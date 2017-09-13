@@ -1,0 +1,218 @@
+﻿@using Vovinam.Common
+@using Vovinam.Data
+
+@using Vovinam.WebBackend.Common
+@using Vovinam.WebBackend.Web
+@model User
+
+@{
+    ViewBag.Title = "Trang thông tin cá nhân";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+
+        <ol class="breadcrumb">
+            <li class="active">
+                Thông tin cá nhân
+            </li>
+        </ol>
+
+        <a onclick="$('#btCreate').click()" class="btn btn-primary m-t-sm">Lưu</a>
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        @using (Ajax.BeginForm("ProfileUser", "Account", null, new AjaxCommonOption { OnSuccess = "CreateSuccess" }, new { role = "form", @id = "CreateEditAjax", enctype = "multipart/form-data" }))
+        {
+            <input type="hidden" name="selectedPermissions" id="selectedPermissions" />
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Thông tin nhân viên</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-horizontal">
+                            @Html.HiddenFor(model => model.Id)
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(x => x.CompanyId)
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Tên người dùng<span style="color: Red">(*)</span></label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.FullName, new { @class = "form-control ", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                                </div>
+                                <label class="control-label col-md-2">Email</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control " })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Tên đăng nhập<span style="color: Red">(*)</span></label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control ", disabled = "disabled" })
+                                </div>
+                                <label class="control-label col-md-2">Điện thoại</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.Phone, new { @class = "form-control " })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Mật khẩu</label>
+                                <div class="col-md-4">
+                                    <input class="form-control" id="Password" name="Password" type="password">
+                                </div>
+                                <label class="control-label col-md-2">Trạng thái<span style="color: Red">(*)</span></label>
+                                <div class="col-md-4">
+                                    @Html.EnumDropDownList("Status", Model.Status, typeof(UserStatus), true, "", new { @class = "form-control ", disabled = "disabled" }, "-- Trạng thái --")
+                                    @Html.ValidationMessageFor(x => x.Status)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Xác nhận mật khẩu</label>
+                                <div class="col-md-4">
+                                    <input class="form-control" data-val="true" data-val-equalto="Mật khẩu bạn nhập không khớp" data-val-equalto-other="*.Password" id="RetypePassword" name="RetypePassword" placeholder="" type="password">
+                                    @Html.ValidationMessage("RetypePassword")
+                                </div>
+                                <label class="control-label col-md-2">Công ty</label>
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(x => x.CompanyId, null, "-- Kho / cửa hàng --", new { @class = "form-control", disabled = "disabled" })
+                                </div>
+
+                                
+                            </div>
+                            <div class="form-group">
+                                
+                                <label class="control-label col-md-2">Hình ảnh</label>
+                                <div class="col-md-4">
+                                    <input type="file" id="Image" name="FileAttach" />
+                                    <img src="@(Model.Image.NotEmpty() ? Url.Content(Model.Image) : "")" style="@(Model.Image.NotEmpty() ? "" : "display: none")" width="150" id="blah" />
+                                </div>
+                            </div>
+
+                          
+
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <input type="submit" value="Lưu" class="btn btn-primary" id="btCreate" />
+                                </div>
+                                <br style="clear: both" />
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>
+
+@section Styles {
+    <link href="~/Content/plugin/iCheck/custom.css" rel="stylesheet" />
+
+
+    <style>
+        .datepicker {
+            z-index: 1200 !important;
+        }
+    </style>
+}
+
+@section scripts
+{
+    <script src="~/Scripts/plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $(document)
+            .on('ready',
+                function () {
+                    $('.i-checks').iCheck({
+                        checkboxClass: 'icheckbox_square-green',
+                        radioClass: 'iradio_square-green',
+                    });
+
+                    $('.input-group.date')
+                        .datetimepicker({
+                            locale: 'vi',
+                            format: 'DD/MM/YYYY',
+                            extraFormats: ["MM/YYYY"],
+                            defaultDate: null
+                        });
+
+
+
+                    function readURL(input) {
+
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                $('#blah').attr('src', e.target.result);
+                            }
+
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+
+                    $("#Image")
+                        .change(function () {
+                            readURL(this);
+                        });
+
+
+
+                    inItUploadAjaxForm(CreateSuccess);
+                });
+
+
+        function inItUploadAjaxForm(successFunction) {
+            window.addEventListener("submit", function (e) {
+                if (!$('#CreateEditAjax').valid()) {
+                    return false;
+                }
+
+
+                var form = e.target;
+                if (form.getAttribute("enctype") === "multipart/form-data") {
+                    if (form.dataset.ajax) {
+                        e.preventDefault();
+                        e.stopImmediatePropagation();
+                        var xhr = new XMLHttpRequest();
+                        xhr.open(form.method, form.action);
+                        xhr.onreadystatechange = function (result) {
+                            if (xhr.readyState == 4 && xhr.status == 200) {
+                                if (successFunction)
+                                    successFunction(xhr.responseText);
+                            }
+                        };
+                        xhr.send(new FormData(form));
+                    }
+                }
+            }, true);
+        }
+
+
+
+        function CreateSuccess(result) {
+            var data = JSON.parse(result);
+            OnSuccessAjax(data);
+        }
+
+    </script>
+}
+
+
+
+

@@ -1,0 +1,206 @@
+﻿@using Vovinam.Data
+@model Group
+
+@{
+    ViewBag.Title = "Tạo vai trò";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = (User)ViewBag.User;
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Quản lý vai trò</h4>
+            <ol class="breadcrumb p-0 m-0">
+                <li>
+                    <a href="@Url.Action("Index","Home")">Vovinam</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","GroupPermission")">Quản lý vai trò</a>
+                </li>
+                <li class="active">
+                    <strong>Tạo mới</strong>
+                </li>
+            </ol>
+
+            <div class="clearfix"></div>
+            <a style="margin-right:10px" onclick="$('#btCreate').click()" class="btn btn-primary waves-effect waves-light m-t-sm">Lưu</a>
+            @Html.ActionLink("Thoát", "Index", null, new { @class = "btn btn-default waves-effect m-t-sm" })
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        @using (Html.BeginForm("Create", "GroupPermission", FormMethod.Post, new { @id = "Create" }))
+        {
+            <div class="col-lg-12">
+                <div class="float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Tạo nhóm</h5>
+                        @if (ViewBag.Message != null)
+                        {
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content">
+                                    <div class="alert alert-success">
+                                        @ViewBag.Message
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="ibox-content">
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true)
+                            @if (user.IsAdminRoot)
+                            {
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Công ty</label>
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(x => x.CompanyId, null, "-- Công ty --", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.HiddenFor(x => x.CompanyId)
+                            }
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Tên nhóm</label>
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.Name, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Ghi chú</label>
+                                <div class="col-md-4">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            @if (user.IsAdminRoot == false)
+                            {
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Bao gồm quyền từ vai trò</label>
+                                    <div class="col-md-4">
+                                        @Html.DropDownList("GroupId", null, "", new { @class = "form-control select2", multiple = "" })
+                                    </div>
+                                </div>
+                            }
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-4">
+                                    <input type="submit" value="Lưu" class="btn btn-primary" />
+                                    @Html.ActionLink("Thoát", "Index", null, new { @class = "btn btn-white" })
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+                @*<div class="ibox float-e-margins" style="display: none">
+                        <div class="ibox-title">
+                            <h5>Danh sách quyền</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-down"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-content">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="min-width: 10%"></td>
+                                                        <td style="min-width: 20%">Mã quyền </td>
+                                                        <td style="min-width: 70%">Tên quyền </td>
+                                                    </tr>
+                                                    <tr>
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                @{
+                                                    var permissions = EnumUtil.GetListPermission().ToList();
+                                                    var permissionGroups = permissions.GroupBy(x => (int) x/1000);
+                                                }
+
+                                                @foreach (var group in permissionGroups)
+                                                {
+                                                    if (group.Key < Manage_Group.Names.Length)
+                                                    {
+                                                        <div class="ibox float-e-margins">
+                                                            <div class="ibox-title">
+                                                                <input type="checkbox" class="cbxAll" style="margin: 5px;" />
+                                                                Nhóm quyền quản lý @Manage_Group.Names[group.Key]
+                                                                <a class="collapse-link">
+                                                                    <i class="fa fa-chevron-down"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="ibox-content">
+                                                                <table style="min-width: 100%">
+                                                                    @foreach (var item in group)
+                                                                    {
+                                                                        <tr>
+                                                                            <td style="min-width: 10%"><input type="checkbox" class="i-checks" name="SelectedGroupPermission" value="@((int) item)"></td>
+                                                                            <td style="min-width: 20%">@((int)item)</td>
+                                                                            <td style="min-width: 70%">@item.GetDescription()</td>
+                                                                        </tr>
+                                                                    }
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-4">
+                                                    <input type="submit" value="Lưu" class="btn btn-primary" />
+                                                    @Html.ActionLink("Hủy", "Index", null, new { @class = "btn btn-white" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+            </div>
+        }
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.cbxAll').change(function () {
+            if (this.checked) {
+                debugger;
+                $(this).closest('.ibox-title').next('.ibox-content').find('input:checkbox').each(function () { this.checked = true; });
+
+            } else {
+                debugger;
+                $(this)
+                    .closest('.ibox-title')
+                    .next('.ibox-content')
+                    .find('input:checkbox')
+                    .each(function () { this.checked = false; });
+            }
+        })
+    })
+</script>

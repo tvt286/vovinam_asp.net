@@ -1,0 +1,157 @@
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Vovinam.dll.config
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Vovinam.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Vovinam.pdb
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Antlr3.Runtime.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\EntityFramework.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\EntityFramework.SqlServer.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\EPPlus.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Excel.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\ICSharpCode.SharpZipLib.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Newtonsoft.Json.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\PagedList.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\PagedList.Mvc.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.Helpers.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.Mvc.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.Optimization.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.Razor.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.WebPages.Deployment.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.WebPages.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.WebPages.Razor.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Vovinam.Common.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Vovinam.Data.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Vovinam.Services.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\WebGrease.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Vovinam.Resources.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Vovinam.Common.pdb
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Vovinam.Data.pdb
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Vovinam.Services.pdb
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\EntityFramework.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\EntityFramework.SqlServer.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\EPPlus.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Excel.pdb
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\PagedList.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\PagedList.Mvc.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.Helpers.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.Mvc.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.Razor.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.WebPages.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.WebPages.Deployment.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.WebPages.Razor.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\System.Web.Optimization.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Newtonsoft.Json.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Antlr3.Runtime.pdb
+C:\Users\PC\Desktop\Vovinam\Vovinam\bin\Vovinam.Resources.pdb
+C:\Users\PC\Desktop\Vovinam\Vovinam\obj\Debug\Vovinam.csprojResolveAssemblyReference.cache
+C:\Users\PC\Desktop\Vovinam\Vovinam\obj\Debug\Vovinam.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam\obj\Debug\Vovinam.pdb
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Vovinam.dll.config
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Vovinam.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Vovinam.pdb
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Antlr3.Runtime.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\EntityFramework.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\EntityFramework.SqlServer.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\EPPlus.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Excel.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\ICSharpCode.SharpZipLib.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Newtonsoft.Json.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\PagedList.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\PagedList.Mvc.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.Helpers.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.Mvc.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.Optimization.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.Razor.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.WebPages.Deployment.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.WebPages.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.WebPages.Razor.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Vovinam.Common.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Vovinam.Data.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Vovinam.Services.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\WebGrease.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Vovinam.Resources.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Vovinam.Common.pdb
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Vovinam.Data.pdb
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Vovinam.Services.pdb
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\EntityFramework.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\EntityFramework.SqlServer.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\EPPlus.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Excel.pdb
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\PagedList.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\PagedList.Mvc.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.Helpers.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.Mvc.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.Razor.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.WebPages.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.WebPages.Deployment.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.WebPages.Razor.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.Optimization.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Newtonsoft.Json.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Antlr3.Runtime.pdb
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Vovinam.Resources.pdb
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\obj\Debug\Vovinam.csprojResolveAssemblyReference.cache
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\obj\Debug\Vovinam.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\obj\Debug\Vovinam.pdb
+E:\asp.net\vovinam\Vovinam\obj\Debug\Vovinam.csprojResolveAssemblyReference.cache
+E:\asp.net\vovinam\Vovinam\bin\Vovinam.dll.config
+E:\asp.net\vovinam\Vovinam\bin\Vovinam.dll
+E:\asp.net\vovinam\Vovinam\bin\Vovinam.pdb
+E:\asp.net\vovinam\Vovinam\bin\Antlr3.Runtime.dll
+E:\asp.net\vovinam\Vovinam\bin\EntityFramework.dll
+E:\asp.net\vovinam\Vovinam\bin\EntityFramework.SqlServer.dll
+E:\asp.net\vovinam\Vovinam\bin\EPPlus.dll
+E:\asp.net\vovinam\Vovinam\bin\Excel.dll
+E:\asp.net\vovinam\Vovinam\bin\ICSharpCode.SharpZipLib.dll
+E:\asp.net\vovinam\Vovinam\bin\Microsoft.Web.Infrastructure.dll
+E:\asp.net\vovinam\Vovinam\bin\Newtonsoft.Json.dll
+E:\asp.net\vovinam\Vovinam\bin\PagedList.dll
+E:\asp.net\vovinam\Vovinam\bin\PagedList.Mvc.dll
+E:\asp.net\vovinam\Vovinam\bin\Swashbuckle.Core.dll
+E:\asp.net\vovinam\Vovinam\bin\System.Net.Http.Formatting.dll
+E:\asp.net\vovinam\Vovinam\bin\System.Web.Helpers.dll
+E:\asp.net\vovinam\Vovinam\bin\System.Web.Http.dll
+E:\asp.net\vovinam\Vovinam\bin\System.Web.Http.WebHost.dll
+E:\asp.net\vovinam\Vovinam\bin\System.Web.Mvc.dll
+E:\asp.net\vovinam\Vovinam\bin\System.Web.Optimization.dll
+E:\asp.net\vovinam\Vovinam\bin\System.Web.Razor.dll
+E:\asp.net\vovinam\Vovinam\bin\System.Web.WebPages.Deployment.dll
+E:\asp.net\vovinam\Vovinam\bin\System.Web.WebPages.dll
+E:\asp.net\vovinam\Vovinam\bin\System.Web.WebPages.Razor.dll
+E:\asp.net\vovinam\Vovinam\bin\Vovinam.Common.dll
+E:\asp.net\vovinam\Vovinam\bin\Vovinam.Data.dll
+E:\asp.net\vovinam\Vovinam\bin\Vovinam.Services.dll
+E:\asp.net\vovinam\Vovinam\bin\WebActivatorEx.dll
+E:\asp.net\vovinam\Vovinam\bin\WebGrease.dll
+E:\asp.net\vovinam\Vovinam\bin\Vovinam.Resources.dll
+E:\asp.net\vovinam\Vovinam\bin\Vovinam.Common.pdb
+E:\asp.net\vovinam\Vovinam\bin\Vovinam.Data.pdb
+E:\asp.net\vovinam\Vovinam\bin\Vovinam.Services.pdb
+E:\asp.net\vovinam\Vovinam\bin\EntityFramework.xml
+E:\asp.net\vovinam\Vovinam\bin\EntityFramework.SqlServer.xml
+E:\asp.net\vovinam\Vovinam\bin\EPPlus.xml
+E:\asp.net\vovinam\Vovinam\bin\Excel.pdb
+E:\asp.net\vovinam\Vovinam\bin\Newtonsoft.Json.xml
+E:\asp.net\vovinam\Vovinam\bin\PagedList.xml
+E:\asp.net\vovinam\Vovinam\bin\PagedList.Mvc.xml
+E:\asp.net\vovinam\Vovinam\bin\System.Net.Http.Formatting.xml
+E:\asp.net\vovinam\Vovinam\bin\System.Web.Helpers.xml
+E:\asp.net\vovinam\Vovinam\bin\System.Web.Http.xml
+E:\asp.net\vovinam\Vovinam\bin\System.Web.Http.WebHost.xml
+E:\asp.net\vovinam\Vovinam\bin\System.Web.Mvc.xml
+E:\asp.net\vovinam\Vovinam\bin\System.Web.Razor.xml
+E:\asp.net\vovinam\Vovinam\bin\System.Web.WebPages.xml
+E:\asp.net\vovinam\Vovinam\bin\System.Web.WebPages.Deployment.xml
+E:\asp.net\vovinam\Vovinam\bin\System.Web.WebPages.Razor.xml
+E:\asp.net\vovinam\Vovinam\bin\System.Web.Optimization.xml
+E:\asp.net\vovinam\Vovinam\bin\Antlr3.Runtime.pdb
+E:\asp.net\vovinam\Vovinam\bin\Vovinam.Resources.pdb
+E:\asp.net\vovinam\Vovinam\obj\Debug\Vovinam.dll
+E:\asp.net\vovinam\Vovinam\obj\Debug\Vovinam.pdb
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\Swashbuckle.Core.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Net.Http.Formatting.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.Http.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.Http.WebHost.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\WebActivatorEx.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Net.Http.Formatting.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.Http.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam\bin\System.Web.Http.WebHost.xml

@@ -1,0 +1,104 @@
+﻿@using Vovinam.Common
+@using Vovinam.WebBackend.Common
+@using Vovinam.WebBackend.Web
+
+@using PagedList.Mvc;
+@model Vovinam.Services.PagedSearchList<Vovinam.Data.Compete>
+
+@{
+    var GenderId = ViewBag.Gender;
+    var user = Vovinam.Services.UserService.GetUserInfo();
+}
+
+<div class="">
+    <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount</h5>
+</div>
+<table class="table table-striped table-colored table-info table-hover">
+    <thead>
+        <tr>
+            <th>
+                Mã trận
+            </th>
+            <th>
+                Học viên 1
+            </th>
+
+            <th>
+                Giáp
+            </th>
+            <th>
+                Điểm
+            </th>
+            <th>
+                Học viên 2
+            </th>
+            <th>
+                Giáp
+            </th>
+            <th>
+                Điểm
+            </th>
+            <th>
+                Người chấm
+            </th>
+
+        </tr>
+    </thead>
+    @{ int index = Model.PageSize * (Model.PageNumber - 1) + 1; }
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(index++)
+                </td>
+                <td>
+                    <div> @item.LevelUp.Name </div>
+                    <div>   @item.LevelUp.Club.Name</div>
+                </td>
+                <td>
+                    <div style="margin: auto; width:50px; height:20px; background-color:red;"></div>
+                    <div>@item.LevelUp.Weight kg</div>
+                </td>
+                <td>
+                    @item.LevelUp.DoiKhang.Point
+                </td>
+                <td>
+                    <div> @item.LevelUp1.Name </div>
+                    <div>   @item.LevelUp1.Club.Name</div>
+
+                </td>
+                <td>
+                    <div style="margin: auto; width:50px; height:20px; background-color:blue;"></div>
+                    <div>@item.LevelUp1.Weight Kg</div>
+
+                </td>
+                <td>
+                    @item.LevelUp1.DoiKhang.Point
+                </td>
+                @if (item.LevelUp1.DoiKhang.User != null)
+                {
+                    <td>
+                        @item.LevelUp1.DoiKhang.User.FullName
+                    </td>
+                }
+                else
+                {
+
+                    <td>
+                        Đang cập nhật
+                    </td>
+
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page =>
+{
+    Model.SearchModel.PageIndex = page;
+    return Url.Action("Index", Model.SearchModel);
+},
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxCommonOption() { HttpMethod = "POST", UpdateTargetId = "content" }))
+

@@ -1,0 +1,61 @@
+﻿@using Vovinam.Data
+@using Vovinam.WebBackend.Common
+@using Vovinam.WebBackend.Web
+@model Company
+
+@using (Ajax.BeginForm("CreateCompany", "Company", null, new AjaxCommonOption { OnSuccess = "CreateCompanySuccess" }, new { role = "form", id = "CreateCompanyForm" }))
+{
+
+   @*@Html.HiddenFor(model => model.Id)*@
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="field-1" class="control-label">Tên<span style="color: Red">*</span></label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="field-1" class="control-label">Trạng thái<span style="color: Red">*</span></label>
+                    @Html.EnumDropDownList("Status", Model.Status, typeof(CompanyStatus), true, "", new { @class = "form-control", data_val = "true", data_val_required = "Thông tin bắt buộc" }, "-- Trạng thái --")
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Thoát</button>
+        <button type="submit" class="btn btn-primary waves-effect waves-light">Lưu</button>
+    </div>
+}
+
+<script type="text/javascript">
+    jQuery.validator.unobtrusive.parse('#CreateCompanyForm');
+    $(function () {
+        //jQuery.validator.unobtrusive.parse('#CreateCompanyForm');
+    });
+
+    function CreateCompanySuccess(data) {
+        if (data.Code == 0) {
+            data.callFunc = function() {
+                $('#myModal').modal('hide');
+                $("#SearchForm").submit();
+            };
+        }
+        OnSuccessAjax(data);
+    }
+</script>
+
+@if (Model.Id == 0)
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#Status").val("");
+        })
+    </script>
+}

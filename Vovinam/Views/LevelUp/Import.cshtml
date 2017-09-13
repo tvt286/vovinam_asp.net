@@ -1,0 +1,154 @@
+﻿@using Vovinam.Common
+@using Vovinam.Services
+@using Vovinam.WebBackend.Common
+@using Vovinam.WebBackend.Web
+@using Vovinam.Models
+@using System.Data
+
+@model List<LevelUpViewModel>
+
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Import Excel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Quản lý học viên</h4>
+            <ol class="breadcrumb p-0 m-0">
+                <li>
+                    <a href="@Url.Action("Index", "Home")">Vovinam</a>
+                </li>
+                <li class="active">
+                    <strong>Import Excel</strong>
+                </li>
+            </ol>
+            <div class="clearfix"></div>
+            <div>
+                @using (Ajax.BeginForm("Import", "LevelUp", null, new AjaxCommonOption { OnSuccess = "CreateSuccess" }, new { role = "form", id = "CreateForm", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.ValidationSummary();
+                    <input type="file" class="form-control" name="uploadfile" id="uploadfile" style="display:none" />
+                    <button style="margin-right:10px" class="btn btn-primary waves-effect waves-light m-t-sm" type="submit" id="btExport">
+                        <i class="fa fa-file-excel-o"></i>
+                        <span class="bold">Nhập file excel</span>
+                    </button>
+                    if (Model != null)
+                    {
+                        <a class="btn btn-primary waves-effect waves-light m-t-sm" id="btnSave" href="javascript:void(0)"> Lưu</a>
+                    }
+                    else
+                    {
+                        <a style="visibility: hidden" class="btn btn-primary waves-effect waves-light m-t-sm" id="btnSave" href="javascript:void(0)"> Lưu</a>
+
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+@if (Model != null)
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-colored table-info">
+            <thead>
+
+                <tr>
+                    <th>Stt</th>
+                    <th>Tên</th>
+                    <th>Năm sinh</th>
+                    <th>Giới tính</th>
+                    <th>Câu lạc bộ</th>
+                    <th>Cấp đai</th>
+                    <th>Cân nặng</th>
+                    <th>Khóa thi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (LevelUpViewModel item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Stt
+                        </td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.BirthDay
+                        </td>
+                        <td>
+                            @item.Gender.GetString()
+                        </td>
+                        <td>
+                            @item.ClubName
+                        </td>
+                        <td>
+                            @item.LevelName
+                        </td>
+                        <td>
+                            @item.Weight
+                        </td>
+                        <td>
+                            @item.ExaminationName
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+}
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/responsive.bootstrap.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/jquery.datatables.init.js"></script>
+    <script>
+
+        $(function () {
+            $("#btExport").on('click', function (e) {
+                e.preventDefault();
+                $("#uploadfile:hidden").trigger('click');
+            });
+        });
+        document.getElementById("uploadfile").onchange = function () {
+            document.getElementById("CreateForm").submit();
+            OnBeginAjax();
+        };
+
+        $("#btnSave").on('click', function (e) {
+            e.preventDefault();
+            var callFunc = function () {
+                var model = @Html.Raw(Json.Encode(Model))
+                OnBeginAjax();
+                $.post('@Url.Action("Save", "LevelUp")',
+                    {
+                        data: model
+                    },
+                function (data) {
+                    debugger;
+                    OnSuccessAjax(data);
+                });
+            };
+            ConfirmPopup("Bạn thực sự muốn lưu danh sách",
+                "Danh sách này sẽ được lưu lại hệ thống",
+                callFunc
+                );
+        });
+
+    </script>
+}

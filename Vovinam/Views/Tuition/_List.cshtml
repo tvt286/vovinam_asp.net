@@ -1,0 +1,182 @@
+﻿@using Vovinam.Common
+@using Vovinam.WebBackend.Common
+@using Vovinam.WebBackend.Web
+
+@using PagedList.Mvc;
+@model Vovinam.Services.PagedSearchList<Vovinam.Data.Student>
+
+@{
+    var clubId = ViewBag.ClubId;
+    var user = Vovinam.Services.UserService.GetUserInfo();
+}
+
+<div class="">
+    <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount</h5>
+</div>
+<table class="table table-striped table-colored table-info table-hover">
+    <thead>
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+                Tên
+            </th>
+            <th>
+                Tháng 1
+            </th>
+            <th>
+                Tháng 2
+            </th>
+            <th>
+                Tháng 3
+            </th>
+            <th>
+                Tháng 4
+            </th>
+            <th>
+                Tháng 5
+            </th>
+            <th>
+                Tháng 9
+            </th>
+            <th>
+                Tháng 10
+            </th>
+            <th>
+                Tháng 11
+            </th>
+            <th>
+                Tháng 12
+            </th>
+
+            @if (UserPermission.Has(Permission.TuitionKA_Edit) || UserPermission.Has(Permission.TuitionKB_Edit) || UserPermission.Has(Permission.TuitionNL_Edit) || user.IsAdminCompany)
+            {
+                <th data-sorter="false">
+                </th>
+            }
+        </tr>
+    </thead>
+    @{ int index = Model.PageSize * (Model.PageNumber - 1) + 1; }
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(index++)
+                </td>
+
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @if (@item.Tuition1 == true)
+                    {
+                        <img style="width:15px" src="/Content/Image/complete.png" />
+                    }
+                    else
+                    {
+                        <img style="width:15px; margin:auto;" src="/Content/Image/uncomplete.png" />
+                    }
+                </td>
+                <td>
+                    @if (@item.Tuition2 == true)
+                    {
+                        <img style="width:15px" src="/Content/Image/complete.png" />
+                    }
+                    else
+                    {
+                        <img style="width:15px; margin:auto;" src="/Content/Image/uncomplete.png" />
+                    }
+                </td>
+                <td>
+                    @if (@item.Tuition3 == true)
+                    {
+                        <img style="width:15px" src="/Content/Image/complete.png" />
+                    }
+                    else
+                    {
+                        <img style="width:15px; margin:auto;" src="/Content/Image/uncomplete.png" />
+                    }
+                </td>
+                <td>
+                    @if (@item.Tuition4 == true)
+                    {
+                        <img style="width:15px" src="/Content/Image/complete.png" />
+                    }
+                    else
+                    {
+                        <img style="width:15px; margin:auto;" src="/Content/Image/uncomplete.png" />
+                    }
+                </td>
+                <td>
+                    @if (@item.Tuition5 == true)
+                    {
+                        <img style="width:15px" src="/Content/Image/complete.png" />
+                    }
+                    else
+                    {
+                        <img style="width:15px; margin:auto;" src="/Content/Image/uncomplete.png" />
+                    }
+                </td>
+                <td>
+                    @if (@item.Tuition9 == true)
+                    {
+                        <img style="width:15px" src="/Content/Image/complete.png" />
+                    }
+                    else
+                    {
+                        <img style="width:15px; margin:auto;" src="/Content/Image/uncomplete.png" />
+                    }
+                </td>
+                <td>
+                    @if (@item.Tuition10 == true)
+                    {
+                        <img style="width:15px" src="/Content/Image/complete.png" />
+                    }
+                    else
+                    {
+                        <img style="width:15px; margin:auto;" src="/Content/Image/uncomplete.png" />
+                    }
+                </td>
+                <td>
+                    @if (@item.Tuition11 == true)
+                    {
+                        <img style="width:15px" src="/Content/Image/complete.png" />
+                    }
+                    else
+                    {
+                        <img style="width:15px; margin:auto;" src="/Content/Image/uncomplete.png" />
+                    }
+                </td>
+                <td>
+                    @if (@item.Tuition12 == true)
+                    {
+                        <img style="width:15px" src="/Content/Image/complete.png" />
+                    }
+                    else
+                    {
+                        <img style="width:15px; margin:auto;" src="/Content/Image/uncomplete.png" />
+                    }
+                </td>
+
+                @if (UserPermission.Has(Permission.TuitionKA_Edit) || UserPermission.Has(Permission.TuitionKB_Edit) || UserPermission.Has(Permission.TuitionNL_Edit) || user.IsAdminCompany)
+                {
+                    <td>
+                        <a href="@Url.Action("Detail", new {id = item.Id, clubId = clubId})">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page =>
+{
+    Model.SearchModel.PageIndex = page;
+    return Url.Action("Index", "Student", Model.SearchModel);
+},
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxCommonOption() { HttpMethod = "POST", UpdateTargetId = "content" }))

@@ -1,0 +1,30 @@
+C:\Users\PC\Desktop\Vovinam\Vovinam.Data\bin\Debug\Vovinam.Data.dll.config
+C:\Users\PC\Desktop\Vovinam\Vovinam.Data\bin\Debug\Vovinam.Data.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam.Data\bin\Debug\Vovinam.Data.pdb
+C:\Users\PC\Desktop\Vovinam\Vovinam.Data\bin\Debug\EntityFramework.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam.Data\bin\Debug\EntityFramework.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\PC\Desktop\Vovinam\Vovinam.Data\obj\Debug\Vovinam.Data.csprojResolveAssemblyReference.cache
+C:\Users\PC\Desktop\Vovinam\Vovinam.Data\obj\Debug\Vovinam.Data.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam.Data\obj\Debug\Vovinam.Data.pdb
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Data\bin\Debug\Vovinam.Data.dll.config
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Data\bin\Debug\Vovinam.Data.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Data\bin\Debug\Vovinam.Data.pdb
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Data\bin\Debug\EntityFramework.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Data\bin\Debug\EntityFramework.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Data\obj\Debug\Vovinam.Data.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Data\obj\Debug\Vovinam.Data.pdb
+E:\asp.net\vovinam\Vovinam.Data\bin\Debug\Vovinam.Data.dll.config
+E:\asp.net\vovinam\Vovinam.Data\bin\Debug\Vovinam.Data.dll
+E:\asp.net\vovinam\Vovinam.Data\bin\Debug\Vovinam.Data.pdb
+E:\asp.net\vovinam\Vovinam.Data\bin\Debug\EntityFramework.dll
+E:\asp.net\vovinam\Vovinam.Data\bin\Debug\EntityFramework.SqlServer.dll
+E:\asp.net\vovinam\Vovinam.Data\bin\Debug\EntityFramework.xml
+E:\asp.net\vovinam\Vovinam.Data\bin\Debug\EntityFramework.SqlServer.xml
+E:\asp.net\vovinam\Vovinam.Data\obj\Debug\Vovinam.Data.dll
+E:\asp.net\vovinam\Vovinam.Data\obj\Debug\Vovinam.Data.pdb
+E:\asp.net\vovinam\Vovinam.Data\obj\Debug\Vovinam.Data.csprojResolveAssemblyReference.cache
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Data\obj\Debug\Vovinam.Data.csprojResolveAssemblyReference.cache

@@ -1,0 +1,109 @@
+﻿@model PagedSearchList<Vovinam.Data.Group>
+
+@using Vovinam.Services
+@using Vovinam.WebBackend.Common
+@using Vovinam.Common
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    var user = UserService.GetUserInfo();
+}
+
+<div class="">
+    <h5>Tìm thấy @(Model.TotalItemCount) nhóm</h5>
+</div>
+<table class="table table-striped table-colored table-info table-hover">
+    <thead>
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+                Tên nhóm
+            </th>
+            <th data-sorter="false">
+                Ghi chú
+            </th>
+            @if (UserPermission.Has(Permission.GroupPermission_Create) || user.IsAdminRoot || user.IsAdminCompany)
+            {
+                <th data-sorter="false"></th>
+            }
+            @if (UserPermission.Has(Permission.Club_Delete) || user.IsAdminCompany)
+            {
+                <th data-sorter="false">
+                    <a href="javascript:void(0)" onclick="DeleteGroupPermission()">
+                        <i class="fa fa-times" style="color: red"></i>
+                    </a>
+                </th>
+            }
+        </tr>
+    </thead>
+    @{ int index = Model.PageSize * (Model.PageNumber - 1) + 1; }
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(index++)
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                @if (UserPermission.Has(Permission.GroupPermission_Create) || user.IsAdminRoot || user.IsAdminCompany)
+                {
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.GroupId })">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </td>
+                }
+                @if (UserPermission.Has(Permission.GroupPermission_Delete) || user.IsAdminCompany)
+                {
+                    <td>
+                        <input type="checkbox" name="deleteGroupId" value="@item.GroupId" />
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page =>
+{
+    Model.SearchModel.PageIndex = page;
+    return Url.Action("Index", Model.SearchModel);
+},
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxCommonOption() { HttpMethod = "POST", UpdateTargetId = "content" }))
+
+
+    <script type="text/javascript">
+        $(function () {
+            InitSortTable();
+        });
+
+        function DeleteGroupPermission() {
+            var callFunc = function () {
+                var groupStr = "";
+
+                $.each($("input[name=deleteGroupId]:checked"),
+                    function (index, element) {
+                        groupStr += $(element).val() + ",";
+                    });
+
+                $.post('@Url.Action("DeleteGroupPermission", "GroupPermission")',
+                    {
+                        groupId: groupStr
+                    },
+                    function (data) {
+                        debugger;
+                        OnSuccessAjax(data);
+                    });
+            };
+
+            ConfirmPopup("Bạn thực sự muốn xóa nhóm vai trò",
+                "Nhóm vai trò này sẽ được xóa khỏi hệ thống",
+                callFunc
+                );
+        }
+    </script>

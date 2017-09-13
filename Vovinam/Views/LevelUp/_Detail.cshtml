@@ -1,0 +1,114 @@
+﻿@using Vovinam.Data
+@using Vovinam.WebBackend.Common
+@using Vovinam.WebBackend.Web
+@model LevelUp
+
+@using (Ajax.BeginForm("Edit", "LevelUp", null, new AjaxCommonOption { OnSuccess = "EditLevelUpSuccess" }, new { role = "form", id = "EditLevelUpForm" }))
+{
+
+    @*@Html.HiddenFor(model => model.Id)*@
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="LevelId" value="@Model.LevelId" />
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="field-1" class="control-label">Tên<span style="color: Red">*</span></label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", data_val = "true", data_val_required = "Thông tin bắt buộc", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="field-1" class="control-label">Cơ bản<span style="color: Red">*</span></label>
+                    @Html.TextBoxFor(x => x.CoBan.Point, new { @class = "form-control", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                    @Html.ValidationMessageFor(model => model.CoBan.Point, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="field-1" class="control-label">Quyền<span style="color: Red">*</span></label>
+                    @Html.TextBoxFor(x => x.Quyen.Point, new { @class = "form-control", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                    @Html.ValidationMessageFor(model => model.Quyen.Point, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="field-1" class="control-label">Võ đạo<span style="color: Red">*</span></label>
+                    @Html.TextBoxFor(x => x.VoDao.Point, new { @class = "form-control", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                    @Html.ValidationMessageFor(model => model.VoDao.Point, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        @if (Model.LevelId != 1)
+        {
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="field-1" class="control-label">Đối kháng<span style="color: Red">*</span></label>
+                        @Html.TextBoxFor(x => x.DoiKhang.Point, new { @class = "form-control", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                        @Html.ValidationMessageFor(model => model.DoiKhang.Point, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+        @if (Model.LevelId == 4)
+        {
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="field-1" class="control-label">Song Luyện<span style="color: Red">*</span></label>
+                        @Html.TextBoxFor(x => x.SongLuyen.Point, new { @class = "form-control", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                        @Html.ValidationMessageFor(model => model.SongLuyen.Point, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.LevelId == 1)
+        {
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="field-1" class="control-label">Thể lực<span style="color: Red">*</span></label>
+                        @Html.TextBoxFor(x => x.TheLuc.Point, new { @class = "form-control", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                        @Html.ValidationMessageFor(model => model.TheLuc.Point, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Thoát</button>
+        <button type="submit" class="btn btn-primary waves-effect waves-light">Lưu</button>
+    </div>
+}
+
+<script type="text/javascript">
+    jQuery.validator.unobtrusive.parse('#CreateLevelUpForm');
+    $(function () {
+        //jQuery.validator.unobtrusive.parse('#CreateCompanyForm');
+    });
+
+    function EditLevelUpSuccess(data) {
+        if (data.Code == 0) {
+            data.callFunc = function () {
+                $('#LevelUpModal').modal('hide');
+                $("#SearchForm").submit();
+            };
+        }
+        OnSuccessAjax(data);
+    }
+</script>
+
+

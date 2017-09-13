@@ -1,0 +1,90 @@
+﻿@using System.Configuration
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico">
+
+    @*<marquee style="z-index: 1; left: 777px; width: 00px; position: absolute; top: -14px; height: 1000px;" scrollamount="5"/>*@
+        <title>Vovinam | @ViewBag.Title</title>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700" rel="stylesheet">
+
+        <link href="/Content/style.css" rel="stylesheet" />
+
+        <link href="/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/Content/css/core.css" rel="stylesheet" type="text/css" />
+        <link href="/Content/css/components.css" rel="stylesheet" type="text/css" />
+        <link href="/Fonts/font-awesome/css/icons.css" rel="stylesheet" type="text/css" />
+        <link href="/Content/css/pages.css" rel="stylesheet" type="text/css" />
+        <link href="/Content/css/menu.css" rel="stylesheet" type="text/css" />
+        <link href="/Content/css/responsive.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/footable.core.css" rel="stylesheet" />
+        <link href="~/Content/toastr.min.css" rel="stylesheet" />
+        @RenderSection("Styles", required: false)
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/font-awesome/css")
+        <script src="/Scripts/modernizr.min.js"></script>
+
+</head>
+<body class="fixed-left">
+
+    <!-- Wrapper-->
+    <div id="wrapper">
+        <!-- Top Navbar -->
+        @Html.Partial("_TopNavbar")
+
+        <!-- Navigation -->
+        @Html.Partial("_Navigation")
+
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="container">
+                    <!-- Main view  -->
+                    @RenderBody()
+                </div>
+            </div>
+
+            <!-- Footer -->
+            @Html.Partial("_Footer")
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End right Content here -->
+        <!-- ============================================================== -->
+
+    </div>
+
+    <!-- End wrapper-->
+    <script src="/Scripts/js/modernizr.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+    <script>
+        var resizefunc = [];
+    </script>
+
+    <!-- jQuery  -->
+    <script src="/Scripts/detect.js"></script>
+    <script src="/Scripts/fastclick.js"></script>
+    <script src="/Scripts/jquery.blockUI.js"></script>
+    <script src="/Scripts/waves.js"></script>
+    <script src="/Scripts/jquery.slimscroll.js"></script>
+    <script src="/Scripts/jquery.scrollTo.min.js"></script>
+    @Scripts.Render("~/plugins/select2")
+    @Scripts.Render("~/plugins/sweetalert")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+
+</body>
+</html>

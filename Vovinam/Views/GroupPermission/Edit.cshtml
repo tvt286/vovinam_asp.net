@@ -1,0 +1,170 @@
+﻿@using Vovinam.Data
+@using Vovinam.Common
+@model Group
+
+@{
+    if (Model.GroupId == 0)
+    {
+        ViewBag.Title = "Thêm vai trò";
+    }
+    else
+    {
+        ViewBag.Title = "Sửa vai trò";
+    }
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = (User)ViewBag.User;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Quản lý vai trò</h4>
+            <ol class="breadcrumb p-0 m-0">
+                <li>
+                    <a href="@Url.Action("Index","Home")">Vovinam</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","GroupPermission")">Quản lý vai trò</a>
+                </li>
+                <li class="active">
+                    @if (Model.GroupId == 0)
+                    {
+                        <strong>Thêm</strong>
+                    }
+                    else
+                    {
+                        <strong>Sửa</strong>
+                    }
+                </li>
+            </ol>
+
+            <div class="clearfix"></div>
+            <a style="margin-right:10px" onclick="$('#Edit').submit();" class="btn btn-primary waves-effect waves-light m-t-sm">Lưu</a>
+            @Html.ActionLink("Thoát", "Index", null, new { @class = "btn btn-default waves-effect m-t-sm" })
+        </div>
+    </div>
+</div>
+<!-- end row -->
+<div class="card-box animated fadeInRight">
+    <div class="row">
+
+        @using (Html.BeginForm("Edit", "GroupPermission", FormMethod.Post, new { @id = "Edit" }))
+        {
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div>
+                        <h5>Sửa vai trò</h5>
+                        @if (ViewBag.Message != null)
+                        {
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content">
+                                    <div class="alert alert-success">
+                                        @ViewBag.Message
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="ibox-content">
+                        @Html.HiddenFor(model => model.GroupId)
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true)
+                            @if (user.IsAdminRoot)
+                            {
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Công ty</label>
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(x => x.CompanyId, null, "-- Công ty --", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.HiddenFor(x => x.CompanyId)
+                            }
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Tên vai trò<span style="color: Red">(*)</span></label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Nhập tên vai trò", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                                    @Html.ValidationMessageFor(model => model.Name)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Ghi chú</label>
+                                <div class="col-md-4">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Nhập ghi chú" })
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                        <div class="col-md-offset-2 col-md-4">
+                            <input type="submit" value="Lưu" class="btn btn-primary" />
+                            @Html.ActionLink("Thoát", "Index", null, new { @class = "btn btn-white" })
+                        </div>
+                    </div>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div >
+                        <h5>Danh sách quyền</h5>
+                       
+                    </div>
+                    <div class="ibox-content">
+                        <div class="m-b-md">
+                            <input type="hidden" name="selectedPermissions" id="selectedPermissions" />
+                            @Html.Partial("_PermissionTree", Model.Group_Permission.Select(x => (Permission)x.PermissionId).ToList())
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <input style="margin-right:10px;" type="submit" value="Lưu" class="btn btn-primary" />
+                                @Html.ActionLink("Hủy", "Index", null, new { @class = "btn btn-white" })
+
+                            </div>
+                            <br style="clear: both" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.cbxAll').change(function () {
+            if (this.checked) {
+                $(this).closest('.ibox-title').next('.ibox-content').find('input:checkbox').each(function () { this.checked = true; });
+            } else {
+                $(this)
+                    .closest('.ibox-title')
+                    .next('.ibox-content')
+                    .find('input:checkbox')
+                    .each(function () { this.checked = false; });
+            }
+        });
+        $('.cbxAll').each(function () {
+            var masterCheck = this;
+            $(this).closest('.ibox-title').next('.ibox-content').find('input:checkbox').each(function () {
+                $(this).change(function () {
+                    var notCheck = $(this).closest('.ibox').find('.i-checks:not(:checked)').length;
+                    if (notCheck == 0) {
+                        masterCheck.checked = true;
+                    } else {
+                        masterCheck.checked = false;
+                    }
+                });
+            });
+        });
+
+        $('#Edit').submit(function () {
+            var permission = GetSelectedPermisison();
+            $('#selectedPermissions').val(permission.join());
+
+        });
+    })
+</script>

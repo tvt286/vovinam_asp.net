@@ -1,0 +1,105 @@
+﻿@using Vovinam.Common
+@using Vovinam.Services
+@using Vovinam.WebBackend.Common
+@using PagedList.Mvc;
+@model Vovinam.Services.PagedSearchList<Vovinam.Data.School>
+
+@{
+    var user = UserService.GetUserInfo();
+}
+<div class="">
+    <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount</h5>
+</div>
+<table class="table table-striped table-colored table-info table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>
+                Tên trường
+            </th>
+
+            @if (UserPermission.Has(Permission.StudentKA_Create) || UserPermission.Has(Permission.StudentKB_Create) || UserPermission.Has(Permission.StudentNL_Create) || user.IsAdminCompany)
+            {
+                <th data-sorter="false">
+
+                </th>
+            }
+            @if (UserPermission.Has(Permission.StudentKA_Delete) || UserPermission.Has(Permission.StudentKB_Delete) || UserPermission.Has(Permission.StudentNL_Delete) || user.IsAdminCompany)
+            {
+                <th data-sorter="false">
+                    <a href="javascript:void(0)" onclick="DeleteSchool()">
+                        <i class="fa fa-times" style="color: red"></i>
+                    </a>
+                </th>
+            }
+        </tr>
+    </thead>
+    @{ int index = Model.PageSize * (Model.PageNumber - 1) + 1; }
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(index++)
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                @if (UserPermission.Has(Permission.StudentKA_Create) || UserPermission.Has(Permission.StudentKB_Create) || UserPermission.Has(Permission.StudentNL_Create) || user.IsAdminCompany)
+                {
+                    <td>
+                        <a href="javascript:void(0)" onclick="DetailSchool(@item.Id)">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td>
+                }
+                @if (UserPermission.Has(Permission.StudentKA_Delete) || UserPermission.Has(Permission.StudentKB_Delete) || UserPermission.Has(Permission.StudentNL_Delete) || user.IsAdminCompany)
+                {
+                    <td>
+                        <input type="checkbox" name="deleteSchoolId" value="@item.Id" />
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page =>
+{
+    Model.SearchModel.PageIndex = page;
+    return Url.Action("Index", Model.SearchModel);
+},
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxCommonOption() { HttpMethod = "POST", UpdateTargetId = "content" }))
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            InitSortTable();
+        });
+
+        function DeleteSchool() {
+            var callFunc = function () {
+                var SchoolStr = "";
+
+                $.each($("input[name=deleteSchoolId]:checked"),
+                    function (index, element) {
+                        SchoolStr += $(element).val() + ",";
+                    });
+
+                $.post('@Url.Action("DeleteSchool", "School")',
+                    {
+                        SchoolId: SchoolStr
+                    },
+                    function (data) {
+                        debugger;
+                        OnSuccessAjax(data);
+                    });
+            };
+
+            ConfirmPopup("Bạn thực sự muốn xóa trường",
+                "Trường này sẽ được xóa khỏi hệ thống",
+                callFunc
+                );
+
+        }
+    </script>

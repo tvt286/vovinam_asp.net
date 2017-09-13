@@ -1,0 +1,93 @@
+﻿@using Vovinam.Common
+@using Vovinam.WebBackend.Common
+@using Vovinam.Services
+@model Vovinam.Models.StudentModel
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Quản lý học viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = UserService.GetUserInfo();
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Quản lý học viên</h4>
+            <ol class="breadcrumb p-0 m-0">
+                <li>
+                    <a href="@Url.Action("Index", "Home")">Vovinam</a>
+                </li>
+                <li class="active">
+                    <strong>Quản lý học viên</strong>
+                </li>
+            </ol>
+
+            <div class="clearfix"></div>
+            @if (UserPermission.Has(Permission.StudentKA_Create) || UserPermission.Has(Permission.StudentKB_Create) || UserPermission.Has(Permission.StudentNL_Create) || user.IsAdminCompany)
+            {
+                <a class="btn btn-primary waves-effect waves-light m-t-sm" href="@Url.Action("Detail", new { clubId = ViewBag.ClubId })"> Tạo mới</a>
+            }
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+<div class="row animated fadeInRight">
+    <div class="col-sm-12">
+
+        <div class="card-box table-responsive">
+            <div>
+                <h5>Tìm kiếm</h5>
+            </div>
+            <div class="ibox-content">
+                @using (Ajax.BeginForm("Index", null, new AjaxCommonOption() { UpdateTargetId = "content" }, new { id = "SearchForm" }))
+                {
+                    <div class="form-horizontal row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Tên</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Tìm kiếm theo tên" })
+                                </div>
+                                <label class="control-label col-md-2">Cập đai</label>
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(x => x.LevelId, null, "-- Cấp đai --", new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button class="btn btn-primary waves-effect waves-light" type="submit">Tìm</button>
+                                    <button class="btn btn-primary waves-effect waves-light" type="button" id="btReset">Reset</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card-box table-responsive">
+            <h5>Kết quả tìm kiếm</h5>
+
+            <div class="ibox-content">
+                <div id="content">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script src="~/Scripts/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/responsive.bootstrap.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/jquery.datatables.init.js"></script>
+}

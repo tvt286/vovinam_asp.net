@@ -1,0 +1,106 @@
+﻿@using Vovinam.WebBackend.Common
+@using Vovinam.Services
+@using Vovinam.Common
+@model Vovinam.Models.GroupPermissionSearchModel
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Vai trò";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = UserService.GetUserInfo();
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Quản lý vai trò</h4>
+            <ol class="breadcrumb p-0 m-0">
+                <li>
+                    <a href="@Url.Action("Index","Home")">Vovinam</a>
+                </li>
+                <li class="active">
+                    <strong>Quản lý vai trò</strong>
+                </li>
+            </ol>
+
+            <div class="clearfix"></div>
+            @if (UserPermission.Has(Permission.GroupPermission_Create) || user.IsAdminCompany || user.IsAdminRoot)
+            {
+                @Html.ActionLink("Thêm mới", "Edit", null, new { @class = "btn btn-primary waves-effect waves-light m-t-sm" })
+            }
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="card-box table-responsive">
+            <div>
+                <h5>Tìm kiếm</h5>
+            </div>
+            <div class="ibox-content">
+                @using (Ajax.BeginForm("Index", null, new AjaxCommonOption() { UpdateTargetId = "content" }, new { id = "SearchForm" }))
+                {
+                    <div class="form-horizontal row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Tên vai trò</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Tìm kiếm theo tên" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button class="btn btn-primary waves-effect waves-light" type="submit">Tìm</button>
+                                    <button class="btn btn-primary waves-effect waves-light" type="button" id="btReset">Reset</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (TempData["message"] != null)
+                {
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="alert alert-success">
+                                @(TempData["message"])
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        setTimeout(function () { $('.alert').fadeOut() }, 3000);
+                    </script>
+                }
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card-box table-responsive">
+            <h5>Kết quả tìm kiếm</h5>
+
+            <div class="ibox-content">
+                <div id="content">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script src="~/Scripts/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/responsive.bootstrap.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/jquery.datatables.init.js"></script>
+}

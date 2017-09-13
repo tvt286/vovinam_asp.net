@@ -1,0 +1,39 @@
+﻿.body1
+{
+    color:black;
+    background-color:#ffffff !important;
+
+}
+
+.tieudeNganQuy
+{
+    padding-top:25px;
+     text-align:center;
+}
+
+
+.tongMat
+{
+    color:#1dc432;font-size:18px;
+}
+.tong
+{
+    color:black;font-size:14px;padding-left:20px;
+}
+
+.tongGui
+{
+    color:#ff0000 !important;font-size:18px;
+}
+.tongNganQuy
+{
+    color:#ff0000;font-size:18px;
+}
+.khoangCach
+{
+    padding-top:40px;
+}
+.tongGui1
+{
+    color:red;font-size:18px;
+}

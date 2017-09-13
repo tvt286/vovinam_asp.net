@@ -1,0 +1,67 @@
+﻿@using Vovinam.Common
+@using Vovinam.WebBackend.Common
+@using PagedList.Mvc;
+@model Vovinam.Services.PagedSearchList<Vovinam.Data.Company>
+
+<div class="">
+    <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount</h5>
+</div>
+<table class="table table-striped table-colored table-info table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>
+                Tên công ty
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    @{ int index = Model.PageSize * (Model.PageNumber - 1) + 1; }
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(index++)
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Status.GetString()
+                </td>
+                <td>
+                    @item.CreateDate.ToString("MM-yyyy")
+                </td>
+                <td>
+                    <a href="javascript:void(0)" onclick="DetailCompany(@item.Id)">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page =>
+{
+    Model.SearchModel.PageIndex = page;
+    return Url.Action("Index", Model.SearchModel);
+},
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxCommonOption() { HttpMethod = "POST", UpdateTargetId = "content" }))
+
+    <script type="text/javascript">
+        $(function () {
+            InitSortTable();
+        });
+
+    </script>

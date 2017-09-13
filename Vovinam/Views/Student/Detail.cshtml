@@ -1,0 +1,256 @@
+﻿@using Vovinam.Common
+@using Vovinam.Data
+@using Vovinam.WebBackend.Common
+@using Vovinam.WebBackend.Web
+
+@model Vovinam.Data.Student
+
+@{
+    if (Model.Id == 0)
+    {
+        ViewBag.Title = "Tạo mới học viên";
+    }
+    else
+    {
+        ViewBag.Title = "Cập nhật học viên";
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Quản lý nhân viên</h4>
+            <ol class="breadcrumb p-0 m-0">
+                <li>
+                    <a href="@Url.Action("Index","Home")">Vovinam</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", new { id = Model.ClubId })">Quản lý học viên</a>
+                </li>
+                <li class="active">
+                    @if (Model.Id == 0)
+                    {
+                        <strong>Tạo mới</strong>
+                    }
+                    else
+                    {
+                        <strong>Sửa</strong>
+                    }
+                </li>
+            </ol>
+
+            <div class="clearfix"></div>
+            <a style="margin-right:10px" onclick="$('#btUpdate').click()" class="btn btn-primary waves-effect waves-light m-t-sm">Lưu</a>
+            @Html.ActionLink("Thoát", "Index", new { id = Model.ClubId }, new { @class = "btn btn-default waves-effect m-t-sm" })
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+<div class="card-box animated fadeInRight">
+    <div class="row">
+        @using (Ajax.BeginForm("Create", "Student", null, new AjaxCommonOption { OnSuccess = "CreateSuccess" }, new { role = "form", id = "CreateForm", enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(x => x.ClubId)
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(x => x.CompanyId)
+            <div class="col-lg-12">
+                <!--Box thông tin-->
+                <div class="ibox ">
+                    <div>
+                        <h5>Thông tin học viên</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-horizontal">
+
+                            <div class="form-group">
+                                <!-- row tên -->
+                                <label class="control-label col-md-2">Tên<span style="color: Red">*</span></label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(x => x.Name, null, new { @class = "form-control", @placeholder = "Nhập tên học viên", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                                <!-- row giới tính -->
+                                <label class="control-label col-md-2">Giới tính<span style="color: Red">*</span></label>
+                                <div class="col-md-4">
+                                    @Html.EnumDropDownList("Gender", Model.Gender, typeof(Gender), true, "", new { @class = "form-control", data_val = "true", data_val_required = "Thông tin bắt buộc" }, "-- Giới tính --")
+                                    @Html.ValidationMessageFor(x => x.Gender)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <!-- row cấp đai -->
+                                <label class="control-label col-md-2">Cập đai<span style="color: Red">*</span></label>
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(x => x.LevelId, null, "-- Cấp đai --", new { @class = "form-control ", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                                    @Html.ValidationMessageFor(model => model.LevelId, "", new { @class = "text-danger" })
+                                </div>
+                                <!-- row Số điện thoại -->
+                                <label class="control-label col-md-2">Số điện thoại<span style="color: Red">*</span></label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(x => x.Phone, null, new { @class = "form-control", @placeholder = "Nhập số điện thoại", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <!-- row ngày sinh -->
+                                <label class="control-label col-md-2">Ngày sinh</label>
+                                <div class="col-md-4">
+                                    <div class="input-group date">
+                                        @Html.TextBoxFor(x => x.Birthday, new { @class = "form-control", data_val = "false", @placeholder = "Ngày/tháng/năm" })
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+
+                                <label class="control-label col-md-2">Ngày vào</label>
+                                <div class="col-md-4">
+                                    <div class="input-group date">
+                                        @Html.TextBoxFor(x => x.DateIn, new { @class = "form-control", data_val = "false", @placeholder = "Ngày/tháng/năm" })
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <!-- row Quê quán -->
+                                <label class="control-label col-md-2">Quê quán</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(x => x.Hometown, null, new { @class = "form-control", @placeholder = "Nhập quê quán" })
+                                </div>
+
+                                <!-- row Trường -->
+                                <label class="control-label col-md-2">Trường</label>
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(x => x.SchoolId, null, "-- Trường --", new { @class = "form-control " })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2"></label>
+                                <div class="col-md-4">
+                                </div>
+                                <label class="control-label col-md-2">Hình ảnh</label>
+                                <div class="col-md-4">
+                                    <button id="btnImage" type="button" class="btn btn-success waves-light waves-effect w-md">Chọn ảnh</button>
+                                    <input type="file" class="form-control" name="FileAttach" id="Image" style="display:none" />
+                                    <div style="margin-top:10px; ">
+                                        <img src="@(Model.Image.NotEmpty() ? Url.Content(Model.Image) : "")" style="@(Model.Image.NotEmpty() ? "" : "display: none")" width="150" id="blah" />
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <input style="margin-right:10px" class="btn btn-primary" type="submit" id="btUpdate" value="Lưu" />
+                                @Html.ActionLink("Thoát", "Index", new { id = Model.ClubId }, htmlAttributes: new { @class = "btn btn-default ", role = "button" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Styles {
+    <link href="~/Content/chosen.css" rel="stylesheet" />
+
+    <style>
+        .input-validation-error {
+            border: 1px solid red;
+        }
+    </style>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#btnImage").on('click', function (e) {
+                e.preventDefault();
+                $("#Image:hidden").trigger('click');
+            });
+        });
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(function () {
+            $('.autoNumeric')
+            .autoNumeric('init', { aPad: false, aSep: '.', aDec: ',', vMin: 0.00, vMax: 99999999999999999.00 });
+            $('.autoNumeric').blur();
+
+            $("#Image")
+            .change(function () {
+                readURL(this);
+                $('#blah').show();
+            });
+
+        });
+
+        function inItUploadAjaxForm(successFunction) {
+            window.addEventListener("submit", function (e) {
+                OnBeginAjax();
+                if (!$('#CreateForm').valid()) {
+                    OnCompleteAjax();
+                    return false;
+                }
+
+                $('.autoNumeric').each(function (i) {
+                    var self = $(this);
+                    try {
+                        var v = self.autoNumeric('get');
+                        //self.autoNumeric('destroy');
+                        self.val(v);
+                    } catch (err) {
+                        self.val(0);
+                    }
+                });
+
+                var form = e.target;
+                if (form.getAttribute("enctype") === "multipart/form-data") {
+                    if (form.dataset.ajax) {
+                        e.preventDefault();
+                        e.stopImmediatePropagation();
+                        var xhr = new XMLHttpRequest();
+                        xhr.open(form.method, form.action);
+                        xhr.onreadystatechange = function (result) {
+                            if (xhr.readyState == 4 && xhr.status == 200) {
+                                if (successFunction)
+                                    successFunction(xhr.responseText);
+                            }
+                            OnCompleteAjax();
+                        };
+                        xhr.send(new FormData(form));
+                    }
+                }
+            }, true);
+        }
+
+        inItUploadAjaxForm(CreateSuccess);
+
+        function CreateSuccess(result) {
+            var data = JSON.parse(result);
+            OnSuccessAjax(data);
+        }
+
+
+    </script>
+}
+
+

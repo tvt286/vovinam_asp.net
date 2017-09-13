@@ -1,0 +1,163 @@
+﻿@using Vovinam.Common
+@using Vovinam.WebBackend.Common
+@using Vovinam.WebBackend.Web
+
+@using PagedList.Mvc;
+@model Vovinam.Services.PagedSearchList<Vovinam.Data.Student>
+
+@{
+    var clubId = ViewBag.ClubId;
+    var user = Vovinam.Services.UserService.GetUserInfo();
+}
+
+
+    <div class="">
+        <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount</h5>
+    </div>
+<table class="table table-striped table-colored table-info table-hover">
+    <thead>
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Tên
+            </th>
+            <th>
+                Ngày sinh
+            </th>
+            <th>
+                Giới tính
+            </th>
+            <th>
+                Quê quán
+            </th>
+            <th>
+                Cấp đai
+            </th>
+            <th>
+                Trường
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            @if (UserPermission.Has(Permission.StudentKA_Create) || UserPermission.Has(Permission.StudentKB_Create) || UserPermission.Has(Permission.StudentNL_Create) || user.IsAdminCompany)
+            {
+                <th data-sorter="false">
+                </th>
+            }
+            @if (UserPermission.Has(Permission.StudentKA_Delete) || UserPermission.Has(Permission.StudentKB_Delete) || UserPermission.Has(Permission.StudentNL_Delete) || user.IsAdminCompany)
+            {
+                <th data-sorter="false">
+                    <a href="javascript:void(0)" onclick="DeleteStudent()">
+                        <i class="fa fa-times" style="color: red"></i>
+                    </a>
+                </th>
+            }
+        </tr>
+    </thead>
+    @{ int index = Model.PageSize * (Model.PageNumber - 1) + 1; }
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(index++)
+                </td>
+                <td>
+                    <img style="width: 70px;" src="@Url.ImageStudent(item)" />
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @if (@item.Birthday != null)
+                    {
+                        @item.Birthday.Value.ToString("dd/MM/yyyy")
+                    }
+                </td>
+                <td>
+                    @item.Gender.GetString()
+                </td>
+                <td>
+                    @item.Hometown
+                </td>
+                <td>
+                    <img style="width: 70px;" src="@Url.ImageLevel(item.Level)" />
+                </td>
+
+                <td>
+                    @if (@item.School != null)
+                    {
+                        @item.School.Name.ToString()
+                    }
+                </td>
+
+
+                <td>
+                    @item.Phone
+                </td>
+                @if (UserPermission.Has(Permission.StudentKA_Create) || UserPermission.Has(Permission.StudentKB_Create) || UserPermission.Has(Permission.StudentNL_Create) || user.IsAdminCompany)
+                {
+                    <td>
+                        <a href="@Url.Action("Detail", new {id = item.Id, clubId = clubId})">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </td>
+                }
+
+                @if (UserPermission.Has(Permission.StudentKA_Delete) || UserPermission.Has(Permission.StudentKB_Delete) || UserPermission.Has(Permission.StudentNL_Delete) || user.IsAdminCompany)
+                {
+                    <td>
+                        <input type="checkbox" name="deleteStudentId" value="@item.Id" />
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page =>
+{
+    Model.SearchModel.PageIndex = page;
+    return Url.Action("Index", "Student", Model.SearchModel);
+},
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxCommonOption() { HttpMethod = "POST", UpdateTargetId = "content" }))
+
+
+<script type="text/javascript">
+    $(function () {
+        InitSortTable();
+    });
+
+    function DeleteStudent() {
+        var callFunc = function () {
+            var studentStr = "";
+
+            $.each($("input[name=deleteStudentId]:checked"),
+                function (index, element) {
+                    studentStr += $(element).val() + ",";
+                });
+            var club = '@ViewBag.ClubId';
+            $.post('@Url.Action("DeleteStudent", "Student")',
+                {
+                    studentId: studentStr,
+                    clubId: club
+                },
+                function (data) {
+                    debugger;
+                    OnSuccessAjax(data);
+                });
+        };
+
+        ConfirmPopup("Bạn thực sự muốn xóa học viên",
+            "Học viên này sẽ được xóa khỏi hệ thống",
+            callFunc
+            );
+
+    }
+</script>

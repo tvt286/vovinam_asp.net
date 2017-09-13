@@ -1,0 +1,45 @@
+﻿#side-menu {
+    font-family: "open sans";
+    font-weight: 600;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+.validation-summary-valid
+{
+    display: none;
+}
+
+.loading {
+    position: relative;
+    min-height: 40px;
+}
+
+
+.col-form-label {
+    margin-bottom: 0;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+}
+
+.form-inline .form-group{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.select2 {
+    
+}
+
+.select2-container .select2-selection--single {
+    height: 34px !important; 
+}
+
+.select2-selection {
+    border: 1px solid #e5e6e7 !important;
+}
+
+
+

@@ -1,0 +1,36 @@
+﻿@using Vovinam.Common
+@using Vovinam.Services
+@using Vovinam.WebBackend.Common
+
+@if (Request.IsAuthenticated)
+{
+    var user = UserService.GetUserInfo();
+    <!-- Right(Notification) -->
+	<ul class="nav navbar-nav navbar-right">
+	
+		<li class="dropdown user-box">
+			<a href="" class="dropdown-toggle waves-effect waves-light user-link" data-toggle="dropdown" aria-expanded="true">
+				<img src="@(user.Image.NotEmpty() ? Url.Content(user.Image) : Url.Content("~/Content/Upload/default.png"))" alt="user-img" class="img-circle user-img">
+			</a>
+
+			<ul class="dropdown-menu dropdown-menu-right arrow-dropdown-menu arrow-menu-right user-list notify-list">
+				<li>
+					<h5>@user.FullName</h5>
+				</li>
+				<li><a href="@Url.Action("ProfileUser", "Account", routeValues: new {id = UserService.GetUserInfo().Id})"><i class="ti-user m-r-5"></i> Thông tin</a></li>
+				<li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="ti-power-off m-r-5"></i> Đăng xuất</a></li>
+			</ul>
+		</li>
+
+	</ul> <!-- end navbar-right -->
+	using(Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right", style="display:none" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+}
+else
+{
+    <ul class="nav navbar-top-links navbar-right">
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

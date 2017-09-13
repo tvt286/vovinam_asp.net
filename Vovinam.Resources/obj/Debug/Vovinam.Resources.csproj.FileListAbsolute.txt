@@ -1,0 +1,20 @@
+C:\Users\PC\Desktop\Vovinam\Vovinam.Resources\bin\Debug\Vovinam.Resources.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam.Resources\bin\Debug\Vovinam.Resources.pdb
+C:\Users\PC\Desktop\Vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.csprojResolveAssemblyReference.cache
+C:\Users\PC\Desktop\Vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.EnumText.resources
+C:\Users\PC\Desktop\Vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.csproj.GenerateResource.Cache
+C:\Users\PC\Desktop\Vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.dll
+C:\Users\PC\Desktop\Vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.pdb
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Resources\bin\Debug\Vovinam.Resources.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Resources\bin\Debug\Vovinam.Resources.pdb
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.EnumText.resources
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.csproj.GenerateResource.Cache
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.dll
+C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.pdb
+E:\asp.net\vovinam\Vovinam.Resources\bin\Debug\Vovinam.Resources.dll
+E:\asp.net\vovinam\Vovinam.Resources\bin\Debug\Vovinam.Resources.pdb
+E:\asp.net\vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.EnumText.resources
+E:\asp.net\vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.csproj.GenerateResource.Cache
+E:\asp.net\vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.dll
+E:\asp.net\vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.pdb
+E:\asp.net\vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.csprojResolveAssemblyReference.cache

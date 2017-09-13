@@ -1,0 +1,766 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="vovinamModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="vovinamModel.CompanyStatus" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Examinations" Relationship="vovinamModel.FK__Examinati__Compa__10566F31" FromRole="Company" ToRole="Examination" />
+    <NavigationProperty Name="Users" Relationship="vovinamModel.FK__User__CompanyId__398D8EEE" FromRole="Company" ToRole="User" />
+    <NavigationProperty Name="Clubs" Relationship="vovinamModel.FK__Club__CompanyId__34C8D9D1" FromRole="Company" ToRole="Club" />
+    <NavigationProperty Name="LevelUps" Relationship="vovinamModel.FK__LevelUp__Company__03F0984C" FromRole="Company" ToRole="LevelUp" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyId" Type="Int32" />
+    <NavigationProperty Name="Group_Permission" Relationship="Self.FK__Group_Per__Group__38996AB5" FromRole="Group" ToRole="Group_Permission" />
+    <NavigationProperty Name="Users" Relationship="vovinamModel.User_Group" FromRole="Group" ToRole="User" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Group_Permission">
+    <Key>
+      <PropertyRef Name="GroupId" />
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+    <Property Name="PermissionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Group" Relationship="Self.FK__Group_Per__Group__38996AB5" FromRole="Group_Permission" ToRole="Group" />
+  </EntityType>
+  <EntityType Name="Level">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Students" Relationship="vovinamModel.FK__Student__LevelId__35BCFE0A" FromRole="Level" ToRole="Student" />
+    <NavigationProperty Name="LevelUps" Relationship="vovinamModel.FK__LevelUp__LevelId__797309D9" FromRole="Level" ToRole="LevelUp" />
+  </EntityType>
+  <Association Name="FK__Group_Per__Group__38996AB5">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="Group_Permission" Type="Self.Group_Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="Group_Permission">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="vovinamEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Companies" EntityType="Self.Company" />
+    <EntitySet Name="Groups" EntityType="Self.Group" />
+    <EntitySet Name="Group_Permission" EntityType="Self.Group_Permission" />
+    <EntitySet Name="Levels" EntityType="Self.Level" />
+    <AssociationSet Name="FK__Group_Per__Group__38996AB5" Association="Self.FK__Group_Per__Group__38996AB5">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="Group_Permission" EntitySet="Group_Permission" />
+    </AssociationSet>
+    <EntitySet Name="User_Permission" EntityType="vovinamModel.User_Permission" />
+    <EntitySet Name="Schools" EntityType="vovinamModel.School" />
+    <EntitySet Name="Examinations" EntityType="vovinamModel.Examination" />
+    <AssociationSet Name="FK__Examinati__Compa__10566F31" Association="vovinamModel.FK__Examinati__Compa__10566F31">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Examination" EntitySet="Examinations" />
+    </AssociationSet>
+    <EntitySet Name="CoBans" EntityType="vovinamModel.CoBan" />
+    <EntitySet Name="DoiKhangs" EntityType="vovinamModel.DoiKhang" />
+    <EntitySet Name="Quyens" EntityType="vovinamModel.Quyen" />
+    <EntitySet Name="SongLuyens" EntityType="vovinamModel.SongLuyen" />
+    <EntitySet Name="TheLucs" EntityType="vovinamModel.TheLuc" />
+    <EntitySet Name="VoDaos" EntityType="vovinamModel.VoDao" />
+    <EntitySet Name="Competes" EntityType="vovinamModel.Compete" />
+    <EntitySet Name="Users" EntityType="vovinamModel.User" />
+    <AssociationSet Name="FK__CoBan__UserId__14270015" Association="vovinamModel.FK__CoBan__UserId__14270015">
+      <End Role="User" EntitySet="Users" />
+      <End Role="CoBan" EntitySet="CoBans" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User__CompanyId__398D8EEE" Association="vovinamModel.FK__User__CompanyId__398D8EEE">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DoiKhang__UserId__160F4887" Association="vovinamModel.FK__DoiKhang__UserId__160F4887">
+      <End Role="User" EntitySet="Users" />
+      <End Role="DoiKhang" EntitySet="DoiKhangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Quyen__UserId__151B244E" Association="vovinamModel.FK__Quyen__UserId__151B244E">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Quyen" EntitySet="Quyens" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SongLuyen__UserI__17036CC0" Association="vovinamModel.FK__SongLuyen__UserI__17036CC0">
+      <End Role="User" EntitySet="Users" />
+      <End Role="SongLuyen" EntitySet="SongLuyens" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TheLuc__UserId__17F790F9" Association="vovinamModel.FK__TheLuc__UserId__17F790F9">
+      <End Role="User" EntitySet="Users" />
+      <End Role="TheLuc" EntitySet="TheLucs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_Perm__UserI__3E52440B" Association="vovinamModel.FK__User_Perm__UserI__3E52440B">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User_Permission" EntitySet="User_Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VoDao__UserId__18EBB532" Association="vovinamModel.FK__VoDao__UserId__18EBB532">
+      <End Role="User" EntitySet="Users" />
+      <End Role="VoDao" EntitySet="VoDaos" />
+    </AssociationSet>
+    <AssociationSet Name="User_Group" Association="vovinamModel.User_Group">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="Clubs" EntityType="vovinamModel.Club" />
+    <AssociationSet Name="FK__Club__CompanyId__34C8D9D1" Association="vovinamModel.FK__Club__CompanyId__34C8D9D1">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Club" EntitySet="Clubs" />
+    </AssociationSet>
+    <EntitySet Name="Students" EntityType="vovinamModel.Student" />
+    <AssociationSet Name="FK__Student__ClubId__4AB81AF0" Association="vovinamModel.FK__Student__ClubId__4AB81AF0">
+      <End Role="Club" EntitySet="Clubs" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__LevelId__35BCFE0A" Association="vovinamModel.FK__Student__LevelId__35BCFE0A">
+      <End Role="Level" EntitySet="Levels" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__SchoolI__49C3F6B7" Association="vovinamModel.FK__Student__SchoolI__49C3F6B7">
+      <End Role="School" EntitySet="Schools" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <EntitySet Name="LevelUpHistories" EntityType="vovinamModel.LevelUpHistory" />
+    <EntitySet Name="LevelUps" EntityType="vovinamModel.LevelUp" />
+    <AssociationSet Name="FK__LevelUp__ClubId__787EE5A0" Association="vovinamModel.FK__LevelUp__ClubId__787EE5A0">
+      <End Role="Club" EntitySet="Clubs" />
+      <End Role="LevelUp" EntitySet="LevelUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__CobanId__72C60C4A" Association="vovinamModel.FK__LevelUp__CobanId__72C60C4A">
+      <End Role="CoBan" EntitySet="CoBans" />
+      <End Role="LevelUp" EntitySet="LevelUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__Company__03F0984C" Association="vovinamModel.FK__LevelUp__Company__03F0984C">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="LevelUp" EntitySet="LevelUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Compete__LevelUp__1BC821DD" Association="vovinamModel.FK__Compete__LevelUp__1BC821DD">
+      <End Role="LevelUp" EntitySet="LevelUps" />
+      <End Role="Compete" EntitySet="Competes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Compete__LevelUp__1CBC4616" Association="vovinamModel.FK__Compete__LevelUp__1CBC4616">
+      <End Role="LevelUp" EntitySet="LevelUps" />
+      <End Role="Compete" EntitySet="Competes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__DoiKhan__778AC167" Association="vovinamModel.FK__LevelUp__DoiKhan__778AC167">
+      <End Role="DoiKhang" EntitySet="DoiKhangs" />
+      <End Role="LevelUp" EntitySet="LevelUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__Examina__7A672E12" Association="vovinamModel.FK__LevelUp__Examina__7A672E12">
+      <End Role="Examination" EntitySet="Examinations" />
+      <End Role="LevelUp" EntitySet="LevelUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__LevelId__797309D9" Association="vovinamModel.FK__LevelUp__LevelId__797309D9">
+      <End Role="Level" EntitySet="Levels" />
+      <End Role="LevelUp" EntitySet="LevelUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__QuyenId__7B5B524B" Association="vovinamModel.FK__LevelUp__QuyenId__7B5B524B">
+      <End Role="Quyen" EntitySet="Quyens" />
+      <End Role="LevelUp" EntitySet="LevelUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__SongLuy__76969D2E" Association="vovinamModel.FK__LevelUp__SongLuy__76969D2E">
+      <End Role="SongLuyen" EntitySet="SongLuyens" />
+      <End Role="LevelUp" EntitySet="LevelUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__TheLucI__74AE54BC" Association="vovinamModel.FK__LevelUp__TheLucI__74AE54BC">
+      <End Role="TheLuc" EntitySet="TheLucs" />
+      <End Role="LevelUp" EntitySet="LevelUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__VodaoId__75A278F5" Association="vovinamModel.FK__LevelUp__VodaoId__75A278F5">
+      <End Role="VoDao" EntitySet="VoDaos" />
+      <End Role="LevelUp" EntitySet="LevelUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUpHi__Level__73852659" Association="vovinamModel.FK__LevelUpHi__Level__73852659">
+      <End Role="LevelUp" EntitySet="LevelUps" />
+      <End Role="LevelUpHistory" EntitySet="LevelUpHistories" />
+    </AssociationSet>
+  </EntityContainer>
+  <EnumType Name="UserStatus">
+    <Member Name="InActive" Value="0" />
+    <Member Name="Active" Value="1" />
+  </EnumType>
+  <EntityType Name="User_Permission">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="PermissionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="vovinamModel.FK__User_Perm__UserI__3E52440B" FromRole="User_Permission" ToRole="User" />
+  </EntityType>
+  <EnumType Name="CompanyStatus">
+    <Member Name="InActive" Value="0" />
+    <Member Name="Active" Value="1" />
+  </EnumType>
+  <EnumType Name="ClubStatus">
+    <Member Name="Active" Value="1" />
+    <Member Name="InActive" Value="0" />
+  </EnumType>
+  <EnumType Name="Gender">
+    <Member Name="Female" Value="2" />
+    <Member Name="Male" Value="1" />
+  </EnumType>
+  <EntityType Name="School">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyId" Type="Int32" />
+    <NavigationProperty Name="Students" Relationship="vovinamModel.FK__Student__SchoolI__49C3F6B7" FromRole="School" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Examination">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="CompanyId" Type="Int32" />
+    <NavigationProperty Name="Company" Relationship="vovinamModel.FK__Examinati__Compa__10566F31" FromRole="Examination" ToRole="Company" />
+    <NavigationProperty Name="LevelUps" Relationship="vovinamModel.FK__LevelUp__Examina__7A672E12" FromRole="Examination" ToRole="LevelUp" />
+  </EntityType>
+  <EnumType Name="KetQua">
+    <Member Name="Dau" Value="0" />
+    <Member Name="Rot" Value="1" />
+    <Member Name="Vot" Value="2" />
+    <Member Name="ThuKhoa" Value="3" />
+    <Member Name="AKhoa" Value="4" />
+    <Member Name="CapNhat" Value="5" />
+  </EnumType>
+  <Association Name="FK__Examinati__Compa__10566F31">
+    <End Type="vovinamModel.Company" Role="Company" Multiplicity="0..1" />
+    <End Type="vovinamModel.Examination" Role="Examination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Examination">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CoBan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Point" Type="Double" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="vovinamModel.FK__CoBan__UserId__14270015" FromRole="CoBan" ToRole="User" />
+    <NavigationProperty Name="LevelUps" Relationship="vovinamModel.FK__LevelUp__CobanId__72C60C4A" FromRole="CoBan" ToRole="LevelUp" />
+  </EntityType>
+  <EntityType Name="DoiKhang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Point" Type="Double" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="vovinamModel.FK__DoiKhang__UserId__160F4887" FromRole="DoiKhang" ToRole="User" />
+    <NavigationProperty Name="LevelUps" Relationship="vovinamModel.FK__LevelUp__DoiKhan__778AC167" FromRole="DoiKhang" ToRole="LevelUp" />
+  </EntityType>
+  <EntityType Name="Quyen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Point" Type="Double" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="vovinamModel.FK__Quyen__UserId__151B244E" FromRole="Quyen" ToRole="User" />
+    <NavigationProperty Name="LevelUps" Relationship="vovinamModel.FK__LevelUp__QuyenId__7B5B524B" FromRole="Quyen" ToRole="LevelUp" />
+  </EntityType>
+  <EntityType Name="SongLuyen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Point" Type="Double" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="vovinamModel.FK__SongLuyen__UserI__17036CC0" FromRole="SongLuyen" ToRole="User" />
+    <NavigationProperty Name="LevelUps" Relationship="vovinamModel.FK__LevelUp__SongLuy__76969D2E" FromRole="SongLuyen" ToRole="LevelUp" />
+  </EntityType>
+  <EntityType Name="TheLuc">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Point" Type="Double" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="vovinamModel.FK__TheLuc__UserId__17F790F9" FromRole="TheLuc" ToRole="User" />
+    <NavigationProperty Name="LevelUps" Relationship="vovinamModel.FK__LevelUp__TheLucI__74AE54BC" FromRole="TheLuc" ToRole="LevelUp" />
+  </EntityType>
+  <EntityType Name="VoDao">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Point" Type="Double" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="vovinamModel.FK__VoDao__UserId__18EBB532" FromRole="VoDao" ToRole="User" />
+    <NavigationProperty Name="LevelUps" Relationship="vovinamModel.FK__LevelUp__VodaoId__75A278F5" FromRole="VoDao" ToRole="LevelUp" />
+  </EntityType>
+  <EntityType Name="Compete">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LevelUpId1" Type="Int32" Nullable="false" />
+    <Property Name="LevelUpId2" Type="Int32" Nullable="false" />
+    <Property Name="ExaminationId" Type="Int32" Nullable="false" />
+    <Property Name="Gender" Type="vovinamModel.Gender" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" />
+    <NavigationProperty Name="LevelUp" Relationship="vovinamModel.FK__Compete__LevelUp__1BC821DD" FromRole="Compete" ToRole="LevelUp" />
+    <NavigationProperty Name="LevelUp1" Relationship="vovinamModel.FK__Compete__LevelUp__1CBC4616" FromRole="Compete" ToRole="LevelUp" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FullName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="IsAdminRoot" Type="Boolean" Nullable="false" />
+    <Property Name="IsAdminCompany" Type="Boolean" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="vovinamModel.UserStatus" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CoBans" Relationship="vovinamModel.FK__CoBan__UserId__14270015" FromRole="User" ToRole="CoBan" />
+    <NavigationProperty Name="Company" Relationship="vovinamModel.FK__User__CompanyId__398D8EEE" FromRole="User" ToRole="Company" />
+    <NavigationProperty Name="DoiKhangs" Relationship="vovinamModel.FK__DoiKhang__UserId__160F4887" FromRole="User" ToRole="DoiKhang" />
+    <NavigationProperty Name="Quyens" Relationship="vovinamModel.FK__Quyen__UserId__151B244E" FromRole="User" ToRole="Quyen" />
+    <NavigationProperty Name="SongLuyens" Relationship="vovinamModel.FK__SongLuyen__UserI__17036CC0" FromRole="User" ToRole="SongLuyen" />
+    <NavigationProperty Name="TheLucs" Relationship="vovinamModel.FK__TheLuc__UserId__17F790F9" FromRole="User" ToRole="TheLuc" />
+    <NavigationProperty Name="User_Permission" Relationship="vovinamModel.FK__User_Perm__UserI__3E52440B" FromRole="User" ToRole="User_Permission" />
+    <NavigationProperty Name="VoDaos" Relationship="vovinamModel.FK__VoDao__UserId__18EBB532" FromRole="User" ToRole="VoDao" />
+    <NavigationProperty Name="Groups" Relationship="vovinamModel.User_Group" FromRole="User" ToRole="Group" />
+  </EntityType>
+  <Association Name="FK__CoBan__UserId__14270015">
+    <End Type="vovinamModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="vovinamModel.CoBan" Role="CoBan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CoBan">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User__CompanyId__398D8EEE">
+    <End Type="vovinamModel.Company" Role="Company" Multiplicity="0..1" />
+    <End Type="vovinamModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DoiKhang__UserId__160F4887">
+    <End Type="vovinamModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="vovinamModel.DoiKhang" Role="DoiKhang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DoiKhang">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Quyen__UserId__151B244E">
+    <End Type="vovinamModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="vovinamModel.Quyen" Role="Quyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quyen">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SongLuyen__UserI__17036CC0">
+    <End Type="vovinamModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="vovinamModel.SongLuyen" Role="SongLuyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SongLuyen">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TheLuc__UserId__17F790F9">
+    <End Type="vovinamModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="vovinamModel.TheLuc" Role="TheLuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TheLuc">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_Perm__UserI__3E52440B">
+    <End Type="vovinamModel.User" Role="User" Multiplicity="1" />
+    <End Type="vovinamModel.User_Permission" Role="User_Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Permission">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VoDao__UserId__18EBB532">
+    <End Type="vovinamModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="vovinamModel.VoDao" Role="VoDao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VoDao">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="User_Group">
+    <End Type="vovinamModel.Group" Role="Group" Multiplicity="*" />
+    <End Type="vovinamModel.User" Role="User" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Club">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="vovinamModel.ClubStatus" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="vovinamModel.FK__Club__CompanyId__34C8D9D1" FromRole="Club" ToRole="Company" />
+    <NavigationProperty Name="Students" Relationship="vovinamModel.FK__Student__ClubId__4AB81AF0" FromRole="Club" ToRole="Student" />
+    <NavigationProperty Name="LevelUps" Relationship="vovinamModel.FK__LevelUp__ClubId__787EE5A0" FromRole="Club" ToRole="LevelUp" />
+  </EntityType>
+  <Association Name="FK__Club__CompanyId__34C8D9D1">
+    <End Type="vovinamModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="vovinamModel.Club" Role="Club" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Club">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Hometown" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ClubId" Type="Int32" Nullable="false" />
+    <Property Name="LevelId" Type="Int32" Nullable="false" />
+    <Property Name="DateIn" Type="DateTime" Precision="0" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+    <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="vovinamModel.Gender" />
+    <Property Name="Birthday" Type="DateTime" Precision="3" />
+    <Property Name="TimeDeleted" Type="DateTime" Precision="3" />
+    <Property Name="SchoolId" Type="Int32" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="Tuition1" Type="Boolean" Nullable="false" />
+    <Property Name="Tuition2" Type="Boolean" Nullable="false" />
+    <Property Name="Tuition3" Type="Boolean" Nullable="false" />
+    <Property Name="Tuition4" Type="Boolean" Nullable="false" />
+    <Property Name="Tuition5" Type="Boolean" Nullable="false" />
+    <Property Name="Tuition6" Type="Boolean" Nullable="false" />
+    <Property Name="Tuition7" Type="Boolean" Nullable="false" />
+    <Property Name="Tuition8" Type="Boolean" Nullable="false" />
+    <Property Name="Tuition9" Type="Boolean" Nullable="false" />
+    <Property Name="Tuition10" Type="Boolean" Nullable="false" />
+    <Property Name="Tuition11" Type="Boolean" Nullable="false" />
+    <Property Name="Tuition12" Type="Boolean" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Club" Relationship="vovinamModel.FK__Student__ClubId__4AB81AF0" FromRole="Student" ToRole="Club" />
+    <NavigationProperty Name="Level" Relationship="vovinamModel.FK__Student__LevelId__35BCFE0A" FromRole="Student" ToRole="Level" />
+    <NavigationProperty Name="School" Relationship="vovinamModel.FK__Student__SchoolI__49C3F6B7" FromRole="Student" ToRole="School" />
+  </EntityType>
+  <Association Name="FK__Student__ClubId__4AB81AF0">
+    <End Type="vovinamModel.Club" Role="Club" Multiplicity="1" />
+    <End Type="vovinamModel.Student" Role="Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Club">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="ClubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__LevelId__35BCFE0A">
+    <End Type="vovinamModel.Level" Role="Level" Multiplicity="1" />
+    <End Type="vovinamModel.Student" Role="Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Level">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="LevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__SchoolI__49C3F6B7">
+    <End Type="vovinamModel.School" Role="School" Multiplicity="0..1" />
+    <End Type="vovinamModel.Student" Role="Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="SchoolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="LevelUpHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TimeCreate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LevelUpId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="StudentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PointNew" Type="Double" Nullable="false" />
+    <Property Name="PointOld" Type="Double" Nullable="false" />
+    <NavigationProperty Name="LevelUp" Relationship="vovinamModel.FK__LevelUpHi__Level__73852659" FromRole="LevelUpHistory" ToRole="LevelUp" />
+  </EntityType>
+  <EntityType Name="LevelUp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Stt" Type="Int32" Nullable="false" />
+    <Property Name="BirthDay" Type="Int32" />
+    <Property Name="Gender" Type="vovinamModel.Gender" Nullable="false" />
+    <Property Name="ClubId" Type="Int32" Nullable="false" />
+    <Property Name="LevelId" Type="Int32" Nullable="false" />
+    <Property Name="Weight" Type="Int32" />
+    <Property Name="ExaminationId" Type="Int32" Nullable="false" />
+    <Property Name="QuyenId" Type="Int32" />
+    <Property Name="CobanId" Type="Int32" />
+    <Property Name="TheLucId" Type="Int32" />
+    <Property Name="SongLuyenId" Type="Int32" />
+    <Property Name="VodaoId" Type="Int32" />
+    <Property Name="DoiKhangId" Type="Int32" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="Total" Type="Double" Nullable="false" />
+    <Property Name="HasCompete" Type="Boolean" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="KetQua" Type="vovinamModel.KetQua" Nullable="false" />
+    <NavigationProperty Name="Club" Relationship="vovinamModel.FK__LevelUp__ClubId__787EE5A0" FromRole="LevelUp" ToRole="Club" />
+    <NavigationProperty Name="CoBan" Relationship="vovinamModel.FK__LevelUp__CobanId__72C60C4A" FromRole="LevelUp" ToRole="CoBan" />
+    <NavigationProperty Name="Company" Relationship="vovinamModel.FK__LevelUp__Company__03F0984C" FromRole="LevelUp" ToRole="Company" />
+    <NavigationProperty Name="Competes" Relationship="vovinamModel.FK__Compete__LevelUp__1BC821DD" FromRole="LevelUp" ToRole="Compete" />
+    <NavigationProperty Name="Competes1" Relationship="vovinamModel.FK__Compete__LevelUp__1CBC4616" FromRole="LevelUp" ToRole="Compete" />
+    <NavigationProperty Name="DoiKhang" Relationship="vovinamModel.FK__LevelUp__DoiKhan__778AC167" FromRole="LevelUp" ToRole="DoiKhang" />
+    <NavigationProperty Name="Examination" Relationship="vovinamModel.FK__LevelUp__Examina__7A672E12" FromRole="LevelUp" ToRole="Examination" />
+    <NavigationProperty Name="Level" Relationship="vovinamModel.FK__LevelUp__LevelId__797309D9" FromRole="LevelUp" ToRole="Level" />
+    <NavigationProperty Name="Quyen" Relationship="vovinamModel.FK__LevelUp__QuyenId__7B5B524B" FromRole="LevelUp" ToRole="Quyen" />
+    <NavigationProperty Name="SongLuyen" Relationship="vovinamModel.FK__LevelUp__SongLuy__76969D2E" FromRole="LevelUp" ToRole="SongLuyen" />
+    <NavigationProperty Name="TheLuc" Relationship="vovinamModel.FK__LevelUp__TheLucI__74AE54BC" FromRole="LevelUp" ToRole="TheLuc" />
+    <NavigationProperty Name="VoDao" Relationship="vovinamModel.FK__LevelUp__VodaoId__75A278F5" FromRole="LevelUp" ToRole="VoDao" />
+    <NavigationProperty Name="LevelUpHistories" Relationship="vovinamModel.FK__LevelUpHi__Level__73852659" FromRole="LevelUp" ToRole="LevelUpHistory" />
+  </EntityType>
+  <Association Name="FK__LevelUp__ClubId__787EE5A0">
+    <End Type="vovinamModel.Club" Role="Club" Multiplicity="1" />
+    <End Type="vovinamModel.LevelUp" Role="LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Club">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="ClubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__CobanId__72C60C4A">
+    <End Type="vovinamModel.CoBan" Role="CoBan" Multiplicity="0..1" />
+    <End Type="vovinamModel.LevelUp" Role="LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CoBan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="CobanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__Company__03F0984C">
+    <End Type="vovinamModel.Company" Role="Company" Multiplicity="0..1" />
+    <End Type="vovinamModel.LevelUp" Role="LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Compete__LevelUp__1BC821DD">
+    <End Type="vovinamModel.LevelUp" Role="LevelUp" Multiplicity="1" />
+    <End Type="vovinamModel.Compete" Role="Compete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LevelUp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Compete">
+        <PropertyRef Name="LevelUpId1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Compete__LevelUp__1CBC4616">
+    <End Type="vovinamModel.LevelUp" Role="LevelUp" Multiplicity="1" />
+    <End Type="vovinamModel.Compete" Role="Compete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LevelUp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Compete">
+        <PropertyRef Name="LevelUpId2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__DoiKhan__778AC167">
+    <End Type="vovinamModel.DoiKhang" Role="DoiKhang" Multiplicity="0..1" />
+    <End Type="vovinamModel.LevelUp" Role="LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DoiKhang">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="DoiKhangId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__Examina__7A672E12">
+    <End Type="vovinamModel.Examination" Role="Examination" Multiplicity="1" />
+    <End Type="vovinamModel.LevelUp" Role="LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Examination">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="ExaminationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__LevelId__797309D9">
+    <End Type="vovinamModel.Level" Role="Level" Multiplicity="1" />
+    <End Type="vovinamModel.LevelUp" Role="LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Level">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="LevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__QuyenId__7B5B524B">
+    <End Type="vovinamModel.Quyen" Role="Quyen" Multiplicity="0..1" />
+    <End Type="vovinamModel.LevelUp" Role="LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quyen">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="QuyenId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__SongLuy__76969D2E">
+    <End Type="vovinamModel.SongLuyen" Role="SongLuyen" Multiplicity="0..1" />
+    <End Type="vovinamModel.LevelUp" Role="LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SongLuyen">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="SongLuyenId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__TheLucI__74AE54BC">
+    <End Type="vovinamModel.TheLuc" Role="TheLuc" Multiplicity="0..1" />
+    <End Type="vovinamModel.LevelUp" Role="LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TheLuc">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="TheLucId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__VodaoId__75A278F5">
+    <End Type="vovinamModel.VoDao" Role="VoDao" Multiplicity="0..1" />
+    <End Type="vovinamModel.LevelUp" Role="LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VoDao">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="VodaoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUpHi__Level__73852659">
+    <End Type="vovinamModel.LevelUp" Role="LevelUp" Multiplicity="1" />
+    <End Type="vovinamModel.LevelUpHistory" Role="LevelUpHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LevelUp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUpHistory">
+        <PropertyRef Name="LevelUpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

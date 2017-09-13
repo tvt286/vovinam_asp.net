@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="vovinamModelStoreContainer" CdmEntityContainer="vovinamEntities">
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="vovinamModel.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="vovinamModel.Group">
+        <MappingFragment StoreEntitySet="Group">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Group_Permission">
+      <EntityTypeMapping TypeName="vovinamModel.Group_Permission">
+        <MappingFragment StoreEntitySet="Group_Permission">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Levels">
+      <EntityTypeMapping TypeName="vovinamModel.Level">
+        <MappingFragment StoreEntitySet="Level">
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Permission">
+      <EntityTypeMapping TypeName="vovinamModel.User_Permission">
+        <MappingFragment StoreEntitySet="User_Permission">
+          <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Schools">
+      <EntityTypeMapping TypeName="vovinamModel.School">
+        <MappingFragment StoreEntitySet="School">
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Examinations">
+      <EntityTypeMapping TypeName="vovinamModel.Examination">
+        <MappingFragment StoreEntitySet="Examination">
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CoBans">
+      <EntityTypeMapping TypeName="vovinamModel.CoBan">
+        <MappingFragment StoreEntitySet="CoBan">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DoiKhangs">
+      <EntityTypeMapping TypeName="vovinamModel.DoiKhang">
+        <MappingFragment StoreEntitySet="DoiKhang">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quyens">
+      <EntityTypeMapping TypeName="vovinamModel.Quyen">
+        <MappingFragment StoreEntitySet="Quyen">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SongLuyens">
+      <EntityTypeMapping TypeName="vovinamModel.SongLuyen">
+        <MappingFragment StoreEntitySet="SongLuyen">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TheLucs">
+      <EntityTypeMapping TypeName="vovinamModel.TheLuc">
+        <MappingFragment StoreEntitySet="TheLuc">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VoDaos">
+      <EntityTypeMapping TypeName="vovinamModel.VoDao">
+        <MappingFragment StoreEntitySet="VoDao">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Competes">
+      <EntityTypeMapping TypeName="vovinamModel.Compete">
+        <MappingFragment StoreEntitySet="Compete">
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="ExaminationId" ColumnName="ExaminationId" />
+          <ScalarProperty Name="LevelUpId2" ColumnName="LevelUpId2" />
+          <ScalarProperty Name="LevelUpId1" ColumnName="LevelUpId1" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="vovinamModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="IsAdminCompany" ColumnName="IsAdminCompany" />
+          <ScalarProperty Name="IsAdminRoot" ColumnName="IsAdminRoot" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="User_Group" TypeName="vovinamModel.User_Group" StoreEntitySet="User_Group">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="Group">
+        <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="Clubs">
+      <EntityTypeMapping TypeName="vovinamModel.Club">
+        <MappingFragment StoreEntitySet="Club">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="vovinamModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="Tuition12" ColumnName="Tuition12" />
+          <ScalarProperty Name="Tuition11" ColumnName="Tuition11" />
+          <ScalarProperty Name="Tuition10" ColumnName="Tuition10" />
+          <ScalarProperty Name="Tuition9" ColumnName="Tuition9" />
+          <ScalarProperty Name="Tuition8" ColumnName="Tuition8" />
+          <ScalarProperty Name="Tuition7" ColumnName="Tuition7" />
+          <ScalarProperty Name="Tuition6" ColumnName="Tuition6" />
+          <ScalarProperty Name="Tuition5" ColumnName="Tuition5" />
+          <ScalarProperty Name="Tuition4" ColumnName="Tuition4" />
+          <ScalarProperty Name="Tuition3" ColumnName="Tuition3" />
+          <ScalarProperty Name="Tuition2" ColumnName="Tuition2" />
+          <ScalarProperty Name="Tuition1" ColumnName="Tuition1" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+          <ScalarProperty Name="TimeDeleted" ColumnName="TimeDeleted" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateIn" ColumnName="DateIn" />
+          <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+          <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+          <ScalarProperty Name="Hometown" ColumnName="Hometown" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LevelUpHistories">
+      <EntityTypeMapping TypeName="vovinamModel.LevelUpHistory">
+        <MappingFragment StoreEntitySet="LevelUpHistory">
+          <ScalarProperty Name="PointOld" ColumnName="PointOld" />
+          <ScalarProperty Name="PointNew" ColumnName="PointNew" />
+          <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LevelUpId" ColumnName="LevelUpId" />
+          <ScalarProperty Name="TimeCreate" ColumnName="TimeCreate" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LevelUps">
+      <EntityTypeMapping TypeName="vovinamModel.LevelUp">
+        <MappingFragment StoreEntitySet="LevelUp">
+          <ScalarProperty Name="KetQua" ColumnName="KetQua" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="HasCompete" ColumnName="HasCompete" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="DoiKhangId" ColumnName="DoiKhangId" />
+          <ScalarProperty Name="VodaoId" ColumnName="VodaoId" />
+          <ScalarProperty Name="SongLuyenId" ColumnName="SongLuyenId" />
+          <ScalarProperty Name="TheLucId" ColumnName="TheLucId" />
+          <ScalarProperty Name="CobanId" ColumnName="CobanId" />
+          <ScalarProperty Name="QuyenId" ColumnName="QuyenId" />
+          <ScalarProperty Name="ExaminationId" ColumnName="ExaminationId" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+          <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+          <ScalarProperty Name="Stt" ColumnName="Stt" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
