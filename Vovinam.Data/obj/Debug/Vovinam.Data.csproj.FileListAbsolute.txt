@@ -28,3 +28,13 @@ E:\asp.net\vovinam\Vovinam.Data\obj\Debug\Vovinam.Data.dll
 E:\asp.net\vovinam\Vovinam.Data\obj\Debug\Vovinam.Data.pdb
 E:\asp.net\vovinam\Vovinam.Data\obj\Debug\Vovinam.Data.csprojResolveAssemblyReference.cache
 C:\Users\TRUC-SIDA\Documents\Visual Studio 2013\Projects\vovinam\Vovinam.Data\obj\Debug\Vovinam.Data.csprojResolveAssemblyReference.cache
+E:\vv\vovinam_asp.net\Vovinam.Data\bin\Debug\Vovinam.Data.dll.config
+E:\vv\vovinam_asp.net\Vovinam.Data\bin\Debug\Vovinam.Data.dll
+E:\vv\vovinam_asp.net\Vovinam.Data\bin\Debug\Vovinam.Data.pdb
+E:\vv\vovinam_asp.net\Vovinam.Data\bin\Debug\EntityFramework.dll
+E:\vv\vovinam_asp.net\Vovinam.Data\bin\Debug\EntityFramework.SqlServer.dll
+E:\vv\vovinam_asp.net\Vovinam.Data\bin\Debug\EntityFramework.xml
+E:\vv\vovinam_asp.net\Vovinam.Data\bin\Debug\EntityFramework.SqlServer.xml
+E:\vv\vovinam_asp.net\Vovinam.Data\obj\Debug\Vovinam.Data.csprojResolveAssemblyReference.cache
+E:\vv\vovinam_asp.net\Vovinam.Data\obj\Debug\Vovinam.Data.dll
+E:\vv\vovinam_asp.net\Vovinam.Data\obj\Debug\Vovinam.Data.pdb

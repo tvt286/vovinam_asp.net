@@ -76,44 +76,43 @@ namespace Vovinam.Common
         ChamThi_ExportCompete = 6005,
 
         [Description("Cơ bản")]
-        TuVe_CoBan = 7001,
+        LamDai_CoBan = 7001,
         [Description("Quyền")]
-        TuVe_Quyen = 7002,
+        LamDai_Quyen = 7002,
         [Description("Võ đạo")]
-        TuVe_VoDao = 7003,
+        LamDai_VoDao = 7003,
         [Description("Thể lực")]
-        TuVe_TheLuc = 7004,
+        LamDai_TheLuc = 7004,
 
         [Description("Cơ bản")]
-        LamDai_CoBan = 8001,
+        LamDai_I_CoBan = 8001,
         [Description("Quyền")]
-        LamDai_Quyen = 8002,
+        LamDai_I_Quyen = 8002,
         [Description("Võ đạo")]
-        LamDai_VoDao = 8003,
+        LamDai_I_VoDao = 8003,
         [Description("Đối kháng")]
-        LamDai_DoiKhang = 8004,
+        LamDai_I_DoiKhang = 8004,
 
         [Description("Cơ bản")]
-        LamDaiI_CoBan = 9001,
+        LamDai_II_CoBan = 9001,
         [Description("Quyền")]
-        LamDaiI_Quyen = 9002,
+        LamDai_II_Quyen = 9002,
         [Description("Võ đạo")]
-        LamDaiI_VoDao = 9003,
+        LamDai_II_VoDao = 9003,
         [Description("Đối kháng")]
-        LamDaiI_DoiKhang = 9004,
+        LamDai_II_DoiKhang = 9004,
+       
+
+        [Description("Cơ bản")]
+        LamDai_III_CoBan = 10001,
+        [Description("Quyền")]
+        LamDai_III_Quyen = 10002,
+        [Description("Võ đạo")]
+        LamDai_III_VoDao = 10003,
+        [Description("Đối kháng")]
+        LamDai_III_DoiKhang = 10004,
         [Description("Song luyện")]
-        LamDaiI_SongLuyen = 9005,
-
-        [Description("Cơ bản")]
-        LamDaiII_CoBan = 10001,
-        [Description("Quyền")]
-        LamDaiII_Quyen = 10002,
-        [Description("Võ đạo")]
-        LamDaiII_VoDao = 10003,
-        [Description("Đối kháng")]
-        LamDaiII_DoiKhang = 10004,
-        [Description("Song luyện")]
-        LamDaiII_SongLuyen = 10005,
+        LamDai_III_SongLuyen = 10005,
 
         [Description("Xem Lịch sử")]
         History_View = 11001,
