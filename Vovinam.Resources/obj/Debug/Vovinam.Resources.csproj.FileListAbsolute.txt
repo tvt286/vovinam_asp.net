@@ -20,7 +20,6 @@ E:\asp.net\vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.pdb
 E:\asp.net\vovinam\Vovinam.Resources\obj\Debug\Vovinam.Resources.csprojResolveAssemblyReference.cache
 E:\vv\vovinam_asp.net\Vovinam.Resources\bin\Debug\Vovinam.Resources.dll
 E:\vv\vovinam_asp.net\Vovinam.Resources\bin\Debug\Vovinam.Resources.pdb
-E:\vv\vovinam_asp.net\Vovinam.Resources\obj\Debug\Vovinam.Resources.csprojResolveAssemblyReference.cache
 E:\vv\vovinam_asp.net\Vovinam.Resources\obj\Debug\Vovinam.Resources.EnumText.resources
 E:\vv\vovinam_asp.net\Vovinam.Resources\obj\Debug\Vovinam.Resources.csproj.GenerateResource.Cache
 E:\vv\vovinam_asp.net\Vovinam.Resources\obj\Debug\Vovinam.Resources.dll

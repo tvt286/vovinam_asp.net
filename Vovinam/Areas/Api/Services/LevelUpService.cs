@@ -11,11 +11,29 @@ namespace Vovinam.Areas.Api.Services
 {
     public class LevelUpService
     {
-        public static List<LevelUpModel> GetLevelUp(int CompanyId, int examinationId)
+        public static List<ExaminationModel> getExamination(int companyId)
+        {
+            using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
+            {
+                var examinations = context.Examinations.Where(x => x.CompanyId == companyId).ToList();
+                List<ExaminationModel> results = new List<ExaminationModel>();
+                foreach (var item in examinations)
+                {
+                    ExaminationModel model = new ExaminationModel();
+                    model.id = item.Id;
+                    model.name = item.Name;
+                    results.Add(model);
+                }
+                return results;
+            }
+        }
+
+        public static List<LevelUpModel> GetLevelUp(int CompanyId, int examinationId, int levelId)
         {
             using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
             {
                 var levelups = context.LevelUps.Where(x => x.ExaminationId == examinationId)
+					.Where(x => x.LevelId == levelId)
                     .Where(x => x.CompanyId == CompanyId)
                     .Include(x => x.Club)
                      .Include(x => x.Level)

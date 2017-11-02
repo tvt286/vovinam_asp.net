@@ -21,15 +21,33 @@ namespace Vovinam.Areas.Api.Controllers
         }
 
         [HttpGet]
-        public object GetLevelUps(int examination_id, int company_id)
+        public object GetLevelUps(int examination_id, int company_id, int level_Id)
         {
 
             List<LevelUpModel> levelUps = new List<LevelUpModel>();
-            levelUps = LevelUpService.GetLevelUp(examination_id, company_id);
+            levelUps = LevelUpService.GetLevelUp(company_id, examination_id, level_Id);
 
             if (levelUps != null)
             {
                 return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.GET_LIST_SUCCESS, levelUps));
+            }
+            else
+            {
+                return Json(new JsonResult(ResultCode.NoContent, Constants.MESSAGE.NO_CONTENT));
+            }
+
+        }
+
+        [HttpGet]
+        public object GetExamination(int company_id)
+        {
+
+            List<ExaminationModel> examinations = new List<ExaminationModel>();
+            examinations = LevelUpService.getExamination(company_id);
+
+            if (examinations != null)
+            {
+                return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.GET_LIST_SUCCESS, examinations));
             }
             else
             {
