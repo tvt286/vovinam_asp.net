@@ -80,26 +80,35 @@ namespace Vovinam.Areas.Api.Services
 
                     model.quyen = new QuyenModel();
                     model.quyen.id = item.Quyen.Id;
+                    model.quyen.point = item.Quyen.Point;
+
                     if (item.Quyen.User != null)
                         model.quyen.user_name = item.Quyen.User.FullName;
 
                     model.doi_khang = new DoiKhangModel();
                     model.doi_khang.id = item.DoiKhang.Id;
+                    model.doi_khang.point = item.DoiKhang.Point;
+
                     if (item.DoiKhang.User != null)
                         model.doi_khang.user_name = item.DoiKhang.User.FullName;
 
                     model.song_luyen = new SongLuyenModel();
                     model.song_luyen.id = item.SongLuyen.Id;
+                    model.song_luyen.point = item.SongLuyen.Point;
+
                     if (item.SongLuyen.User != null)
                         model.song_luyen.user_name = item.SongLuyen.User.FullName;
 
                     model.vo_dao = new VoDaoModel();
                     model.vo_dao.id = item.VoDao.Id;
+                    model.vo_dao.point = item.VoDao.Point;
+
                     if (item.VoDao.User != null)
                         model.vo_dao.user_name = item.VoDao.User.FullName;
 
                     model.the_luc = new TheLucModel();
                     model.the_luc.id = item.TheLuc.Id;
+                    model.the_luc.point = item.TheLuc.Point;
                     if (item.TheLuc.User != null)
                         model.the_luc.user_name = item.TheLuc.User.FullName;
                     results.Add(model);
