@@ -149,7 +149,7 @@ namespace Vovinam.Areas.Api.Services
             }
         }
 
-        public static void UpdateCoBan(int levelUpId, double point, int userId)
+        public static void UpdatePoint(int levelUpId, double point, int userId, int pointType)
         {
             using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
             {
@@ -160,12 +160,60 @@ namespace Vovinam.Areas.Api.Services
                 LevelUpHistory history = new LevelUpHistory();
                 history.UserName = user.FullName;
                 history.LevelUpId = levelUpId;
-                history.Name = "Cơ bản";
+                
                 history.StudentName = levelUp.Name;
-                history.PointOld = levelUp.CoBan.Point;
                 history.PointNew = point;
+                if(pointType == 1)
+                {
+                    history.Name = "Cơ bản";
+                    history.PointOld = levelUp.CoBan.Point;
+                    levelUp.CoBan.Point = point;
+                    levelUp.CoBan.UserId = user.Id;
+
+
+                }
+                else if (pointType == 2)
+                {
+                    history.Name = "Võ đạo";
+                    history.PointOld = levelUp.VoDao.Point;
+                    levelUp.VoDao.Point = point;
+                    levelUp.VoDao.UserId = user.Id;
+
+                }
+                else if (pointType == 3)
+                {
+                    history.Name = "Thể lực";
+                    history.PointOld = levelUp.TheLuc.Point;
+                    levelUp.TheLuc.Point = point;
+                    levelUp.TheLuc.UserId = user.Id;
+
+                }
+                else if (pointType == 4)
+                {
+                    history.Name = "Quyền";
+                    history.PointOld = levelUp.Quyen.Point;
+                    levelUp.Quyen.Point = point;
+                    levelUp.Quyen.UserId = user.Id;
+
+                }
+                else if (pointType == 5)
+                {
+                    history.Name = "Đối kháng";
+                    history.PointOld = levelUp.DoiKhang.Point;
+                    levelUp.DoiKhang.Point = point;
+                    levelUp.DoiKhang.UserId = user.Id;
+
+                }
+                else if (pointType == 6)
+                {
+                    history.Name = "Song luyện";
+                    history.PointOld = levelUp.SongLuyen.Point;
+                    levelUp.SongLuyen.Point = point;
+                    levelUp.SongLuyen.UserId = user.Id;
+
+                }
+
                 LevelUpHistoryService.Create(history);
-                levelUp.CoBan.Point = point;
                 if (levelUp.LevelId == 1)
                     levelUp.Total = levelUp.Quyen.Point + levelUp.TheLuc.Point + levelUp.VoDao.Point + levelUp.CoBan.Point;
                 else if (levelUp.LevelId == 2 || levelUp.LevelId == 3)
@@ -175,7 +223,6 @@ namespace Vovinam.Areas.Api.Services
                 // set ket qua
                 SetKetQua(levelUp);
               
-                levelUp.CoBan.UserId = user.Id;
                 context.SaveChanges();
             }
         }

@@ -57,51 +57,51 @@ namespace Vovinam.Areas.Api.Controllers
         }
 
         [HttpPost]
-        public object UpdateCoBan(int levelup_id, int user_id, double point)
+        public object UpdatePoint(int levelup_id, int user_id, double point, int point_type)
         {
-            LevelUpService.UpdateCoBan(levelup_id,point,user_id);
+            LevelUpService.UpdatePoint(levelup_id, point, user_id, point_type);
             return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.UPDATE_SUCCESS));
 
         }
 
-        [HttpPost]
-        public object UpdateQuyen(int levelup_id, int user_id, double point)
-        {
-            LevelUpService.UpdateQuyen(levelup_id, point, user_id);
-            return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.UPDATE_SUCCESS));
+        //[HttpPost]
+        //public object UpdateQuyen(int levelup_id, int user_id, double point)
+        //{
+        //    LevelUpService.UpdateQuyen(levelup_id, point, user_id);
+        //    return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.UPDATE_SUCCESS));
 
-        }
+        //}
 
-        [HttpPost]
-        public object UpdateVoDao(int levelup_id, int user_id, double point)
-        {
-            LevelUpService.UpdateVoDao(levelup_id, point, user_id);
-            return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.UPDATE_SUCCESS));
+        //[HttpPost]
+        //public object UpdateVoDao(int levelup_id, int user_id, double point)
+        //{
+        //    LevelUpService.UpdateVoDao(levelup_id, point, user_id);
+        //    return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.UPDATE_SUCCESS));
 
-        }
+        //}
 
-        [HttpPost]
-        public object UpdateSongLuyen(int levelup_id, int user_id, double point)
-        {
-            LevelUpService.UpdateSongLuyen(levelup_id, point, user_id);
-            return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.UPDATE_SUCCESS));
+        //[HttpPost]
+        //public object UpdateSongLuyen(int levelup_id, int user_id, double point)
+        //{
+        //    LevelUpService.UpdateSongLuyen(levelup_id, point, user_id);
+        //    return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.UPDATE_SUCCESS));
 
-        }
+        //}
 
-        [HttpPost]
-        public object UpdateDoiKhang(int levelup_id, int user_id, double point)
-        {
-            LevelUpService.UpdateDoiKhang(levelup_id, point, user_id);
-            return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.UPDATE_SUCCESS));
+        //[HttpPost]
+        //public object UpdateDoiKhang(int levelup_id, int user_id, double point)
+        //{
+        //    LevelUpService.UpdateDoiKhang(levelup_id, point, user_id);
+        //    return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.UPDATE_SUCCESS));
 
-        }
+        //}
 
-        [HttpPost]
-        public object UpdateTheLuc(int levelup_id, int user_id, double point)
-        {
-            LevelUpService.UpdateTheLuc(levelup_id, point, user_id);
-            return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.UPDATE_SUCCESS));
+        //[HttpPost]
+        //public object UpdateTheLuc(int levelup_id, int user_id, double point)
+        //{
+        //    LevelUpService.UpdateTheLuc(levelup_id, point, user_id);
+        //    return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.UPDATE_SUCCESS));
 
-        }
+        //}
     }
 }
