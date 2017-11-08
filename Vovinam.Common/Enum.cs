@@ -90,18 +90,14 @@ namespace Vovinam.Common
         LamDai_I_Quyen = 8002,
         [Description("Võ đạo")]
         LamDai_I_VoDao = 8003,
-        [Description("Đối kháng")]
-        LamDai_I_DoiKhang = 8004,
-
+      
         [Description("Cơ bản")]
         LamDai_II_CoBan = 9001,
         [Description("Quyền")]
         LamDai_II_Quyen = 9002,
         [Description("Võ đạo")]
         LamDai_II_VoDao = 9003,
-        [Description("Đối kháng")]
-        LamDai_II_DoiKhang = 9004,
-       
+    
 
         [Description("Cơ bản")]
         LamDai_III_CoBan = 10001,
@@ -109,13 +105,17 @@ namespace Vovinam.Common
         LamDai_III_Quyen = 10002,
         [Description("Võ đạo")]
         LamDai_III_VoDao = 10003,
-        [Description("Đối kháng")]
-        LamDai_III_DoiKhang = 10004,
         [Description("Song luyện")]
-        LamDai_III_SongLuyen = 10005,
+        LamDai_III_SongLuyen = 10004,
+
+
+        [Description("Đối kháng nam")]
+        DoiKhang_Nam = 11001,
+        [Description("Đối kháng nữ")]
+        DoiKhang_Nu = 11002,
 
         [Description("Xem Lịch sử")]
-        History_View = 11001,
+        History_View = 12001,
 
     }
 }

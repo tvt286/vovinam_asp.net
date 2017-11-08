@@ -11,12 +11,12 @@ namespace Vovinam.Areas.Api.Services
 {
     public class CompeteService
     {
-        public static List<CompeteModel> GetCompetes(int CompanyId, int examinationId)
+        public static List<CompeteModel> GetCompetes(int CompanyId, int examinationId, Gender gender)
         {
             using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
             {
                 var competes = context.Competes.Where(x => x.ExaminationId == examinationId)
-                    .Where(x => x.CompanyId == CompanyId)
+                    .Where(x => x.CompanyId == CompanyId && x.Gender == gender)
                     .Include(x => x.LevelUp)
                      .Include(x => x.LevelUp1)
                     .Include(x => x.LevelUp.DoiKhang)
@@ -71,6 +71,65 @@ namespace Vovinam.Areas.Api.Services
 
                 }
                 return results;
+            }
+        }
+
+
+        public static void UpdatePoint(int levelUpId1, int levelUpId2, double point1, double point2, int userId)
+        {
+            using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
+            {
+                var user = context.Users.FirstOrDefault(x => x.Id == userId);
+                var levelUp1 = context.LevelUps.FirstOrDefault(x => x.Id == levelUpId1);
+                var levelUp2 = context.LevelUps.FirstOrDefault(x => x.Id == levelUpId2);
+
+                // luu lich sử 1
+                LevelUpHistory history = new LevelUpHistory();
+                history.UserName = user.FullName;
+                history.LevelUpId = levelUpId1;
+
+                history.StudentName = levelUp1.Name;
+                history.PointNew = point1;
+                                      
+                history.Name = "Đối kháng";
+                history.PointOld = levelUp1.DoiKhang.Point;
+                levelUp1.DoiKhang.Point = point1;
+                levelUp1.DoiKhang.UserId = user.Id;
+
+                LevelUpHistoryService.Create(history);
+                if (levelUp1.LevelId == 1)
+                    levelUp1.Total = levelUp1.Quyen.Point + levelUp1.TheLuc.Point + levelUp1.VoDao.Point + levelUp1.CoBan.Point;
+                else if (levelUp1.LevelId == 2 || levelUp1.LevelId == 3)
+                    levelUp1.Total = levelUp1.Quyen.Point + levelUp1.DoiKhang.Point + levelUp1.VoDao.Point + levelUp1.CoBan.Point;
+                else if (levelUp1.LevelId == 4)
+                    levelUp1.Total = levelUp1.Quyen.Point + levelUp1.DoiKhang.Point + levelUp1.VoDao.Point + levelUp1.CoBan.Point + levelUp1.SongLuyen.Point;
+                // set ket qua
+                LevelUpService.SetKetQua(levelUp1);
+
+                // luu lich sử 2
+                LevelUpHistory history1 = new LevelUpHistory();
+                history1.UserName = user.FullName;
+                history1.LevelUpId = levelUpId2;
+
+                history1.StudentName = levelUp2.Name;
+                history1.PointNew = point2;
+
+                history1.Name = "Đối kháng";
+                history1.PointOld = levelUp2.DoiKhang.Point;
+                levelUp2.DoiKhang.Point = point2;
+                levelUp2.DoiKhang.UserId = user.Id;
+
+                LevelUpHistoryService.Create(history1);
+                if (levelUp2.LevelId == 1)
+                    levelUp2.Total = levelUp2.Quyen.Point + levelUp2.TheLuc.Point + levelUp2.VoDao.Point + levelUp2.CoBan.Point;
+                else if (levelUp2.LevelId == 2 || levelUp2.LevelId == 3)
+                    levelUp2.Total = levelUp2.Quyen.Point + levelUp2.DoiKhang.Point + levelUp2.VoDao.Point + levelUp2.CoBan.Point;
+                else if (levelUp2.LevelId == 4)
+                    levelUp2.Total = levelUp2.Quyen.Point + levelUp2.DoiKhang.Point + levelUp2.VoDao.Point + levelUp2.CoBan.Point + levelUp2.SongLuyen.Point;
+                // set ket qua
+                LevelUpService.SetKetQua(levelUp2);
+
+                context.SaveChanges();
             }
         }
     }

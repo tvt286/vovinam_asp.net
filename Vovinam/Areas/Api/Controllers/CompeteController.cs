@@ -16,11 +16,11 @@ namespace Vovinam.Areas.Api.Controllers
     public class CompeteController : ApiController
     {
         [HttpGet]
-        public object GetCompetes(int club_id, int company_id)
+        public object GetCompetes(int examination_id, int company_id, Gender gender)
         {
 
             List<CompeteModel> competes = new List<CompeteModel>();
-            competes = CompeteService.GetCompetes(club_id, company_id);
+            competes = CompeteService.GetCompetes(company_id, examination_id, gender);
 
             if (competes.Count > 0)
             {
@@ -30,6 +30,14 @@ namespace Vovinam.Areas.Api.Controllers
             {
                 return Json(new JsonResult(ResultCode.NoContent, Constants.MESSAGE.NO_CONTENT));
             }
+
+        }
+
+        [HttpPost]
+        public object UpdatePoint(int levelup_id_1, int levelup_id_2, int user_id, double point_1, double point_2)
+        {
+            CompeteService.UpdatePoint(levelup_id_1, levelup_id_2, point_1, point_2, user_id);
+            return Json(new JsonResult(ResultCode.Success, Constants.MESSAGE.UPDATE_SUCCESS));
 
         }
     }
