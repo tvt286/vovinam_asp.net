@@ -82,6 +82,31 @@ namespace Vovinam.Areas.Api.Services
 
         }
 
+        public static List<UserModel> getUsers(int companyId)
+        {
+            using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
+            {
+                var users = context.Users.Where(x => x.CompanyId == companyId 
+                    && x.IsDeleted == false && x.IsAdminCompany == false).ToList();
+                List<UserModel> results = new List<UserModel>();
+                foreach (var user in users)
+                {
+                    UserModel userModel = new UserModel();
+                    userModel.id = user.Id;
+                    userModel.full_name = user.FullName;
+                    userModel.user_name = user.UserName;
+                    userModel.email = user.Email;
+                    userModel.phone = user.Phone;
+                    userModel.image = user.Image;
+                    userModel.is_admin_root = user.IsAdminRoot;
+                    userModel.is_admin_company = user.IsAdminCompany;
+                    results.Add(userModel);
+                    
+                }
+                return results;
+            }
+        }
+
         public static User Get(string userName)
         {
             using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
@@ -129,6 +154,7 @@ namespace Vovinam.Areas.Api.Services
                 };
 
                 var passMD5 = Encryptor.MD5Hash(old_pass);
+                var passNewMD5 = Encryptor.MD5Hash(new_pass);
 
                 var user = context.Users.Where(x => x.Password == passMD5).Where(x => x.UserName.Contains(user_name)).FirstOrDefault();
                 if (user == null)
@@ -138,7 +164,7 @@ namespace Vovinam.Areas.Api.Services
                 }
                 else
                 {
-                    user.Password = passMD5;
+                    user.Password = passNewMD5;
                     user.DateUpdated = DateTime.Now;
                     context.SaveChanges();
                 }

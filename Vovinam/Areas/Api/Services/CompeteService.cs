@@ -20,7 +20,10 @@ namespace Vovinam.Areas.Api.Services
                     .Include(x => x.LevelUp)
                      .Include(x => x.LevelUp1)
                     .Include(x => x.LevelUp.DoiKhang)
+                    .Include(x => x.LevelUp.DoiKhang.User)
                      .Include(x => x.LevelUp1.DoiKhang)
+                     .Include(x => x.LevelUp1.DoiKhang.User)
+
                     .ToList();
 
                 List<CompeteModel> results = new List<CompeteModel>();
@@ -34,7 +37,7 @@ namespace Vovinam.Areas.Api.Services
                     model.levelup_1.name = item.LevelUp.Name;
                     model.levelup_1.stt = item.LevelUp.Stt;
                     model.levelup_1.weight = item.LevelUp.Weight;
-
+                    
                     model.levelup_1.club = new ClubModel();
                     model.levelup_1.club.id = item.LevelUp.Club.Id;
                     model.levelup_1.club.name = item.LevelUp.Club.Name;
@@ -45,6 +48,8 @@ namespace Vovinam.Areas.Api.Services
 
                     model.levelup_1.doi_khang = new DoiKhangModel();
                     model.levelup_1.doi_khang.id = item.LevelUp.DoiKhang.Id;
+                    model.levelup_1.doi_khang.point = item.LevelUp.DoiKhang.Point;
+
                     if (item.LevelUp.DoiKhang.User != null)
                         model.levelup_1.doi_khang.user_name = item.LevelUp.DoiKhang.User.FullName;
 
@@ -64,6 +69,8 @@ namespace Vovinam.Areas.Api.Services
 
                     model.levelup_2.doi_khang = new DoiKhangModel();
                     model.levelup_2.doi_khang.id = item.LevelUp1.DoiKhang.Id;
+                    model.levelup_2.doi_khang.point = item.LevelUp1.DoiKhang.Point;
+
                     if (item.LevelUp1.DoiKhang.User != null)
                         model.levelup_2.doi_khang.user_name = item.LevelUp1.DoiKhang.User.FullName;
 
