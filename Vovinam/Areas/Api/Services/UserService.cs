@@ -100,6 +100,11 @@ namespace Vovinam.Areas.Api.Services
                     userModel.image = user.Image;
                     userModel.is_admin_root = user.IsAdminRoot;
                     userModel.is_admin_company = user.IsAdminCompany;
+                    if (user.Status == UserStatus.Active)
+                        userModel.active = true;
+                    else
+                        userModel.active = false;
+
                     results.Add(userModel);
                     
                 }

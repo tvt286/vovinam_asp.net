@@ -15,7 +15,7 @@ namespace Vovinam.Areas.Api.Models
         public string image { get; set; }
         public bool is_admin_root { get; set; }
         public bool is_admin_company { get; set; }
-
+        public bool active { get; set; }
         public  List<UserPermissionModel> user_permission { get; set; }
         public  List<GroupModel> group { get; set; }
 
