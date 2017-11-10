@@ -237,12 +237,12 @@
     <NavigationProperty Name="LevelUps" Relationship="vovinamModel.FK__LevelUp__Examina__7A672E12" FromRole="Examination" ToRole="LevelUp" />
   </EntityType>
   <EnumType Name="KetQua">
-    <Member Name="Dau" Value="0" />
+    <Member Name="CapNhat" Value="0" />
     <Member Name="Rot" Value="1" />
     <Member Name="Vot" Value="2" />
-    <Member Name="ThuKhoa" Value="3" />
-    <Member Name="AKhoa" Value="4" />
-    <Member Name="CapNhat" Value="5" />
+    <Member Name="Dau" Value="3" />
+    <Member Name="ThuKhoa" Value="4" />
+    <Member Name="AKhoa" Value="5" />
   </EnumType>
   <Association Name="FK__Examinati__Compa__10566F31">
     <End Type="vovinamModel.Company" Role="Company" Multiplicity="0..1" />

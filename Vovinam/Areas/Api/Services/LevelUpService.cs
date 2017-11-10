@@ -51,6 +51,119 @@ namespace Vovinam.Areas.Api.Services
                      .Include(x => x.DoiKhang.User)
                     .ToList();
 
+                levelups.OrderBy(x => x.Stt).ToList();
+
+                List<LevelUpModel> results = new List<LevelUpModel>();
+
+                foreach (var item in levelups)
+                {
+                    LevelUpModel model = new LevelUpModel();
+                    model.id = item.Id;
+                    model.name = item.Name;
+                    model.stt = item.Stt;
+                    model.birthday = item.BirthDay;
+                    model.gender = item.Gender.ToString();
+                    model.weight = item.Weight;
+                    model.total = item.Total;
+                    model.ketqua = item.KetQua.ToString();
+
+                    model.club = new ClubModel();
+                    model.club.id = item.Club.Id;
+                    model.club.name = item.Club.Name;
+
+                    model.level = new LevelModel();
+                    model.level.id = item.Level.Id;
+                    model.level.name = item.Level.Name;
+
+                    model.co_ban = new CoBanModel();
+                    model.co_ban.point = item.CoBan.Point;
+                    if (item.CoBan.User != null)
+                        model.co_ban.user_name = item.CoBan.User.FullName;
+
+                    model.quyen = new QuyenModel();
+                    model.quyen.id = item.Quyen.Id;
+                    model.quyen.point = item.Quyen.Point;
+
+                    if (item.Quyen.User != null)
+                        model.quyen.user_name = item.Quyen.User.FullName;
+
+                    model.doi_khang = new DoiKhangModel();
+                    model.doi_khang.id = item.DoiKhang.Id;
+                    model.doi_khang.point = item.DoiKhang.Point;
+
+                    if (item.DoiKhang.User != null)
+                        model.doi_khang.user_name = item.DoiKhang.User.FullName;
+
+                    model.song_luyen = new SongLuyenModel();
+                    model.song_luyen.id = item.SongLuyen.Id;
+                    model.song_luyen.point = item.SongLuyen.Point;
+
+                    if (item.SongLuyen.User != null)
+                        model.song_luyen.user_name = item.SongLuyen.User.FullName;
+
+                    model.vo_dao = new VoDaoModel();
+                    model.vo_dao.id = item.VoDao.Id;
+                    model.vo_dao.point = item.VoDao.Point;
+
+                    if (item.VoDao.User != null)
+                        model.vo_dao.user_name = item.VoDao.User.FullName;
+
+                    model.the_luc = new TheLucModel();
+                    model.the_luc.id = item.TheLuc.Id;
+                    model.the_luc.point = item.TheLuc.Point;
+                    if (item.TheLuc.User != null)
+                        model.the_luc.user_name = item.TheLuc.User.FullName;
+                    results.Add(model);
+
+                }             
+                return results;
+            }
+        }
+
+        public static List<ResultModel> GetResults(int CompanyId, int examinationId, int levelId)
+        {
+            List<ResultModel> results = new List<ResultModel>();
+            ResultModel male = new ResultModel();
+            male.gender = "Nam";
+            male.students = GetResultsByGender(CompanyId, examinationId, levelId, Gender.Male);
+
+            ResultModel female = new ResultModel();
+            female.gender = "Nữ";
+            female.students = GetResultsByGender(CompanyId, examinationId, levelId, Gender.Female);
+
+            results.Add(male);
+            results.Add(female);
+
+            return results;
+
+        }
+        public static List<LevelUpModel> GetResultsByGender(int CompanyId, int examinationId, int levelId, Gender gender)
+        {
+            using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
+            {
+                var levelups = context.LevelUps.Where(x => x.ExaminationId == examinationId)
+                    .Where(x => x.LevelId == levelId && x.Gender == gender)
+                    .Where(x => x.CompanyId == CompanyId)
+                    .Include(x => x.Club)
+                     .Include(x => x.Level)
+                     .Include(x => x.CoBan)
+                     .Include(x => x.Quyen)
+                     .Include(x => x.VoDao)
+                     .Include(x => x.SongLuyen)
+                     .Include(x => x.TheLuc)
+                     .Include(x => x.DoiKhang)
+                     .Include(x => x.CoBan.User)
+                     .Include(x => x.Quyen.User)
+                     .Include(x => x.VoDao.User)
+                     .Include(x => x.SongLuyen.User)
+                     .Include(x => x.TheLuc.User)
+                     .Include(x => x.DoiKhang.User)
+                    .ToList();
+
+                
+                levelups.OrderByDescending(x => x.KetQua).OrderByDescending(x => x.Total).ToList();
+               
+
                 List<LevelUpModel> results = new List<LevelUpModel>();
 
                 foreach (var item in levelups)

@@ -13,11 +13,11 @@ namespace Vovinam.Data
     
     public enum KetQua : int
     {
-        Dau = 0,
+        CapNhat = 0,
         Rot = 1,
         Vot = 2,
-        ThuKhoa = 3,
-        AKhoa = 4,
-        CapNhat = 5
+        Dau = 3,
+        ThuKhoa = 4,
+        AKhoa = 5
     }
 }

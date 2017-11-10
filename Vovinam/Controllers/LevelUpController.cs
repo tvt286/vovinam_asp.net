@@ -384,10 +384,6 @@ namespace Vovinam.Controllers
             return View();
         }
 
-
-
-
-
         public ActionResult Save(List<LevelUpViewModel> data)
         {
             List<LevelUp> model = new List<LevelUp>();
@@ -403,6 +399,7 @@ namespace Vovinam.Controllers
                 Weight = x.Weight,
                 ExaminationId = ExaminationService.GetByName(x.ExaminationName).Id
             }).ToList();
+
             LevelUpService.Create(model);
             // tạo danh sách đối kháng
             var doikhangNam = GetCompete(model, Gender.Male);
@@ -423,20 +420,25 @@ namespace Vovinam.Controllers
 
         private List<Compete> GetCompete(List<LevelUp> model, Gender gender)
         {
+            // danh sách theo giới tính, sắp sếp theo cân nặng
             List<LevelUp> doikhang = model.Where(x => x.Gender == gender).Where(x => x.Weight != 0).OrderBy(x => x.Weight).ToList();
 
             List<Compete> capdau = new List<Compete>();
 
+            // so sánh hoc vien dau tien tới hoc vien cuối 
             for (int i = 0, length = doikhang.Count - 1; i < length; i++)
             {
                 for (int j = 1, count = doikhang.Count; j < count; j++)
                 {
+                    // nếu như hoc vien đầu tiên đã có cặp đấu thì break để duyệt  tiếp theo
                     if (doikhang[i].HasCompete)
                         break;
-                    else if (doikhang[j].HasCompete)
+                    else if (doikhang[j].HasCompete) // nếu như hoc vien dang so sánh đã có cap dau thì bỏ qua
                         continue;
 
                     var diff = doikhang[i].Weight - doikhang[j].Weight;
+
+                    // 2 clb phải khác nhau và chenh lệch nhau ko quá 3kg thì ghép cặp
                     if (doikhang[i].ClubId != doikhang[j].ClubId && ((diff > 0 && diff <= 3) || (diff < 0 && diff >= -3)))
                     {
                         Compete compete = new Compete();
@@ -454,6 +456,7 @@ namespace Vovinam.Controllers
 
             }
 
+            // lần tiếp theo lấy tat cả hoc viên còn lại chưa có cặp đấu
             doikhang = doikhang.Where(x => x.HasCompete == false).OrderBy(x => x.Weight).ToList();
             if (doikhang != null)
             {
@@ -469,6 +472,8 @@ namespace Vovinam.Controllers
                             continue;
 
                         var diff = doikhang[i].Weight - doikhang[j].Weight;
+
+                        // cùng clb có the gap nhau
                         if (((diff > 0 && diff <= 3) || (diff < 0 && diff >= -3)))
                         {
                             Compete compete = new Compete();
@@ -484,11 +489,14 @@ namespace Vovinam.Controllers
                         }
                     }
                 }
+
             }
 
+            // lần 3 còn lại những nguoi lệch hang cân quá 3kg
             doikhang = doikhang.Where(x => x.HasCompete == false).OrderBy(x => x.Weight).ToList();
             if (doikhang != null)
-            {
+            {       
+                // nếu như chỉ còn 1 hoc viên
                 if (doikhang.Count % 2 != 0)
                 {
                     Compete compete = new Compete();

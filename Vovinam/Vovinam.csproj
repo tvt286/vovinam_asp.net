@@ -181,6 +181,7 @@
     <Compile Include="Areas\Api\Models\LevelModel.cs" />
     <Compile Include="Areas\Api\Models\LevelUpModel.cs" />
     <Compile Include="Areas\Api\Models\QuyenModel.cs" />
+    <Compile Include="Areas\Api\Models\ResultModel.cs" />
     <Compile Include="Areas\Api\Models\SchoolModel.cs" />
     <Compile Include="Areas\Api\Models\SongLuyenModel.cs" />
     <Compile Include="Areas\Api\Models\StudentModel.cs" />
