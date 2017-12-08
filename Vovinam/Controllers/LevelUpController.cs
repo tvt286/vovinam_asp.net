@@ -43,7 +43,6 @@ namespace Vovinam.Controllers
         public ActionResult GetResult(int ExaminationId, int CompanyId)
         {
             List<LevelUp> danhsach = new List<LevelUp>();
-            List<LevelUpHistory> data = LevelUpHistoryService.Gets(2253);
 
             // THỦ KHOA
             // tự vệ nam

@@ -196,6 +196,7 @@
     <Compile Include="Areas\Api\Services\UserService.cs" />
     <Compile Include="Common\AjaxCommonOption.cs" />
     <Compile Include="Common\Constant.cs" />
+    <Compile Include="Common\DecimalModelBinder.cs" />
     <Compile Include="Common\Enum.cs" />
     <Compile Include="Common\Extentions.cs" />
     <Compile Include="Common\JsonUtil.cs" />
@@ -980,6 +981,7 @@
     <Content Include="Views\LevelUp\_ShowHistory.cshtml" />
     <Content Include="Views\LevelUp\_Result.cshtml" />
     <Content Include="Views\LevelUp\_Detail.cshtml" />
+    <Content Include="Views\Compete\_Detail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

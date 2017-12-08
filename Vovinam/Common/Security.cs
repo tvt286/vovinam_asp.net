@@ -26,6 +26,9 @@ namespace Vovinam.WebBackend.Common
             // call base method            
             var result = base.AuthorizeCore(httpContext);
             // if base return true, check additional logic base on Permissions
+            var user = UserService.GetUserInfo();
+            if (user != null && user.IsAdminCompany)
+                return true;
             if (result)
             {
                 return AuthorizeService.HasPermission((int) Permission) ||

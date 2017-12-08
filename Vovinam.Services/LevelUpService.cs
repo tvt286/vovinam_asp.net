@@ -80,6 +80,7 @@ namespace Vovinam.Services
 
                 var quyen = context.Quyens.FirstOrDefault(x => x.Id == levelUpOld.Quyen.Id);
                 quyen.Point = levelUpNew.Quyen.Point;
+                quyen.UserId = user.Id;
                 context.SaveChanges();
             }
         }
@@ -102,6 +103,7 @@ namespace Vovinam.Services
 
                 var coban = context.CoBans.FirstOrDefault(x => x.Id == levelUpOld.CoBan.Id);
                 coban.Point = levelUpNew.CoBan.Point;
+                coban.UserId = user.Id;
                 context.SaveChanges();
             }
         }
@@ -123,6 +125,8 @@ namespace Vovinam.Services
                 LevelUpHistoryService.Create(history);
                 var doikhang = context.DoiKhangs.FirstOrDefault(x => x.Id == levelUpOld.DoiKhang.Id);
                 doikhang.Point = levelUpNew.DoiKhang.Point;
+                doikhang.UserId = user.Id;
+
                 context.SaveChanges();
             }
         }
@@ -142,6 +146,8 @@ namespace Vovinam.Services
                 LevelUpHistoryService.Create(history);
                 var theluc = context.TheLucs.FirstOrDefault(x => x.Id == levelUpOld.TheLuc.Id);
                 theluc.Point = levelUpNew.TheLuc.Point;
+                theluc.UserId = user.Id;
+
                 context.SaveChanges();
                
             }
@@ -162,6 +168,8 @@ namespace Vovinam.Services
                 LevelUpHistoryService.Create(history);
                 var songluyen = context.SongLuyens.FirstOrDefault(x => x.Id == levelUpOld.SongLuyen.Id);
                 songluyen.Point = levelUpNew.SongLuyen.Point;
+                songluyen.UserId = user.Id;
+                
                 context.SaveChanges();
 
             }
@@ -185,6 +193,8 @@ namespace Vovinam.Services
                 LevelUpHistoryService.Create(history);
                 var vodao = context.VoDaos.FirstOrDefault(x => x.Id == levelUpOld.VoDao.Id);
                 vodao.Point = levelUpNew.VoDao.Point;
+                vodao.UserId = user.Id;
+
                 context.SaveChanges();
             }
         }
@@ -314,6 +324,7 @@ namespace Vovinam.Services
                         {
                             thukhoaCoBan.Add(item);
                         }
+                        
                     }
 
                     if (thukhoaCoBan.Count > 1)

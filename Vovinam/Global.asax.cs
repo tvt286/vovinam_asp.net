@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Vovinam.App_Start;
+using Vovinam.Common;
 
 namespace Vovinam
 {

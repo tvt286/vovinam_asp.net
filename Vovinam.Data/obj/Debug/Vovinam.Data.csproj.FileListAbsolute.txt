@@ -37,3 +37,4 @@ E:\vv\vovinam_asp.net\Vovinam.Data\bin\Debug\EntityFramework.xml
 E:\vv\vovinam_asp.net\Vovinam.Data\bin\Debug\EntityFramework.SqlServer.xml
 E:\vv\vovinam_asp.net\Vovinam.Data\obj\Debug\Vovinam.Data.dll
 E:\vv\vovinam_asp.net\Vovinam.Data\obj\Debug\Vovinam.Data.pdb
+E:\vv\vovinam_asp.net\Vovinam.Data\obj\Debug\Vovinam.Data.csprojResolveAssemblyReference.cache

@@ -42,6 +42,22 @@ namespace Vovinam.Services
                     .ToList();
             }
         }
+
+        public static Compete Get(int id)
+        {
+            using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
+            {
+                return context.Competes.Where(x => x.Id == id)
+                    .Include(x => x.LevelUp1)
+                    .Include(x => x.LevelUp1.DoiKhang)
+                    .Include(x => x.LevelUp1.Level)
+                    .Include(x => x.LevelUp)
+                    .Include(x => x.LevelUp.DoiKhang)
+                    .Include(x => x.LevelUp.Level)
+                    .FirstOrDefault();
+            }
+        }
+
         public static PagedSearchList<Compete> Search(int? ExaminationId, int GenderId,
      int pageSize, int pageIndex)
         {

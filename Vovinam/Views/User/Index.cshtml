@@ -20,14 +20,14 @@
                     <a href="@Url.Action("Index","Home")">Vovinam</a>
                 </li>
                 <li class="active">
-                    Quản lý nhân viên
+                    <strong>Quản lý nhân viên</strong>
                 </li>
             </ol>
 
             <div class="clearfix"></div>
             @if (UserPermission.Has(Permission.User_Create) || user.IsAdminCompany || user.IsAdminRoot)
             {
-                <a class="btn btn-primary waves-effect waves-light m-t-sm" href="@Url.Action("Detail")"> Tạo mới</a>
+                <a class="btn btn-primary waves-effect waves-light m-t-sm" href="@Url.Action("Detail")">Tạo mới</a>
             }
         </div>
     </div>

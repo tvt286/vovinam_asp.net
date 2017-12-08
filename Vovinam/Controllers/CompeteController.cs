@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Vovinam.Common;
 using Vovinam.Data;
 using Vovinam.Models;
 using Vovinam.Services;
@@ -111,6 +112,46 @@ namespace Vovinam.Controllers
                 Response.End();
             }
             return null;
+        }
+
+        [HttpPost]
+        public ActionResult Detail(int id)
+        {
+            Compete data = CompeteService.Get(id);
+            return PartialView("_Detail", data);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Compete model)
+        {
+            var data = CompeteService.Get(model.Id);
+            var user = UserService.GetUserInfo();
+
+            if (model.LevelUp.DoiKhang.Point != data.LevelUp.DoiKhang.Point)
+            {
+                var levelup = LevelUpService.Get(model.LevelUpId1);
+                LevelUpService.UpdateDoiKhang(levelup, model.LevelUp);
+            }
+
+            if (model.LevelUp1.DoiKhang.Point != data.LevelUp1.DoiKhang.Point)
+            {
+                var levelup = LevelUpService.Get(model.LevelUpId2);
+                LevelUpService.UpdateDoiKhang(levelup, model.LevelUp1);
+            }
+            var levelup1 = LevelUpService.Get(model.LevelUpId1);
+            var levelup2 = LevelUpService.Get(model.LevelUpId2);
+
+            LevelUpService.setKetQua(levelup1);
+            LevelUpService.setKetQua(levelup2);
+            return
+                   Json(
+                       new RedirectCommand
+                       {
+                           Code = ResultCode.Success,
+                           Message = "Cập nhật điểm thành công!",
+                           Url = Url.Action("Index", new { Id = (levelup1.Gender == Gender.Male) ? 1 : 2 })
+                       },
+                       JsonRequestBehavior.AllowGet);
         }
     }
 }

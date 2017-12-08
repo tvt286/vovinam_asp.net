@@ -41,7 +41,12 @@
             <th>
                 Người chấm
             </th>
+            @if (user.IsAdminCompany)
+            {
+                <th data-sorter="false">
 
+                </th>
+            }
         </tr>
     </thead>
     @{ int index = Model.PageSize * (Model.PageNumber - 1) + 1; }
@@ -90,6 +95,14 @@
                     </td>
 
                 }
+                @if (user.IsAdminCompany)
+                {
+                    <td>
+                        <a href="javascript:void(0)" onclick="DetailCompete(@item.Id)">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </td>
+                }
             </tr>
         }
     </tbody>
@@ -102,3 +115,49 @@
 },
         PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxCommonOption() { HttpMethod = "POST", UpdateTargetId = "content" }))
 
+<div id="competeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Sửa điểm đối kháng</h4>
+            </div>
+            <div id="competeModal-content">
+
+            </div>
+        </div>
+    </div>
+</div><!-- /.modal -->
+
+<style>
+    .table-hover tr:hover td {
+        cursor: pointer;
+    }
+
+    .text-red {
+        color: red;
+    }
+</style>
+
+<script>
+        var TeamDetailPostBackURL = '/LevelUp/ShowHistory';
+        $(function () {
+            
+            $("#closbtn").click(function () {
+                $('#myModal').modal('hide');
+            });
+        });
+
+        function DetailCompete(id) {
+            $.post('@Url.Action("Detail", "Compete")',
+            {
+                id: id
+            },
+            function (data) {
+                $('#competeModal-content').html(data);
+                $('#competeModal').modal('show');
+
+            });
+        }
+
+</script>

@@ -9,7 +9,7 @@ using Vovinam.Models;
 using Vovinam.WebBackend.Common;
 using Vovinam.Common;
 
-namespace Kootoro.WebBackend.Controllers
+namespace Vovinam.WebBackend.Controllers
 {
     public class CompanyController : Controller
     {

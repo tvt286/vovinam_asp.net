@@ -1,0 +1,55 @@
+﻿@using Vovinam.Data
+@using Vovinam.WebBackend.Common
+@using Vovinam.WebBackend.Web
+@model Compete
+
+@using (Ajax.BeginForm("Edit", "Compete", null, new AjaxCommonOption { OnSuccess = "EditCompeteSuccess" }, new { role = "form", id = "EditCompeteForm" }))
+{
+
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="LevelUpId1" value="@Model.LevelUpId1" />
+    <input type="hidden" name="LevelUpId2" value="@Model.LevelUpId2" />
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="field-1" style="color:red" class="control-label">@Model.LevelUp.Name</label>
+                    @Html.TextBoxFor(x => x.LevelUp.DoiKhang.Point, new {  @class = "form-control", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                    @Html.ValidationMessageFor(model => model.LevelUp.DoiKhang.Point, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="field-1" style="color:blue" class="control-label">@Model.LevelUp1.Name</label>
+                    @Html.TextBoxFor(x => x.LevelUp1.DoiKhang.Point, new {  @class = "form-control", data_val = "true", data_val_required = "Thông tin bắt buộc" })
+                    @Html.ValidationMessageFor(model => model.LevelUp1.DoiKhang.Point, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Thoát</button>
+        <button type="submit" class="btn btn-primary waves-effect waves-light">Lưu</button>
+    </div>
+}
+
+<script type="text/javascript">
+    jQuery.validator.unobtrusive.parse('#EditCompeteForm');
+  
+    function EditCompeteSuccess(data) {
+        if (data.Code == 0) {
+            data.callFunc = function () {
+                $('#CompeteModal').modal('hide');
+                $("#SearchForm").submit();
+            };
+        }
+        OnSuccessAjax(data);
+    }
+</script>
+
+
