@@ -43,10 +43,12 @@ namespace Vovinam.Controllers
         public ActionResult Detail(int? id)
         {
             var user = UserService.GetUserInfo();
+
             if (!(UserPermission.Has(Permission.User_Create) || user.IsAdminRoot || user.IsAdminCompany))
             {
                 return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("Index") });
             }
+
             ViewBag.User = user;
 
             var model = new User
@@ -110,6 +112,7 @@ namespace Vovinam.Controllers
                         Message = "Chỉ được up file hình!"
                     }, JsonRequestBehavior.AllowGet);
                 }
+
                 if (checkFile == UploadFileStatus.OverLimited)
                 {
                     return Json(new CommandResult
@@ -118,6 +121,7 @@ namespace Vovinam.Controllers
                         Message = "Chỉ được up file 5MB!"
                     }, JsonRequestBehavior.AllowGet);
                 }
+
                 fileAttach.SaveAs(pathFile);
 
             }
@@ -133,6 +137,7 @@ namespace Vovinam.Controllers
                         Message = "Vui lòng nhập mật khẩu!"
                     }, JsonRequestBehavior.AllowGet);
                 }
+
                 model.Image = sourceFile;
                 if (model.Password.NotEmpty())
                 {
@@ -147,6 +152,7 @@ namespace Vovinam.Controllers
                 var data = UserService.Get(model.Id, true, true);
                 var tempPass = data.Password;
                 TryUpdateModel(data);
+
                 if (sourceFile.NotEmpty())
                 {
                     if (data.Image.NotEmpty())
@@ -171,7 +177,6 @@ namespace Vovinam.Controllers
                 {
                     data.Password = Encryptor.MD5Hash(model.Password);
                 }
-
 
                 result = UserService.UpdateUser(data, selectedGroup, permissionIdList);
 

@@ -256,18 +256,56 @@ namespace Vovinam.Controllers
             var data = LevelUpService.Get(model.Id);
             var user = UserService.GetUserInfo();
 
+           
+
             if (model.Quyen.Point != data.Quyen.Point)
             {
+                if (model.Quyen.Point < 0 || model.Quyen.Point < 0)
+                {
+                    return
+                      Json(
+                          new RedirectCommand
+                          {
+                              Code = ResultCode.Fail,
+                              Message = "Điểm nhập phải > 0!"
+                          },
+                          JsonRequestBehavior.AllowGet);
+                }
+
                 LevelUpService.UpdateQuyen(data, model);
             }
 
             if (model.CoBan.Point != data.CoBan.Point)
             {
+                if (model.CoBan.Point < 0 || model.CoBan.Point < 0)
+                {
+                    return
+                      Json(
+                          new RedirectCommand
+                          {
+                              Code = ResultCode.Fail,
+                              Message = "Điểm nhập phải > 0!"
+                          },
+                          JsonRequestBehavior.AllowGet);
+                }
+
+
                 LevelUpService.UpdateCoBan(data, model);
             }
 
             if (model.VoDao.Point != data.VoDao.Point)
             {
+                if (model.VoDao.Point < 0 || model.VoDao.Point < 0)
+                {
+                    return
+                      Json(
+                          new RedirectCommand
+                          {
+                              Code = ResultCode.Fail,
+                              Message = "Điểm nhập phải > 0!"
+                          },
+                          JsonRequestBehavior.AllowGet);
+                }
                 LevelUpService.UpdateVoDao(data, model);
             }
 
@@ -275,6 +313,17 @@ namespace Vovinam.Controllers
             {
                 if (model.DoiKhang.Point != data.DoiKhang.Point)
                 {
+                    if (model.DoiKhang.Point < 0 || model.DoiKhang.Point < 0)
+                    {
+                        return
+                          Json(
+                              new RedirectCommand
+                              {
+                                  Code = ResultCode.Fail,
+                                  Message = "Điểm nhập phải > 0!"
+                              },
+                              JsonRequestBehavior.AllowGet);
+                    }
                     LevelUpService.UpdateDoiKhang(data, model);
                 }
             }
@@ -283,6 +332,17 @@ namespace Vovinam.Controllers
             {
                 if (model.TheLuc.Point != data.TheLuc.Point)
                 {
+                    if (model.TheLuc.Point < 0 || model.TheLuc.Point < 0)
+                    {
+                        return
+                          Json(
+                              new RedirectCommand
+                              {
+                                  Code = ResultCode.Fail,
+                                  Message = "Điểm nhập phải > 0!"
+                              },
+                              JsonRequestBehavior.AllowGet);
+                    }
                     LevelUpService.UpdateTheLuc(data, model);
                 }
             }
@@ -290,6 +350,17 @@ namespace Vovinam.Controllers
             {
                 if (model.SongLuyen.Point != data.SongLuyen.Point)
                 {
+                    if (model.SongLuyen.Point < 0 || model.SongLuyen.Point < 0)
+                    {
+                        return
+                          Json(
+                              new RedirectCommand
+                              {
+                                  Code = ResultCode.Fail,
+                                  Message = "Điểm nhập phải > 0!"
+                              },
+                              JsonRequestBehavior.AllowGet);
+                    }
                     LevelUpService.UpdateSongLuyen(data, model);
                 }
             }
@@ -345,7 +416,14 @@ namespace Vovinam.Controllers
                     for (int i = 0; i < data.Rows.Count - 1; i++)
                     {
                         LevelUpViewModel student = new LevelUpViewModel();
-                        student.Stt = Convert.ToInt32(data.Rows[i]["Stt"]);
+                        if (!data.Rows[i].IsNull("Stt"))
+                        {
+                            student.Stt = Convert.ToInt32(data.Rows[i]["Stt"]);
+                        }
+                        else
+                        {
+                            break;
+                        }
                         student.Name = data.Rows[i]["Tên"].ToString();
                         student.BirthDay = Convert.ToInt32(data.Rows[i]["Năm sinh"]);
                         if (data.Rows[i]["Giới tính"].ToString().Equals("Nam"))
@@ -373,7 +451,11 @@ namespace Vovinam.Controllers
             }
             else
             {
-                ModelState.AddModelError("File", "Please upload your file");
+                return Json(new CommandResult
+                {
+                    Code = ResultCode.Fail,
+                    Message = "Chỉ được up file hình!"
+                }, JsonRequestBehavior.AllowGet);
             }
             return View();
         }
@@ -386,18 +468,22 @@ namespace Vovinam.Controllers
         public ActionResult Save(List<LevelUpViewModel> data)
         {
             List<LevelUp> model = new List<LevelUp>();
-            model = data.Select(x => new LevelUp
+            var ExaminationId = ExaminationService.GetByName(data.FirstOrDefault().ExaminationName).Id;
+            foreach (var x in data)
             {
-                Stt = x.Stt,
-                Name = x.Name,
-                BirthDay = x.BirthDay,
-                Gender = x.Gender,
-                KetQua = KetQua.CapNhat,
-                ClubId = ClubService.GetByName(x.ClubName).Id,
-                LevelId = LevelService.GetByName(x.LevelName).Id,
-                Weight = x.Weight,
-                ExaminationId = ExaminationService.GetByName(x.ExaminationName).Id
-            }).ToList();
+                var levelUp = new LevelUp();
+                levelUp.Stt = x.Stt;
+                levelUp.Name = x.Name;
+                levelUp.BirthDay = x.BirthDay;
+                levelUp.Gender = x.Gender;
+                levelUp.KetQua = KetQua.CapNhat;
+                levelUp.ClubId = ClubService.GetByName(x.ClubName).Id;
+                levelUp.LevelId = LevelService.GetByName(x.LevelName).Id;
+                levelUp.Weight = x.Weight;
+                levelUp.ExaminationId = ExaminationId;
+                model.Add(levelUp);
+            }
+          
 
             LevelUpService.Create(model);
             // tạo danh sách đối kháng
@@ -509,25 +595,20 @@ namespace Vovinam.Controllers
                     doikhang = doikhang.Where(x => x.HasCompete == false).OrderBy(x => x.Weight).ToList();
                 }
 
-                for (int i = 0, length = doikhang.Count - 1; i < length; i++)
+                if(doikhang.Count > 0)
                 {
-                    for (int j = 1, count = doikhang.Count; j < count; j++)
+                    for (int i = 0, length = doikhang.Count - 1; i < length; i++)
                     {
-
                         if (doikhang[i].HasCompete)
-                            break;
-                        else if (doikhang[j].HasCompete)
                             continue;
                         Compete compete = new Compete();
                         compete.LevelUpId1 = doikhang[i].Id;
-                        compete.LevelUpId2 = doikhang[j].Id;
+                        compete.LevelUpId2 = doikhang[i + 1].Id;
                         compete.Gender = gender;
                         compete.ExaminationId = doikhang[i].ExaminationId;
-
-                        capdau.Add(compete);
                         doikhang[i].HasCompete = true;
-                        doikhang[j].HasCompete = true;
-                        break;
+                        doikhang[i + 1].HasCompete = true;
+                        capdau.Add(compete);
                     }
                 }
 

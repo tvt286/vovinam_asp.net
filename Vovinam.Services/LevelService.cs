@@ -21,7 +21,7 @@ namespace Vovinam.Services
         {
             using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
             {
-                return context.Levels.First(x => x.Name == name);
+                return context.Levels.FirstOrDefault(x => x.Name == name);
             }
         }
     }

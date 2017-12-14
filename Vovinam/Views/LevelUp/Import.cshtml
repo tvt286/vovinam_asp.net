@@ -10,19 +10,19 @@
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Import Excel";
+    ViewBag.Title = "Nhập danh sách bằng excel";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
     <div class="col-xs-12">
         <div class="page-title-box">
-            <h4 class="page-title">Quản lý học viên</h4>
+            <h4 class="page-title">Nhập danh sách bằng excel</h4>
             <ol class="breadcrumb p-0 m-0">
                 <li>
                     <a href="@Url.Action("Index", "Home")">Vovinam</a>
                 </li>
                 <li class="active">
-                    <strong>Import Excel</strong>
+                    <strong>Nhập danh sách bằng excel</strong>
                 </li>
             </ol>
             <div class="clearfix"></div>
@@ -126,9 +126,35 @@
             });
         });
         document.getElementById("uploadfile").onchange = function () {
-            document.getElementById("CreateForm").submit();
-            OnBeginAjax();
+            var fileList = this.files;
+            if (fileList != null)
+            {
+                var sizefile = fileList[0].size / 1024;
+                if (!isExcel(fileList[0]["name"])) {
+                    AlertError("Để tối ưu dung lượng truyền tải, vui lòng chỉ upload video định dạng [mp4, wmv]");
+                    return false;
+                }
+                document.getElementById("CreateForm").submit();
+                OnBeginAjax();
+            }     
         };
+
+        function getExtension(filename) {
+            var parts = filename.split('.');
+            return parts[parts.length - 1];
+        }
+
+        function isExcel(filename) {
+            var ext = getExtension(filename);
+            switch (ext.toLowerCase()) {
+                case 'xls':
+                case 'xlsx':
+                case '':
+                    // etc
+                    return true;
+            }
+            return false;
+        }
 
         $("#btnSave").on('click', function (e) {
             e.preventDefault();
@@ -140,7 +166,6 @@
                         data: model
                     },
                 function (data) {
-                    debugger;
                     OnSuccessAjax(data);
                 });
             };

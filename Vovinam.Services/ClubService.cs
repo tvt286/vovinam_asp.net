@@ -26,7 +26,7 @@ namespace Vovinam.Services
         {
             using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
             {
-                return context.Clubs.First(x => x.Name.Contains(name));
+                return context.Clubs.FirstOrDefault(x => x.Name.Contains(name));
             }
         }
 

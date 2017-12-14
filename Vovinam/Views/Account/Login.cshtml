@@ -45,7 +45,7 @@
                             <div class="text-center account-logo-box">
                                 <h2 class="text-uppercase">
                                     <a href="index.html" class="text-success">
-                                        <span><img src="~/Content/Image/logo.png" alt="" height="36"></span>
+                                        <span><img class="logo" src="~/Content/Image/logo.png" alt="" height="36"></span>
                                     </a>
                                 </h2>
                                 <!--<h4 class="text-uppercase font-bold m-b-0">Sign In</h4>-->
@@ -104,9 +104,21 @@
         </div>
     </section>
     <!-- END HOME -->
+    <style>
+        .logo {
+            -webkit-transition: -webkit-transform 0.4s;
+            transition: transform 0.4s;
+        }
+        .logo:hover{
+            -webkit-transform: scale(1.8) rotate(0.01deg);
+            transform: scale(1.8) rotate(0.01deg);
+        }
+        
+    </style>
 
     <script>
         var resizefunc = [];
+
     </script>
 
     <!-- jQuery  -->

@@ -126,7 +126,18 @@ namespace Vovinam.Controllers
         {
             var data = CompeteService.Get(model.Id);
             var user = UserService.GetUserInfo();
-
+             
+            if(model.LevelUp.DoiKhang.Point < 0 || model.LevelUp1.DoiKhang.Point < 0)
+            {
+                return
+                  Json(
+                      new RedirectCommand
+                      {
+                          Code = ResultCode.Fail,
+                          Message = "Điểm nhập phải > 0!"                       
+                      },
+                      JsonRequestBehavior.AllowGet);
+            }
             if (model.LevelUp.DoiKhang.Point != data.LevelUp.DoiKhang.Point)
             {
                 var levelup = LevelUpService.Get(model.LevelUpId1);
