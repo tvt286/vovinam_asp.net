@@ -130,20 +130,26 @@
     <script>
 
         function getResult(examinationId, companyId) {
-            OnBeginAjax();
-            var options = { "backdrop": "static", keyboard: true };
-            $.post('@Url.Action("GetResult", "LevelUp")',
-                     {
-                         ExaminationId: examinationId,
-                         CompanyId: companyId
-                     },
-              function (data) {
-                  OnCompleteAjax();
-                  $('#resultModal-content').html(data);
-                  $('#resultModal').modal(options);
-                  $('#resultModal').modal('show');
-              });
+            var callFunc = function () {
+                OnBeginAjax();
+                var options = { "backdrop": "static", keyboard: true };
+                $.post('@Url.Action("GetResult", "LevelUp")',
+                         {
+                             ExaminationId: examinationId,
+                             CompanyId: companyId
+                         },
+                  function (data) {
+                      OnCompleteAjax();
+                      $('#resultModal-content').html(data);
+                      $('#resultModal').modal(options);
+                      $('#resultModal').modal('show');
+                  });
+            };
 
+            ConfirmPopup("Bạn thực sự muốn lấy danh sách thủ khoa & á khoa?",
+               "Danh sách này sẽ được lưu lại hệ thống",
+               callFunc
+               );
             $("#closbtn").click(function () {
                 $('#resultModal').modal('hide');
             });

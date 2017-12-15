@@ -11,11 +11,46 @@ namespace Vovinam.Services
 {
     public class ExaminationService
     {
+        public static PagedSearchList<Examination> Search(int? ExaminationId,
+          int pageSize, int pageIndex)
+        {
+            using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
+            {
+                var user = UserService.GetUserInfo();
+
+                IQueryable<Examination> query = context.Examinations.Where(x => x.CompanyId == user.CompanyId && x.IsDeleted == false).AsNoTracking();
+
+                if (ExaminationId.HasValue)
+                {
+                    query = query.Where(x => x.Id == ExaminationId);
+                }
+
+                query = query.OrderByDescending(x => x.Id);
+                pageIndex = pageIndex < 1 ? 1 : pageIndex;
+
+                return new PagedSearchList<Examination>(query, pageIndex, pageSize);
+            }
+        }
+
+        public static void Delete(string schoolIdStr)
+        {
+            using (var context = new vovinamEntities())
+            {
+                var schoolIdList =
+                    schoolIdStr.Replace(" ", "").Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
+                foreach (var schoolId in schoolIdList)
+                {
+                    var school = context.Examinations.FirstOrDefault(x => x.Id == schoolId);
+                    school.IsDeleted = true;
+                    context.SaveChanges();
+                }
+            }
+        }
         public static List<Examination> GetAll(int companyId)
         {
             using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
             {
-                return context.Examinations.Where(x => x.CompanyId == companyId).AsNoTracking().ToList();
+                return context.Examinations.Where(x => x.CompanyId == companyId && x.IsDeleted == false).AsNoTracking().ToList();
             }
         }
 
@@ -23,7 +58,7 @@ namespace Vovinam.Services
         {
             using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
             {
-                return context.Examinations.FirstOrDefault(x => x.Name == name);
+                return context.Examinations.Where(x => x.IsDeleted == false).FirstOrDefault(x => x.Name == name);
             }
         }
 
@@ -43,7 +78,7 @@ namespace Vovinam.Services
         {
             using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
             {
-                return context.Examinations.OrderBy(x => x.Id).ToList().LastOrDefault();
+                return context.Examinations.Where(x => x.IsDeleted == false).OrderBy(x => x.Id).ToList().LastOrDefault();
             }
         }
     }

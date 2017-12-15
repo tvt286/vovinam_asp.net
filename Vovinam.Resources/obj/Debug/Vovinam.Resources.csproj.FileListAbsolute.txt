@@ -24,4 +24,3 @@ E:\vv\vovinam_asp.net\Vovinam.Resources\obj\Debug\Vovinam.Resources.EnumText.res
 E:\vv\vovinam_asp.net\Vovinam.Resources\obj\Debug\Vovinam.Resources.csproj.GenerateResource.Cache
 E:\vv\vovinam_asp.net\Vovinam.Resources\obj\Debug\Vovinam.Resources.dll
 E:\vv\vovinam_asp.net\Vovinam.Resources\obj\Debug\Vovinam.Resources.pdb
-E:\vv\vovinam_asp.net\Vovinam.Resources\obj\Debug\Vovinam.Resources.csprojResolveAssemblyReference.cache

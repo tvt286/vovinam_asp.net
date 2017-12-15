@@ -61,6 +61,7 @@
           <Property Name="Name" Type="nchar" MaxLength="10" />
           <Property Name="Date" Type="date" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -111,8 +112,8 @@
           <Property Name="CompanyId" Type="int" />
           <Property Name="Total" Type="float" Nullable="false" />
           <Property Name="HasCompete" Type="bit" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="KetQua" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="LevelUpHistory">
           <Key>
@@ -960,6 +961,7 @@
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="Company" Relationship="vovinamModel.FK__Examinati__Compa__10566F31" FromRole="Examination" ToRole="Company" />
           <NavigationProperty Name="LevelUps" Relationship="vovinamModel.FK__LevelUp__Examina__7A672E12" FromRole="Examination" ToRole="LevelUp" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EnumType Name="KetQua">
           <Member Name="CapNhat" Value="0" />
@@ -1554,6 +1556,7 @@
           <EntitySetMapping Name="Examinations">
             <EntityTypeMapping TypeName="vovinamModel.Examination">
               <MappingFragment StoreEntitySet="Examination">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

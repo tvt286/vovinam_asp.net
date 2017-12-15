@@ -56,6 +56,7 @@
     <Property Name="Name" Type="nchar" MaxLength="10" />
     <Property Name="Date" Type="date" />
     <Property Name="CompanyId" Type="int" />
+    <Property Name="IsDeleted" Type="bit" />
   </EntityType>
   <EntityType Name="Group">
     <Key>
@@ -106,8 +107,8 @@
     <Property Name="CompanyId" Type="int" />
     <Property Name="Total" Type="float" Nullable="false" />
     <Property Name="HasCompete" Type="bit" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="100" />
     <Property Name="KetQua" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="LevelUpHistory">
     <Key>

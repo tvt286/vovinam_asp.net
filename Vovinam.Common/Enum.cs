@@ -63,6 +63,7 @@ namespace Vovinam.Common
         [Description("Sửa học phí Nông Lâm")]
         TuitionNL_Edit = 5005,
 
+      
         [Description("Xem danh sách khóa thi")]
         ChamThi_View = 6001,
         [Description("Tạo danh sách khóa thi")]
@@ -116,6 +117,9 @@ namespace Vovinam.Common
 
         [Description("Xem Lịch sử")]
         History_View = 12001,
+
+        [Description("Quản lý khóa thi")]
+        QuanLyKhoaThi_All = 13001,
 
     }
 }

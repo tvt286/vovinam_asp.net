@@ -61,6 +61,7 @@
     <EntitySetMapping Name="Examinations">
       <EntityTypeMapping TypeName="vovinamModel.Examination">
         <MappingFragment StoreEntitySet="Examination">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Name" ColumnName="Name" />

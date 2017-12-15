@@ -126,7 +126,6 @@
                                },
                          ]
                      },
-
                     {
                         "text": "Khóa thi",
                         "icon": "mdi mdi-account-circle",
@@ -135,19 +134,17 @@
                             {
                                 "text": "Danh sách khóa thi",
                                 "children": [
-
-                                    @EnumUtil.ToTreeNode(Permission.ChamThi_ViewCompete, dic),
-                                    @EnumUtil.ToTreeNode(Permission.ChamThi_ExportCompete, dic)
+                                    @EnumUtil.ToTreeNode(Permission.QuanLyKhoaThi_All, dic),
+                                    @EnumUtil.ToTreeNode(Permission.ChamThi_View, dic),
+                                    @EnumUtil.ToTreeNode(Permission.ChamThi_Import, dic)
 
                                 ]
                             },
                             {
                                 "text": "Danh sách đối kháng",
                                 "children": [
-
                                     @EnumUtil.ToTreeNode(Permission.ChamThi_ViewCompete, dic),
                                     @EnumUtil.ToTreeNode(Permission.ChamThi_ExportCompete, dic)
-
                                 ]
                             }
                         ]
@@ -208,6 +205,7 @@
                             @EnumUtil.ToTreeNode(Permission.History_View, dic)
                         ]
                     },
+                    
                 ]
             }
         });

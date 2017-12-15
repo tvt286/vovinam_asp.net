@@ -275,6 +275,7 @@ namespace Vovinam.Services
             {
                 var maxPoint = 0.0;
                 var list = new List<LevelUp>();
+
                 if (levelId == 1)
                 {
                     list = Gets(CompanyId, ExaminationId, levelId)
@@ -428,10 +429,15 @@ namespace Vovinam.Services
             }
         }
 
-        public static List<LevelUp> GetAKhoa(int? CompanyId, int ExaminationId, int levelId, Gender gender)
+        public static List<LevelUp> GetAKhoa(int? CompanyId, int ExaminationId, int levelId, Gender gender, List<LevelUp> ThuKhoa)
         {
             using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
             {
+                var listIdThuKhoa = new List<int>();
+
+                if(ThuKhoa != null)
+                    listIdThuKhoa = ThuKhoa.Select(r => r.Id).ToList();
+
                 var maxPoint = 0.0;
                 var list = new List<LevelUp>();
                 if (levelId == 1)
@@ -441,7 +447,7 @@ namespace Vovinam.Services
                        .Where(x => x.Quyen.Point != 0)
                        .Where(x => x.VoDao.Point != 0)
                        .Where(x => x.TheLuc.Point != 0)
-                       .Where(x => x.KetQua != KetQua.ThuKhoa)
+                       .Where(x => !listIdThuKhoa.Contains(x.Id))
                        .Where(x => x.Gender == gender).ToList();
 
                 }
@@ -451,7 +457,7 @@ namespace Vovinam.Services
                         .Where(x => x.CoBan.Point != 0)
                         .Where(x => x.Quyen.Point != 0)
                         .Where(x => x.VoDao.Point != 0)
-                        .Where(x => x.KetQua != KetQua.ThuKhoa)                       
+                        .Where(x => !listIdThuKhoa.Contains(x.Id))
                         .Where(x => x.DoiKhang.Point != 0).Where(x => x.Gender == gender).ToList();
 
                 }
@@ -462,7 +468,7 @@ namespace Vovinam.Services
                         .Where(x => x.Quyen.Point != 0)
                         .Where(x => x.VoDao.Point != 0)
                         .Where(x => x.SongLuyen.Point != 0)
-                        .Where(x => x.KetQua != KetQua.ThuKhoa)
+                        .Where(x => !listIdThuKhoa.Contains(x.Id))
                         .Where(x => x.DoiKhang.Point != 0).Where(x => x.Gender == gender).ToList();
                 }
 
@@ -470,7 +476,8 @@ namespace Vovinam.Services
                     maxPoint = list.Max(x => x.Total);
                 if (maxPoint == 0)
                     return null;
-                var danhsach = Gets(CompanyId, ExaminationId, levelId).Where(x => x.KetQua != KetQua.ThuKhoa).Where(x => x.Gender == gender).Where(x => x.Total == maxPoint).ToList();
+                var danhsach = Gets(CompanyId, ExaminationId, levelId).Where(x => !listIdThuKhoa.Contains(x.Id))
+                    .Where(x => x.Gender == gender).Where(x => x.Total == maxPoint).ToList();
 
                 if (danhsach.Count > 1)
                 {

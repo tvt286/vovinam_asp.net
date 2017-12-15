@@ -141,7 +141,7 @@ namespace Vovinam.Controllers
             // Á KHOA
 
             // tự vệ nam
-            var tuveAkhoaNam = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 1, Gender.Male);
+            var tuveAkhoaNam = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 1, Gender.Male, tuveNam);
             if (tuveAkhoaNam != null)
             {
                 foreach (var item in tuveAkhoaNam)
@@ -152,7 +152,7 @@ namespace Vovinam.Controllers
                 danhsach.AddRange(tuveAkhoaNam);
             }
             // tự vệ nữ
-            var tuveAkhoaNu = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 1, Gender.Female);
+            var tuveAkhoaNu = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 1, Gender.Female, tuveNu);
             if (tuveAkhoaNu != null)
             {
                 foreach (var item in tuveAkhoaNu)
@@ -164,7 +164,7 @@ namespace Vovinam.Controllers
                 danhsach.AddRange(tuveAkhoaNu);
             }
             // lam đai nam
-            var lamdaiAkhoaNam = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 2, Gender.Male);
+            var lamdaiAkhoaNam = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 2, Gender.Male, lamdaiNam);
             if (lamdaiAkhoaNam != null)
             {
                 foreach (var item in lamdaiAkhoaNam)
@@ -175,7 +175,7 @@ namespace Vovinam.Controllers
                 danhsach.AddRange(lamdaiAkhoaNam);
             }
             // lam đai nữ
-            var lamdaiAkhoaNu = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 2, Gender.Female);
+            var lamdaiAkhoaNu = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 2, Gender.Female, lamdaiNu);
             if (lamdaiAkhoaNu != null)
             {
                 foreach (var item in lamdaiAkhoaNu)
@@ -186,7 +186,7 @@ namespace Vovinam.Controllers
                 danhsach.AddRange(lamdaiAkhoaNu);
             }
             // lam đai i nam
-            var lamdaiIAkhoaNam = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 3, Gender.Male);
+            var lamdaiIAkhoaNam = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 3, Gender.Male, lamdaiINam);
             if (lamdaiIAkhoaNam != null)
             {
                 foreach (var item in lamdaiIAkhoaNam)
@@ -197,7 +197,7 @@ namespace Vovinam.Controllers
                 danhsach.AddRange(lamdaiIAkhoaNam);
             }
             // lam đai i nữ
-            var lamdaiIAkhoaNu = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 3, Gender.Female);
+            var lamdaiIAkhoaNu = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 3, Gender.Female, lamdaiINu);
             if (lamdaiIAkhoaNu != null)
             {
                 foreach (var item in lamdaiIAkhoaNu)
@@ -208,7 +208,7 @@ namespace Vovinam.Controllers
                 danhsach.AddRange(lamdaiIAkhoaNu);
             }
             // lam đai ii nam
-            var lamdaiIIAkhoaNam = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 4, Gender.Male);
+            var lamdaiIIAkhoaNam = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 4, Gender.Male, lamdaiIINam);
             if (lamdaiIIAkhoaNam != null)
             {
                 foreach (var item in lamdaiIIAkhoaNam)
@@ -219,7 +219,7 @@ namespace Vovinam.Controllers
                 danhsach.AddRange(lamdaiIIAkhoaNam);
             }
             // lam đai ii nữ
-            var lamdaiIIAkhoaNu = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 4, Gender.Female);
+            var lamdaiIIAkhoaNu = LevelUpService.GetAKhoa(CompanyId, ExaminationId, 4, Gender.Female, lamdaiIINu);
             if (lamdaiIIAkhoaNu != null)
             {
 

@@ -24,6 +24,7 @@ namespace Vovinam.Data
         public string Name { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<int> CompanyId { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual Company Company { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

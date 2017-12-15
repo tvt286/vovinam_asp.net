@@ -129,9 +129,8 @@
             var fileList = this.files;
             if (fileList != null)
             {
-                var sizefile = fileList[0].size / 1024;
                 if (!isExcel(fileList[0]["name"])) {
-                    AlertError("Để tối ưu dung lượng truyền tải, vui lòng chỉ upload video định dạng [mp4, wmv]");
+                    AlertError("Vui lòng chọn file xls hoặc xlsx");
                     return false;
                 }
                 document.getElementById("CreateForm").submit();

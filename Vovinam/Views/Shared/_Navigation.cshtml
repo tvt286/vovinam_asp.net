@@ -113,26 +113,33 @@
                     }
                     <li class="menu-title">Thi thăng cấp</li>
 
-                    if (user.IsAdminCompany || UserPermission.Has(Permission.ChamThi_View) || UserPermission.Has(Permission.ChamThi_Import))
+                    if (user.IsAdminCompany || UserPermission.Has(Permission.QuanLyKhoaThi_All) || UserPermission.Has(Permission.ChamThi_Import))
                     {
                         <li>
-                            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span> Danh sách khóa thi </span> <span class="menu-arrow"></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span> Quản lý khóa thi </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
-                                @if (user.IsAdminCompany || UserPermission.Has(Permission.ChamThi_View))
+                                @if (user.IsAdminCompany || UserPermission.Has(Permission.QuanLyKhoaThi_All))
                                 {
 
-                                    <li class="@Html.IsSelected(action: "Index", controller: "LevelUp")"><a href="@Url.Action("Index", "LevelUp")">Danh sách thi</a></li>
+                                    <li class="@Html.IsSelected(action: "Index", controller: "Examination")"><a href="@Url.Action("Index", "Examination")">Danh sách khóa thi</a></li>
 
                                 }
 
                                 @if (user.IsAdminCompany || UserPermission.Has(Permission.ChamThi_Import))
                                 {
 
-                                    <li class="@Html.IsSelected(action: "Import", controller: "LevelUp")"><a href="@Url.Action("Import", "LevelUp")">Import danh sách thi</a></li>
+                                    <li class="@Html.IsSelected(action: "Import", controller: "LevelUp")"><a href="@Url.Action("Import", "LevelUp")">Nhập danh sách thi</a></li>
 
                                 }
 
                             </ul>
+                        </li>
+                    }
+
+                    if (user.IsAdminCompany || UserPermission.Has(Permission.ChamThi_View))
+                    {
+                        <li class="@Html.IsSelected(action: "Index", controller: "LevelUp") ">
+                            <a href="@Url.Action("Index", "LevelUp")" class="waves-effect"><i class="mdi mdi-format-align-justify"></i><span> Danh sách thí sinh </span></a>
                         </li>
                     }
                     if (user.IsAdminCompany || UserPermission.Has(Permission.ChamThi_ViewCompete))

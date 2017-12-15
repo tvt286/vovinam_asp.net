@@ -206,6 +206,7 @@
     <Compile Include="Controllers\ClubController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CompeteController.cs" />
+    <Compile Include="Controllers\ExaminationController.cs" />
     <Compile Include="Controllers\GroupPermissionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LevelUpController.cs" />
@@ -224,6 +225,7 @@
     <Compile Include="Models\LevelUpViewModel.cs" />
     <Compile Include="Models\ListLevelUpModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\ExaminationViewModel.cs" />
     <Compile Include="Models\SchoolViewModel.cs" />
     <Compile Include="Models\StudentModel.cs" />
     <Compile Include="Models\TuitionSearchModel.cs" />
@@ -623,6 +625,12 @@
     <Content Include="Content\images\users\avatar-7.jpg" />
     <Content Include="Content\images\users\avatar-8.jpg" />
     <Content Include="Content\images\users\avatar-9.jpg" />
+    <Content Include="Content\Image\background.jpg" />
+    <Content Include="Content\Image\background1.jpg" />
+    <Content Include="Content\Image\bg1.jpg" />
+    <Content Include="Content\Image\bg2.JPG" />
+    <Content Include="Content\Image\bg3.jpg" />
+    <Content Include="Content\Image\bg4.png" />
     <Content Include="Content\Image\bg_marker.png" />
     <Content Include="Content\Image\bg_marker_blue.png" />
     <Content Include="Content\Image\bg_marker_green.png" />
@@ -982,6 +990,8 @@
     <Content Include="Views\LevelUp\_Result.cshtml" />
     <Content Include="Views\LevelUp\_Detail.cshtml" />
     <Content Include="Views\Compete\_Detail.cshtml" />
+    <Content Include="Views\Examination\_List.cshtml" />
+    <Content Include="Views\Examination\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

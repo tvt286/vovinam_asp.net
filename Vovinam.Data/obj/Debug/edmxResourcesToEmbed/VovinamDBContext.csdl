@@ -235,6 +235,7 @@
     <Property Name="CompanyId" Type="Int32" />
     <NavigationProperty Name="Company" Relationship="vovinamModel.FK__Examinati__Compa__10566F31" FromRole="Examination" ToRole="Company" />
     <NavigationProperty Name="LevelUps" Relationship="vovinamModel.FK__LevelUp__Examina__7A672E12" FromRole="Examination" ToRole="LevelUp" />
+    <Property Name="IsDeleted" Type="Boolean" />
   </EntityType>
   <EnumType Name="KetQua">
     <Member Name="CapNhat" Value="0" />

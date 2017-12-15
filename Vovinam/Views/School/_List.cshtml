@@ -71,7 +71,6 @@
     return Url.Action("Index", Model.SearchModel);
 },
         PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxCommonOption() { HttpMethod = "POST", UpdateTargetId = "content" }))
-    </div>
     <script type="text/javascript">
         $(function () {
             InitSortTable();
