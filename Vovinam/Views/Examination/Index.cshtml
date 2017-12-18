@@ -1,0 +1,91 @@
+﻿@using Vovinam.WebBackend.Common
+@using Vovinam.Common
+@using Vovinam.Services
+@model Vovinam.Models.ExaminationSearchModel
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Quản lý khóa thi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = UserService.GetUserInfo();
+}
+
+<div class="row ">
+    <div class="col-xs-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Quản lý khóa thi</h4>
+            <ol class="breadcrumb p-0 m-0">
+                <li>
+                    <a href="@Url.Action("Index", "Home")">Vovinam</a>
+                </li>
+                <li class="active">
+                    <strong>Quản lý khóa thi</strong>
+                </li>
+            </ol>
+
+            <div class="clearfix"></div>
+           
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+
+<div class="row  animated fadeInRight">
+    <div class="col-sm-12">
+
+        <div class="card-box table-responsive">
+            <div>
+                <h5>Tìm kiếm</h5>
+            </div>
+            <div class="ibox-content">
+                @using (Ajax.BeginForm("Index", null, new AjaxCommonOption() { UpdateTargetId = "content" }, new { id = "SearchForm" }))
+                {
+                    <div class="form-horizontal row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Tên khóa thi</label>
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(x => x.ExaminationId, null, "-- Khóa thi --", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button class="btn btn-primary waves-effect waves-light" type="submit">Tìm</button>
+                                    <button class="btn btn-primary waves-effect waves-light" type="button" id="btReset">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card-box table-responsive">
+            <h5>Kết quả tìm kiếm</h5>
+
+            <div class="ibox-content">
+                <div id="content">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script src="~/Scripts/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/responsive.bootstrap.min.js"></script>
+    <script src="~/Scripts/plugins/datatables/jquery.datatables.init.js"></script>
+
+}
+

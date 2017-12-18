@@ -25,11 +25,14 @@
 
             <div class="dropdown" id="setting-dropdown">
                 <ul class="dropdown-menu">
-                    <li><a href="javascript:void(0)"><i class="mdi mdi-face-profile m-r-5"></i> Thông tin</a></li>
-                    <li><a href="javascript:void(0)"><i class="mdi mdi-logout m-r-5"></i> Đăng xuất</a></li>
+                    <li><a href="@Url.Action("ProfileUser", "Account", routeValues: new {id = UserService.GetUserInfo().Id})"><i class="mdi mdi-face-profile m-r-5"></i> Thông tin</a></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="mdi mdi-logout m-r-5"></i> Đăng xuất</a></li>
                 </ul>
             </div>
-
+            @using(Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right", style="display:none" }))
+            {
+            @Html.AntiForgeryToken()
+            }
             <ul>
                 <li class="menu-title">Menu</li>
 
