@@ -82,8 +82,9 @@ File: Menu
 .notify-list h5 {
   margin: 0 0 5px 0;
   padding: 10px;
-  background-color: #f3f3f3;
+  background-color: #22317b;
   text-align: center;
+  color:white;
 }
 .notify-list .all-msgs a {
   color: #313a46;
@@ -203,7 +204,7 @@ body.fixed-left .side-menu.left {
     background-color:#293846;
 }
 .dropdown-menu>li>a{
-    color:white;
+    color:black;
 }
 #sidebar-menu,
 #sidebar-menu ul,
@@ -641,4 +642,11 @@ body.fixed-left-void {
 }
 .mobile.smallscreen .sidebar-inner.slimscrollleft {
   overflow: scroll !important;
+}
+.dropdown-menu-message{
+    background-color:white !important;
+}
+
+.seen-noti{
+     background-color: #d6f1fb;
 }

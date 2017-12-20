@@ -59,9 +59,33 @@
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -162,6 +186,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SignalRMessage.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
@@ -169,6 +194,7 @@
     <Compile Include="Areas\Api\Common\JsonResult.cs" />
     <Compile Include="Areas\Api\Controllers\CompeteController.cs" />
     <Compile Include="Areas\Api\Controllers\LevelUpController.cs" />
+    <Compile Include="Areas\Api\Controllers\NotificationController.cs" />
     <Compile Include="Areas\Api\Controllers\StudentController.cs" />
     <Compile Include="Areas\Api\Controllers\UserController.cs" />
     <Compile Include="Areas\Api\Models\ClubModel.cs" />
@@ -217,6 +243,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\NotificationHubs.cs" />
     <Compile Include="Models\ClubModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\CompeteSearchModel.cs" />
@@ -226,6 +253,7 @@
     <Compile Include="Models\ListLevelUpModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ExaminationViewModel.cs" />
+    <Compile Include="Models\NotificationModel.cs" />
     <Compile Include="Models\SchoolViewModel.cs" />
     <Compile Include="Models\StudentModel.cs" />
     <Compile Include="Models\TuitionSearchModel.cs" />
@@ -699,6 +727,7 @@
     <Content Include="Content\plugin\switchery\switchery.css" />
     <Content Include="Content\plugin\tablesorter\jquery.tablesorter.pager.css" />
     <Content Include="Content\plugin\tablesorter\theme.bootstrap.css" />
+    <Content Include="Content\plugin\toastr\toastr.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\star-rating.css" />
     <Content Include="Content\style.css" />
@@ -803,13 +832,13 @@
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\detect.js" />
     <Content Include="Scripts\fastclick.js" />
-    <Content Include="Scripts\jquery-1.4.4.js" />
-    <Content Include="Scripts\jquery-1.4.4.min.js" />
     <Content Include="Scripts\jquery.app.js" />
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\jquery.core.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.scrollTo.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="Scripts\jquery.slimscroll.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -823,6 +852,7 @@
     <Content Include="Scripts\js\jquery.core.js" />
     <Content Include="Scripts\js\jquery.scrollTo.min.js" />
     <Content Include="Scripts\js\jquery.slimscroll.js" />
+    <Content Include="Scripts\jquery.toastr.js" />
     <Content Include="Scripts\js\modernizr.min.js" />
     <Content Include="Scripts\js\waves.js" />
     <Content Include="Scripts\js\wow.min.js" />
@@ -890,6 +920,7 @@
     <Content Include="Scripts\plugins\tablesorter\jquery.tablesorter.js" />
     <Content Include="Scripts\plugins\tablesorter\jquery.tablesorter.pager.js" />
     <Content Include="Scripts\plugins\tablesorter\jquery.tablesorter.widgets.js" />
+    <Content Include="Scripts\plugins\toastr\toastr.min.js" />
     <Content Include="Scripts\waves.js" />
     <Content Include="Scripts\wow.min.js" />
     <Content Include="Web.config">
@@ -983,7 +1014,6 @@
     <Content Include="Views\School\Index.cshtml" />
     <Content Include="Views\School\_DetailSchool.cshtml" />
     <Content Include="Views\School\_List.cshtml" />
-    <None Include="Scripts\jquery-1.4.4-vsdoc.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\plugins\datatables\json\scroller-demo.json" />
     <Content Include="Views\LevelUp\_ShowHistory.cshtml" />

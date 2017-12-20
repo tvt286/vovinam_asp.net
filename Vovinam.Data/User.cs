@@ -25,6 +25,7 @@ namespace Vovinam.Data
             this.User_Permission = new HashSet<User_Permission>();
             this.VoDaos = new HashSet<VoDao>();
             this.Groups = new HashSet<Group>();
+            this.Notifications = new HashSet<Notification>();
         }
     
         public int Id { get; set; }
@@ -59,5 +60,7 @@ namespace Vovinam.Data
         public virtual ICollection<VoDao> VoDaos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Group> Groups { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Notification> Notifications { get; set; }
     }
 }

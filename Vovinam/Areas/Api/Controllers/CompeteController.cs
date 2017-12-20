@@ -10,6 +10,7 @@ using Vovinam.Areas.Api.Common;
 using Vovinam.Areas.Api.Models;
 using Vovinam.Areas.Api.Services;
 using Vovinam.Data;
+using Vovinam.Hubs;
 
 namespace Vovinam.Areas.Api.Controllers
 {

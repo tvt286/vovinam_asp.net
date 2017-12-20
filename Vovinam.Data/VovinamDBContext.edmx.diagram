@@ -52,6 +52,8 @@
         <AssociationConnector Association="vovinamModel.FK__LevelUp__TheLucI__74AE54BC" />
         <AssociationConnector Association="vovinamModel.FK__LevelUp__VodaoId__75A278F5" />
         <AssociationConnector Association="vovinamModel.FK__LevelUpHi__Level__73852659" />
+        <EntityTypeShape EntityType="vovinamModel.Notification" Width="1.5" PointX="11.25" PointY="2.5" />
+        <AssociationConnector Association="vovinamModel.FK__Notificat__UserI__0A688BB1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

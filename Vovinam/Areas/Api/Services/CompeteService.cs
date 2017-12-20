@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using Vovinam.Areas.Api.Models;
 using Vovinam.Data;
+using Vovinam.Hubs;
 
 namespace Vovinam.Areas.Api.Services
 {
@@ -90,6 +91,16 @@ namespace Vovinam.Areas.Api.Services
                 var levelUp1 = context.LevelUps.FirstOrDefault(x => x.Id == levelUpId1);
                 var levelUp2 = context.LevelUps.FirstOrDefault(x => x.Id == levelUpId2);
 
+                if(levelUp1.DoiKhang.Point != 0)
+                {
+                    NotificationHubs.Add(user.Id, string.Format("Đối kháng: {0} từ {1} -> {2}", levelUp1.Name, levelUp1.DoiKhang.Point, point1));
+
+                }
+                if (levelUp2.DoiKhang.Point != 0)
+                {
+                    NotificationHubs.Add(user.Id, string.Format("Đối kháng: {0} từ {1} -> {2}", levelUp2.Name, levelUp2.DoiKhang.Point, point2));
+
+                }
                 // luu lich sử 1
                 LevelUpHistory history = new LevelUpHistory();
                 history.UserName = user.FullName;

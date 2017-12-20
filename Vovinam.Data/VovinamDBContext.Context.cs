@@ -44,5 +44,6 @@ namespace Vovinam.Data
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<LevelUpHistory> LevelUpHistories { get; set; }
         public virtual DbSet<LevelUp> LevelUps { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
     }
 }

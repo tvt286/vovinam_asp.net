@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Vovinam.Common;
 using Vovinam.Data;
+using Vovinam.Hubs;
 using Vovinam.Models;
 using Vovinam.Services;
 using Vovinam.WebBackend.Common;
@@ -21,6 +22,7 @@ namespace Vovinam.Controllers
             {
                 return View(searchModel);
             }
+
             var pagedList = ClubService.Search(searchModel.Name, searchModel.PageSize, searchModel.PageIndex);
             pagedList.SearchModel = searchModel;
             return PartialView("_List", pagedList);
@@ -30,7 +32,6 @@ namespace Vovinam.Controllers
         public ActionResult DetailClub(int? id)
         {
             var data = new Club();
-
             if (id.HasValue)
             {
                 data = ClubService.Get(id.Value);

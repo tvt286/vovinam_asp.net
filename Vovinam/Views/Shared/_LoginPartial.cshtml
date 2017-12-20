@@ -1,79 +1,42 @@
 ﻿@using Vovinam.Common
 @using Vovinam.Services
 @using Vovinam.WebBackend.Common
+@using Vovinam.WebBackend.Web
 
 @if (Request.IsAuthenticated)
 {
     var user = UserService.GetUserInfo();
     <!-- Right(Notification) -->
-	<ul class="nav navbar-nav navbar-right">
-        <li>
-            <a href="#" class="right-menu-item dropdown-toggle" data-toggle="dropdown">
-                <i class="mdi mdi-bell"></i>
-                <span class="badge up bg-danger">8</span>
+    <ul class="nav navbar-nav navbar-right">
+        @if (user.IsAdminCompany)
+        {
+            <li>
+                <a href="#" class="right-menu-item dropdown-toggle" data-toggle="dropdown">
+                    <i class="mdi mdi-bell"></i>
+                    <span class="badge up bg-danger" id="number-notification"></span>
+                </a>
+
+                <ul id="list-notification" style="overflow:auto; max-height:400px" class="dropdown-menu dropdown-menu-message dropdown-menu-right arrow-dropdown-menu arrow-menu-right dropdown-lg user-list notify-list">
+                 
+                </ul>
+            </li>
+        }
+        <li class="dropdown user-box">
+            <a href="" class="dropdown-toggle waves-effect waves-light user-link" data-toggle="dropdown" aria-expanded="true">
+                <img src="@(user.Image.NotEmpty() ? Url.Content(user.Image) : Url.Content("~/Content/Upload/default.png"))" alt="user-img" class="img-circle user-img">
             </a>
 
-            <ul class="dropdown-menu dropdown-menu-right arrow-dropdown-menu arrow-menu-right dropdown-lg user-list notify-list">
+            <ul class="dropdown-menu dropdown-menu-message dropdown-menu-right arrow-dropdown-menu arrow-menu-right user-list notify-list">
                 <li>
-                    <h5>Messages</h5>
+                    <h5>@user.FullName</h5>
                 </li>
-                <li>
-                    <a href="#" class="user-list-item">
-                        <div class="avatar">
-                            <img src="assets/images/users/avatar-2.jpg" alt="">
-                        </div>
-                        <div class="user-desc">
-                            <span class="name">Patricia Beach</span>
-                            <span class="desc">There are new settings available</span>
-                            <span class="time">2 hours ago</span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="user-list-item">
-                        <div class="avatar">
-                            <img src="assets/images/users/avatar-3.jpg" alt="">
-                        </div>
-                        <div class="user-desc">
-                            <span class="name">Connie Lucas</span>
-                            <span class="desc">There are new settings available</span>
-                            <span class="time">2 hours ago</span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="user-list-item">
-                        <div class="avatar">
-                            <img src="assets/images/users/avatar-4.jpg" alt="">
-                        </div>
-                        <div class="user-desc">
-                            <span class="name">Margaret Becker</span>
-                            <span class="desc">There are new settings available</span>
-                            <span class="time">2 hours ago</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="all-msgs text-center">
-                    <p class="m-0"><a href="#">See all Messages</a></p>
-                </li>
+                <li><a href="@Url.Action("ProfileUser", "Account", routeValues: new {id = UserService.GetUserInfo().Id})"><i class="ti-user m-r-5"></i> Thông tin</a></li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="ti-power-off m-r-5"></i> Đăng xuất</a></li>
             </ul>
         </li>
-		<li class="dropdown user-box">
-			<a href="" class="dropdown-toggle waves-effect waves-light user-link" data-toggle="dropdown" aria-expanded="true">
-				<img src="@(user.Image.NotEmpty() ? Url.Content(user.Image) : Url.Content("~/Content/Upload/default.png"))" alt="user-img" class="img-circle user-img">
-			</a>
 
-			<ul class="dropdown-menu dropdown-menu-right arrow-dropdown-menu arrow-menu-right user-list notify-list">
-				<li>
-					<h5>@user.FullName</h5>
-				</li>
-				<li><a href="@Url.Action("ProfileUser", "Account", routeValues: new {id = UserService.GetUserInfo().Id})"><i class="ti-user m-r-5"></i> Thông tin</a></li>
-				<li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="ti-power-off m-r-5"></i> Đăng xuất</a></li>
-			</ul>
-		</li>
-
-	</ul> <!-- end navbar-right -->
-	using(Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right", style="display:none" }))
+    </ul> <!-- end navbar-right -->
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right", style = "display:none" }))
     {
         @Html.AntiForgeryToken()
     }
@@ -84,3 +47,68 @@ else
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
+
+<script src="/Scripts/jquery.signalR-2.2.2.js"></script>
+<script src="/signalr/hubs"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+        $(function () {
+            // Proxy created on the fly
+            var job = $.connection.notificationHubs;
+            // Declare a function on the job hub so the server can invoke it
+            job.client.displayNotification = function () {
+                getData();
+            };
+            // Start the connection
+            $.connection.hub.start();
+            getData();
+        });
+
+        function getData() {
+            var $noti = $('#list-notification');
+            var $numberNoti = $('#number-notification');
+
+            $.ajax({
+                url: '/Api/Notification/GetAll',
+                type: 'GET',
+                datatype: 'json',
+                success: function (data) {
+                    if (data.length > 0) {
+                        $noti.empty();
+                        if (data[0].CountNoti == 0)
+                            $numberNoti.text("");
+                        else
+                            $numberNoti.text(data[0].CountNoti);
+                        ShowMessageNoti(data[0].Content, data[0].UserName);
+                        $noti.append('<li><h5>Thông báo</h5></li>');
+                        var rows = [];
+                        $.each(data, function (i, val) {
+                            rows.push('<li><a  href="#" class="user-list-item '+ (data[i].Seen == false ? "seen-noti":"") +'"><div class="avatar"><img src="/Content/Upload/default.png" alt=""></div><div class="user-desc"><span class="name">' + data[i].UserName + '</span><span class="desc">' + data[i].Content + '</span><span class="time">' + data[i].TimeCreate.toString().substr(0, 16) + '</span></div></a></li>');
+                        });
+                        $noti.append(rows.join(''));
+                        $noti.append('<li class="all-msgs text-center"><p class="m-0"><a href="javascript:void(0)" onclick="SeenAll()"">Đánh dấu đã đọc hết</a></p></li>');
+
+                    }
+                }
+            });
+
+        }
+
+    });
+
+    function SeenAll() {
+        $('#number-notification').text("");
+        $(".seen-noti").removeClass("seen-noti");
+        $.ajax({
+            url: '/Api/Notification/SetSeen',
+            type: 'GET',
+            datatype: 'json',
+            success: function (data) {
+                ShowMessageNoti('Cập nhật thành công!', 'Thông báo');
+            }
+        });
+    }
+
+</script>

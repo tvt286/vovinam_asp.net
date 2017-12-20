@@ -10,6 +10,7 @@ using System.Web.Security;
 using Vovinam.Common;
 using Vovinam.Common.Enums;
 using Vovinam.Data;
+using Vovinam.Hubs;
 using Vovinam.Services;
 using Vovinam.WebBackend.Web;
 
@@ -51,6 +52,7 @@ namespace Vovinam.Controllers
                         FormsAuthentication.SetAuthCookie(user.UserName, rememberMe);
                         if (string.IsNullOrEmpty(returnUrl))
                         {
+                            NotificationHubs.Add(user.Id, "Đã đăng nhập");
                             var operation = "Tài khoản " + user.UserName + " đã đăng nhập";
                             return RedirectToAction("Index", "Home");
                         }

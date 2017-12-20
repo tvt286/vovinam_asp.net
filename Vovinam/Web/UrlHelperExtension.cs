@@ -28,6 +28,15 @@ namespace Vovinam.WebBackend.Web
             return url.Content(user.Image);
         }
 
+        public static string ImageUserString(this UrlHelper url, string image)
+        {
+            if (string.IsNullOrEmpty(image))
+            {
+                return url.Content("~/Content/Upload/default.png");
+            }
+            return url.Content(image);
+        }
+
         public static string ImageLevel(this UrlHelper url, Level level)
         {
             if (string.IsNullOrEmpty(level.Image))

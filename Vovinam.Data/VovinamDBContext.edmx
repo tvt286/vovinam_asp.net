@@ -128,6 +128,16 @@
           <Property Name="PointNew" Type="float" Nullable="false" />
           <Property Name="PointOld" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TimeCreate" Type="datetime" Nullable="false" />
+          <Property Name="Seen" Type="bit" />
+        </EntityType>
         <EntityType Name="Quyen">
           <Key>
             <PropertyRef Name="Id" />
@@ -452,6 +462,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Notificat__UserI__0A688BB1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Quyen__UserId__151B244E">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Quyen" Type="Self.Quyen" Multiplicity="*" />
@@ -596,6 +618,7 @@
           <EntitySet Name="Level" EntityType="Self.Level" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LevelUp" EntityType="Self.LevelUp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LevelUpHistory" EntityType="Self.LevelUpHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SongLuyen" EntityType="Self.SongLuyen" Schema="dbo" store:Type="Tables" />
@@ -676,6 +699,10 @@
           <AssociationSet Name="FK__LevelUpHi__Level__73852659" Association="Self.FK__LevelUpHi__Level__73852659">
             <End Role="LevelUp" EntitySet="LevelUp" />
             <End Role="LevelUpHistory" EntitySet="LevelUpHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notificat__UserI__0A688BB1" Association="Self.FK__Notificat__UserI__0A688BB1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notification" EntitySet="Notification" />
           </AssociationSet>
           <AssociationSet Name="FK__Quyen__UserId__151B244E" Association="Self.FK__Quyen__UserId__151B244E">
             <End Role="User" EntitySet="User" />
@@ -916,6 +943,11 @@
             <End Role="LevelUp" EntitySet="LevelUps" />
             <End Role="LevelUpHistory" EntitySet="LevelUpHistories" />
           </AssociationSet>
+          <EntitySet Name="Notifications" EntityType="vovinamModel.Notification" />
+          <AssociationSet Name="FK__Notificat__UserI__0A688BB1" Association="vovinamModel.FK__Notificat__UserI__0A688BB1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
           </EntityContainer>
         <EnumType Name="UserStatus">
           <Member Name="InActive" Value="0" />
@@ -1083,6 +1115,7 @@
           <NavigationProperty Name="User_Permission" Relationship="vovinamModel.FK__User_Perm__UserI__3E52440B" FromRole="User" ToRole="User_Permission" />
           <NavigationProperty Name="VoDaos" Relationship="vovinamModel.FK__VoDao__UserId__18EBB532" FromRole="User" ToRole="VoDao" />
           <NavigationProperty Name="Groups" Relationship="vovinamModel.User_Group" FromRole="User" ToRole="Group" />
+          <NavigationProperty Name="Notifications" Relationship="vovinamModel.FK__Notificat__UserI__0A688BB1" FromRole="User" ToRole="Notification" />
         </EntityType>
         <Association Name="FK__CoBan__UserId__14270015">
           <End Type="vovinamModel.User" Role="User" Multiplicity="0..1" />
@@ -1490,6 +1523,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeCreate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Seen" Type="Boolean" />
+          <NavigationProperty Name="User" Relationship="vovinamModel.FK__Notificat__UserI__0A688BB1" FromRole="Notification" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Notificat__UserI__0A688BB1">
+          <End Type="vovinamModel.User" Role="User" Multiplicity="1" />
+          <End Type="vovinamModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1740,6 +1796,17 @@
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
                 <ScalarProperty Name="Stt" ColumnName="Stt" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="vovinamModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="Seen" ColumnName="Seen" />
+                <ScalarProperty Name="TimeCreate" ColumnName="TimeCreate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

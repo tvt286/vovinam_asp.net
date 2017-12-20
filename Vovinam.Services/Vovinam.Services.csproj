@@ -67,6 +67,7 @@
     <Compile Include="LevelService.cs" />
     <Compile Include="LevelUpHistoryService.cs" />
     <Compile Include="LevelUpService.cs" />
+    <Compile Include="NotificationService.cs" />
     <Compile Include="PagedSearchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchoolService.cs" />

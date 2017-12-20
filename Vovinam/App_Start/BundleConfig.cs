@@ -29,6 +29,10 @@ namespace Vovinam
             // SlimScroll
             bundles.Add(new ScriptBundle("~/plugins/slimScroll").Include(
                       "~/Scripts/plugins/slimScroll/jquery.slimscroll.min.js"));
+            // toast
+            bundles.Add(new ScriptBundle("~/plugins/toastr").Include(
+                      "~/Scripts/plugins/toastr/toastr.min.js", "~/Scripts/jquery.toastr.js"));
+
 
             // jQuery plugins
             bundles.Add(new ScriptBundle("~/plugins/metsiMenu").Include(
@@ -50,7 +54,7 @@ namespace Vovinam
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/animate.css",
                 /*"~/Content/style.css",*/ "~/Content/bootstrap-datetimepicker.css", "~/Content/fix.css",
-                      "~/Content/plugin/sweetalert/sweetalert.css", "~/Content/plugin/select2/select2.min.css",
+                      "~/Content/plugin/sweetalert/sweetalert.css", "~/Content/plugin/toastr/toastr.min.css", "~/Content/plugin/select2/select2.min.css",
                       "~/Content/plugin/chosen/chosen.css", "~/Content/Plugin/boostrap-tagsinput/bootstrap-tagsinput.css", "~/Content/nv.d3.css"));
 
 
