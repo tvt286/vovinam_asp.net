@@ -26,6 +26,7 @@ namespace Vovinam.Areas.Api.Controllers
                 Image = x.User.Image,
                 TimeCreate = x.TimeCreate,
                 Seen = x.Seen.Value,
+                Show = x.Show,
                 CountNoti = count
             }).ToList();
         }

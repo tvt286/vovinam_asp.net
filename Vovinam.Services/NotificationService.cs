@@ -16,11 +16,13 @@ namespace Vovinam.Services
             using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
             {
                 var user = UserService.GetUserInfo();
+                var result = new List<Notification>();
                 if(includeSeen)
-                    return context.Notifications.Include(x => x.User).Where(x => x.UserId != user.Id).OrderByDescending(x => x.Id).ToList();
+                    result = context.Notifications.Include(x => x.User).Where(x => x.UserId != user.Id).OrderByDescending(x => x.Id).ToList();
                 else
-                    return context.Notifications.Include(x => x.User).Where(x => x.UserId != user.Id && x.Seen == false).OrderByDescending(x => x.Id).ToList();
-
+                    result = context.Notifications.Include(x => x.User).Where(x => x.UserId != user.Id && x.Seen == false).OrderByDescending(x => x.Id).ToList();
+               
+                return result;
             }
         }
 
@@ -43,5 +45,18 @@ namespace Vovinam.Services
             }
         }
 
+        public static void UpdateShow()
+        {
+            using (var context = new vovinamEntities())
+            {
+                var user = UserService.GetUserInfo();
+                var noti = context.Notifications.Where(x => x.UserId != user.Id && x.Show == false).ToList();
+                foreach (var item in noti)
+                {
+                    item.Show = true;
+                }
+                context.SaveChanges();
+            }
+        }
     }
 }

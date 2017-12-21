@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using Vovinam.Areas.Api.Models;
 using Vovinam.Data;
+using Vovinam.Hubs;
 
 namespace Vovinam.Areas.Api.Services
 {
@@ -15,7 +16,7 @@ namespace Vovinam.Areas.Api.Services
         {
             using (var context = new vovinamEntities(IsolationLevel.ReadUncommitted))
             {
-                var examinations = context.Examinations.Where(x => x.CompanyId == companyId).ToList();
+                var examinations = context.Examinations.Where(x => x.CompanyId == companyId && x.IsDeleted == false).ToList();
                 List<ExaminationModel> results = new List<ExaminationModel>();
                 foreach (var item in examinations)
                 {
@@ -278,52 +279,80 @@ namespace Vovinam.Areas.Api.Services
                 history.PointNew = point;
                 if(pointType == 1)
                 {
+                    if (levelUp.CoBan.Point != 0)
+                    {
+                        NotificationHubs.Add(user.Id, string.Format("Cơ bản: {0} từ {1} -> {2}", levelUp.Name, levelUp.CoBan.Point, point));
+                    }
+
                     history.Name = "Cơ bản";
                     history.PointOld = levelUp.CoBan.Point;
                     levelUp.CoBan.Point = point;
                     levelUp.CoBan.UserId = user.Id;
-
-
+                  
                 }
                 else if (pointType == 2)
                 {
+                    if (levelUp.VoDao.Point != 0)
+                    {
+                        NotificationHubs.Add(user.Id, string.Format("Võ đạo: {0} từ {1} -> {2}", levelUp.Name, levelUp.VoDao.Point, point));
+
+                    }
                     history.Name = "Võ đạo";
                     history.PointOld = levelUp.VoDao.Point;
                     levelUp.VoDao.Point = point;
                     levelUp.VoDao.UserId = user.Id;
-
+                   
                 }
                 else if (pointType == 3)
                 {
+                    if (levelUp.TheLuc.Point != 0)
+                    {
+                        NotificationHubs.Add(user.Id, string.Format("Thể lực: {0} từ {1} -> {2}", levelUp.Name, levelUp.TheLuc.Point, point));
+
+                    }
                     history.Name = "Thể lực";
                     history.PointOld = levelUp.TheLuc.Point;
                     levelUp.TheLuc.Point = point;
                     levelUp.TheLuc.UserId = user.Id;
-
+                   
                 }
                 else if (pointType == 4)
                 {
+                    if (levelUp.Quyen.Point != 0)
+                    {
+                        NotificationHubs.Add(user.Id, string.Format("Quyền: {0} từ {1} -> {2}", levelUp.Name, levelUp.Quyen.Point, point));
+
+                    }
                     history.Name = "Quyền";
                     history.PointOld = levelUp.Quyen.Point;
                     levelUp.Quyen.Point = point;
                     levelUp.Quyen.UserId = user.Id;
-
+                   
                 }
                 else if (pointType == 5)
                 {
+                    if (levelUp.DoiKhang.Point != 0)
+                    {
+                        NotificationHubs.Add(user.Id, string.Format("Đối kháng: {0} từ {1} -> {2}", levelUp.Name, levelUp.DoiKhang.Point, point));
+
+                    }
                     history.Name = "Đối kháng";
                     history.PointOld = levelUp.DoiKhang.Point;
                     levelUp.DoiKhang.Point = point;
                     levelUp.DoiKhang.UserId = user.Id;
-
+                   
                 }
                 else if (pointType == 6)
                 {
+                    if (levelUp.SongLuyen.Point != 0)
+                    {
+                        NotificationHubs.Add(user.Id, string.Format("Song luyện: {0} từ {1} -> {2}", levelUp.Name, levelUp.SongLuyen.Point, point));
+                    }
                     history.Name = "Song luyện";
                     history.PointOld = levelUp.SongLuyen.Point;
                     levelUp.SongLuyen.Point = point;
                     levelUp.SongLuyen.UserId = user.Id;
-
+                    
                 }
 
                 LevelUpHistoryService.Create(history);

@@ -1,0 +1,748 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="vovinamModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Club">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateUpdated" Type="datetime" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CoBan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Point" Type="float" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Compete">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LevelUpId1" Type="int" Nullable="false" />
+    <Property Name="LevelUpId2" Type="int" Nullable="false" />
+    <Property Name="ExaminationId" Type="int" Nullable="false" />
+    <Property Name="Gender" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" />
+  </EntityType>
+  <EntityType Name="DoiKhang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Point" Type="float" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="Examination">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="10" />
+    <Property Name="Date" Type="date" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Group_Permission">
+    <Key>
+      <PropertyRef Name="GroupId" />
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="PermissionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Level">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="Image" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="LevelUp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Stt" Type="int" Nullable="false" />
+    <Property Name="BirthDay" Type="int" />
+    <Property Name="Gender" Type="int" Nullable="false" />
+    <Property Name="ClubId" Type="int" Nullable="false" />
+    <Property Name="LevelId" Type="int" Nullable="false" />
+    <Property Name="Weight" Type="int" />
+    <Property Name="ExaminationId" Type="int" Nullable="false" />
+    <Property Name="QuyenId" Type="int" />
+    <Property Name="CobanId" Type="int" />
+    <Property Name="TheLucId" Type="int" />
+    <Property Name="SongLuyenId" Type="int" />
+    <Property Name="VodaoId" Type="int" />
+    <Property Name="DoiKhangId" Type="int" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="Total" Type="float" Nullable="false" />
+    <Property Name="HasCompete" Type="bit" Nullable="false" />
+    <Property Name="KetQua" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="LevelUpHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="TimeCreate" Type="datetime" Nullable="false" />
+    <Property Name="LevelUpId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="StudentName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="PointNew" Type="float" Nullable="false" />
+    <Property Name="PointOld" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TimeCreate" Type="datetime" Nullable="false" />
+    <Property Name="Seen" Type="bit" />
+    <Property Name="Show" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Quyen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Point" Type="float" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="School">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CompanyId" Type="int" />
+  </EntityType>
+  <EntityType Name="SongLuyen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Point" Type="float" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Hometown" Type="nvarchar" MaxLength="50" />
+    <Property Name="ClubId" Type="int" Nullable="false" />
+    <Property Name="LevelId" Type="int" Nullable="false" />
+    <Property Name="DateIn" Type="date" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateUpdated" Type="datetime" />
+    <Property Name="Image" Type="nvarchar" MaxLength="200" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="Birthday" Type="datetime" />
+    <Property Name="TimeDeleted" Type="datetime" />
+    <Property Name="SchoolId" Type="int" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="Tuition1" Type="bit" Nullable="false" />
+    <Property Name="Tuition2" Type="bit" Nullable="false" />
+    <Property Name="Tuition3" Type="bit" Nullable="false" />
+    <Property Name="Tuition4" Type="bit" Nullable="false" />
+    <Property Name="Tuition5" Type="bit" Nullable="false" />
+    <Property Name="Tuition6" Type="bit" Nullable="false" />
+    <Property Name="Tuition7" Type="bit" Nullable="false" />
+    <Property Name="Tuition8" Type="bit" Nullable="false" />
+    <Property Name="Tuition9" Type="bit" Nullable="false" />
+    <Property Name="Tuition10" Type="bit" Nullable="false" />
+    <Property Name="Tuition11" Type="bit" Nullable="false" />
+    <Property Name="Tuition12" Type="bit" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TheLuc">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Point" Type="float" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="nvarchar" MaxLength="300" />
+    <Property Name="IsAdminRoot" Type="bit" Nullable="false" />
+    <Property Name="IsAdminCompany" Type="bit" Nullable="false" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateUpdated" Type="datetime" />
+    <Property Name="Status" Type="int" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_Group">
+    <Key>
+      <PropertyRef Name="GroupId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_Permission">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="PermissionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VoDao">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Point" Type="float" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <Association Name="FK__Club__CompanyId__34C8D9D1">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="Club" Type="Self.Club" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Club">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CoBan__UserId__14270015">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="CoBan" Type="Self.CoBan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CoBan">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Compete__LevelUp__1BC821DD">
+    <End Role="LevelUp" Type="Self.LevelUp" Multiplicity="1" />
+    <End Role="Compete" Type="Self.Compete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LevelUp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Compete">
+        <PropertyRef Name="LevelUpId1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Compete__LevelUp__1CBC4616">
+    <End Role="LevelUp" Type="Self.LevelUp" Multiplicity="1" />
+    <End Role="Compete" Type="Self.Compete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LevelUp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Compete">
+        <PropertyRef Name="LevelUpId2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DoiKhang__UserId__160F4887">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="DoiKhang" Type="Self.DoiKhang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DoiKhang">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Examinati__Compa__10566F31">
+    <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Examination">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Group_Per__Group__38996AB5">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="Group_Permission" Type="Self.Group_Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="Group_Permission">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__ClubId__787EE5A0">
+    <End Role="Club" Type="Self.Club" Multiplicity="1" />
+    <End Role="LevelUp" Type="Self.LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Club">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="ClubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__CobanId__72C60C4A">
+    <End Role="CoBan" Type="Self.CoBan" Multiplicity="0..1" />
+    <End Role="LevelUp" Type="Self.LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CoBan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="CobanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__Company__03F0984C">
+    <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="LevelUp" Type="Self.LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__DoiKhan__778AC167">
+    <End Role="DoiKhang" Type="Self.DoiKhang" Multiplicity="0..1" />
+    <End Role="LevelUp" Type="Self.LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DoiKhang">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="DoiKhangId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__Examina__7A672E12">
+    <End Role="Examination" Type="Self.Examination" Multiplicity="1" />
+    <End Role="LevelUp" Type="Self.LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Examination">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="ExaminationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__LevelId__797309D9">
+    <End Role="Level" Type="Self.Level" Multiplicity="1" />
+    <End Role="LevelUp" Type="Self.LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Level">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="LevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__QuyenId__7B5B524B">
+    <End Role="Quyen" Type="Self.Quyen" Multiplicity="0..1" />
+    <End Role="LevelUp" Type="Self.LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quyen">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="QuyenId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__SongLuy__76969D2E">
+    <End Role="SongLuyen" Type="Self.SongLuyen" Multiplicity="0..1" />
+    <End Role="LevelUp" Type="Self.LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SongLuyen">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="SongLuyenId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__TheLucI__74AE54BC">
+    <End Role="TheLuc" Type="Self.TheLuc" Multiplicity="0..1" />
+    <End Role="LevelUp" Type="Self.LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TheLuc">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="TheLucId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUp__VodaoId__75A278F5">
+    <End Role="VoDao" Type="Self.VoDao" Multiplicity="0..1" />
+    <End Role="LevelUp" Type="Self.LevelUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VoDao">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUp">
+        <PropertyRef Name="VodaoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LevelUpHi__Level__73852659">
+    <End Role="LevelUp" Type="Self.LevelUp" Multiplicity="1" />
+    <End Role="LevelUpHistory" Type="Self.LevelUpHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LevelUp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LevelUpHistory">
+        <PropertyRef Name="LevelUpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Notificat__UserI__0A688BB1">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Quyen__UserId__151B244E">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Quyen" Type="Self.Quyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quyen">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SongLuyen__UserI__17036CC0">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="SongLuyen" Type="Self.SongLuyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SongLuyen">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__ClubId__4AB81AF0">
+    <End Role="Club" Type="Self.Club" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Club">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="ClubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__LevelId__35BCFE0A">
+    <End Role="Level" Type="Self.Level" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Level">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="LevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__SchoolI__49C3F6B7">
+    <End Role="School" Type="Self.School" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="SchoolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TheLuc__UserId__17F790F9">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="TheLuc" Type="Self.TheLuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TheLuc">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User__CompanyId__398D8EEE">
+    <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_Grou__Group__3A81B327">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="User_Group" Type="Self.User_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="User_Group">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_Grou__UserI__3B75D760">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User_Group" Type="Self.User_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Group">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_Perm__UserI__3E52440B">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User_Permission" Type="Self.User_Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Permission">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VoDao__UserId__18EBB532">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="VoDao" Type="Self.VoDao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VoDao">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="vovinamModelStoreContainer">
+    <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CoBan" EntityType="Self.CoBan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Compete" EntityType="Self.Compete" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DoiKhang" EntityType="Self.DoiKhang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Examination" EntityType="Self.Examination" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Group_Permission" EntityType="Self.Group_Permission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Level" EntityType="Self.Level" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LevelUp" EntityType="Self.LevelUp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LevelUpHistory" EntityType="Self.LevelUpHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SongLuyen" EntityType="Self.SongLuyen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TheLuc" EntityType="Self.TheLuc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Group" EntityType="Self.User_Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Permission" EntityType="Self.User_Permission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VoDao" EntityType="Self.VoDao" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Club__CompanyId__34C8D9D1" Association="Self.FK__Club__CompanyId__34C8D9D1">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Club" EntitySet="Club" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CoBan__UserId__14270015" Association="Self.FK__CoBan__UserId__14270015">
+      <End Role="User" EntitySet="User" />
+      <End Role="CoBan" EntitySet="CoBan" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Compete__LevelUp__1BC821DD" Association="Self.FK__Compete__LevelUp__1BC821DD">
+      <End Role="LevelUp" EntitySet="LevelUp" />
+      <End Role="Compete" EntitySet="Compete" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Compete__LevelUp__1CBC4616" Association="Self.FK__Compete__LevelUp__1CBC4616">
+      <End Role="LevelUp" EntitySet="LevelUp" />
+      <End Role="Compete" EntitySet="Compete" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DoiKhang__UserId__160F4887" Association="Self.FK__DoiKhang__UserId__160F4887">
+      <End Role="User" EntitySet="User" />
+      <End Role="DoiKhang" EntitySet="DoiKhang" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Examinati__Compa__10566F31" Association="Self.FK__Examinati__Compa__10566F31">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Examination" EntitySet="Examination" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Group_Per__Group__38996AB5" Association="Self.FK__Group_Per__Group__38996AB5">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="Group_Permission" EntitySet="Group_Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__ClubId__787EE5A0" Association="Self.FK__LevelUp__ClubId__787EE5A0">
+      <End Role="Club" EntitySet="Club" />
+      <End Role="LevelUp" EntitySet="LevelUp" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__CobanId__72C60C4A" Association="Self.FK__LevelUp__CobanId__72C60C4A">
+      <End Role="CoBan" EntitySet="CoBan" />
+      <End Role="LevelUp" EntitySet="LevelUp" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__Company__03F0984C" Association="Self.FK__LevelUp__Company__03F0984C">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="LevelUp" EntitySet="LevelUp" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__DoiKhan__778AC167" Association="Self.FK__LevelUp__DoiKhan__778AC167">
+      <End Role="DoiKhang" EntitySet="DoiKhang" />
+      <End Role="LevelUp" EntitySet="LevelUp" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__Examina__7A672E12" Association="Self.FK__LevelUp__Examina__7A672E12">
+      <End Role="Examination" EntitySet="Examination" />
+      <End Role="LevelUp" EntitySet="LevelUp" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__LevelId__797309D9" Association="Self.FK__LevelUp__LevelId__797309D9">
+      <End Role="Level" EntitySet="Level" />
+      <End Role="LevelUp" EntitySet="LevelUp" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__QuyenId__7B5B524B" Association="Self.FK__LevelUp__QuyenId__7B5B524B">
+      <End Role="Quyen" EntitySet="Quyen" />
+      <End Role="LevelUp" EntitySet="LevelUp" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__SongLuy__76969D2E" Association="Self.FK__LevelUp__SongLuy__76969D2E">
+      <End Role="SongLuyen" EntitySet="SongLuyen" />
+      <End Role="LevelUp" EntitySet="LevelUp" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__TheLucI__74AE54BC" Association="Self.FK__LevelUp__TheLucI__74AE54BC">
+      <End Role="TheLuc" EntitySet="TheLuc" />
+      <End Role="LevelUp" EntitySet="LevelUp" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUp__VodaoId__75A278F5" Association="Self.FK__LevelUp__VodaoId__75A278F5">
+      <End Role="VoDao" EntitySet="VoDao" />
+      <End Role="LevelUp" EntitySet="LevelUp" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LevelUpHi__Level__73852659" Association="Self.FK__LevelUpHi__Level__73852659">
+      <End Role="LevelUp" EntitySet="LevelUp" />
+      <End Role="LevelUpHistory" EntitySet="LevelUpHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Notificat__UserI__0A688BB1" Association="Self.FK__Notificat__UserI__0A688BB1">
+      <End Role="User" EntitySet="User" />
+      <End Role="Notification" EntitySet="Notification" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Quyen__UserId__151B244E" Association="Self.FK__Quyen__UserId__151B244E">
+      <End Role="User" EntitySet="User" />
+      <End Role="Quyen" EntitySet="Quyen" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SongLuyen__UserI__17036CC0" Association="Self.FK__SongLuyen__UserI__17036CC0">
+      <End Role="User" EntitySet="User" />
+      <End Role="SongLuyen" EntitySet="SongLuyen" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__ClubId__4AB81AF0" Association="Self.FK__Student__ClubId__4AB81AF0">
+      <End Role="Club" EntitySet="Club" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__LevelId__35BCFE0A" Association="Self.FK__Student__LevelId__35BCFE0A">
+      <End Role="Level" EntitySet="Level" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__SchoolI__49C3F6B7" Association="Self.FK__Student__SchoolI__49C3F6B7">
+      <End Role="School" EntitySet="School" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TheLuc__UserId__17F790F9" Association="Self.FK__TheLuc__UserId__17F790F9">
+      <End Role="User" EntitySet="User" />
+      <End Role="TheLuc" EntitySet="TheLuc" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User__CompanyId__398D8EEE" Association="Self.FK__User__CompanyId__398D8EEE">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_Grou__Group__3A81B327" Association="Self.FK__User_Grou__Group__3A81B327">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="User_Group" EntitySet="User_Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_Grou__UserI__3B75D760" Association="Self.FK__User_Grou__UserI__3B75D760">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_Group" EntitySet="User_Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_Perm__UserI__3E52440B" Association="Self.FK__User_Perm__UserI__3E52440B">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_Permission" EntitySet="User_Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VoDao__UserId__18EBB532" Association="Self.FK__VoDao__UserId__18EBB532">
+      <End Role="User" EntitySet="User" />
+      <End Role="VoDao" EntitySet="VoDao" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -14,6 +14,7 @@ namespace Vovinam.Models
         public string Image { get; set; }
         public bool Seen { get; set; }
         public int CountNoti { get; set; }
+        public bool Show { get; set; }
 
     }
 }

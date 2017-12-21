@@ -19,6 +19,7 @@ namespace Vovinam.Data
         public string Content { get; set; }
         public System.DateTime TimeCreate { get; set; }
         public Nullable<bool> Seen { get; set; }
+        public bool Show { get; set; }
     
         public virtual User User { get; set; }
     }

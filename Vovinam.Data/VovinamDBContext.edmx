@@ -137,6 +137,7 @@
           <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
           <Property Name="TimeCreate" Type="datetime" Nullable="false" />
           <Property Name="Seen" Type="bit" />
+          <Property Name="Show" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Quyen">
           <Key>
@@ -1533,6 +1534,7 @@
           <Property Name="TimeCreate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Seen" Type="Boolean" />
           <NavigationProperty Name="User" Relationship="vovinamModel.FK__Notificat__UserI__0A688BB1" FromRole="Notification" ToRole="User" />
+          <Property Name="Show" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK__Notificat__UserI__0A688BB1">
           <End Type="vovinamModel.User" Role="User" Multiplicity="1" />
@@ -1803,6 +1805,7 @@
           <EntitySetMapping Name="Notifications">
             <EntityTypeMapping TypeName="vovinamModel.Notification">
               <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="Show" ColumnName="Show" />
                 <ScalarProperty Name="Seen" ColumnName="Seen" />
                 <ScalarProperty Name="TimeCreate" ColumnName="TimeCreate" />
                 <ScalarProperty Name="Content" ColumnName="Content" />

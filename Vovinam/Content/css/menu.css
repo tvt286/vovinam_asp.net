@@ -548,6 +548,7 @@ body.fixed-left .side-menu.left {
 }
 .user-list .user-list-item .user-desc {
   margin-left: 40px;
+  margin-bottom:5px;
 }
 .user-list .user-list-item .user-desc span.name {
   color: #313a46;
@@ -569,6 +570,7 @@ body.fixed-left .side-menu.left {
 }
 .user-list .user-list-item .user-desc span.time {
   font-size: 11px;
+  float:right;
 }
 /* Seach */
 .app-search {

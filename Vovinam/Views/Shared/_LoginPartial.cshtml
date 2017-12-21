@@ -54,6 +54,7 @@ else
 <script type="text/javascript">
 
     $(function () {
+
         $(function () {
             // Proxy created on the fly
             var job = $.connection.notificationHubs;
@@ -81,15 +82,17 @@ else
                             $numberNoti.text("");
                         else
                             $numberNoti.text(data[0].CountNoti);
-                        ShowMessageNoti(data[0].Content, data[0].UserName);
                         $noti.append('<li><h5>Thông báo</h5></li>');
                         var rows = [];
                         $.each(data, function (i, val) {
-                            rows.push('<li><a  href="#" class="user-list-item '+ (data[i].Seen == false ? "seen-noti":"") +'"><div class="avatar"><img src="/Content/Upload/default.png" alt=""></div><div class="user-desc"><span class="name">' + data[i].UserName + '</span><span class="desc">' + data[i].Content + '</span><span class="time">' + data[i].TimeCreate.toString().substr(0, 16) + '</span></div></a></li>');
+                            if (data[i].Show == false) {
+                                ShowMessageNoti(data[i].Content, data[i].UserName);
+                            }
+                            rows.push('<li><a  href="#" class="user-list-item ' + (data[i].Seen == false ? "seen-noti" : "") + '"><div class="avatar"><img src="/Content/Upload/default.png" alt=""></div><div class="user-desc"><span class="name">' + data[i].UserName + '</span><span class="desc">' + data[i].Content + '</span><span  class="time">' + data[i].TimeCreate.toString().substr(0, 16) + '</span></div></a></li>');
                         });
                         $noti.append(rows.join(''));
                         $noti.append('<li class="all-msgs text-center"><p class="m-0"><a href="javascript:void(0)" onclick="SeenAll()"">Đánh dấu đã đọc hết</a></p></li>');
-
+                        $.get('@Url.Action("SetShow", "Notification")');
                     }
                 }
             });
